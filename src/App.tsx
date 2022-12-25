@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material';
 
-function App() {
+function App(): JSX.Element {
   return (
     <Box>
       <Typography>TyPro runs!</Typography>
