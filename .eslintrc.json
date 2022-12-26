@@ -5,9 +5,9 @@
     },
     "settings": {
         "react": {
-          "version": "detect"
+            "version": "detect"
         }
-      },
+    },
     "extends": [
         "standard-with-typescript",
         "eslint:recommended",
