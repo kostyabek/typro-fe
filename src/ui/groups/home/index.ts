@@ -1,1 +1,2 @@
-export { HomePage } from './pages/HomePage';
+export * from './HomeGroup';
+export { HomeRouter } from './HomeRouter';
