@@ -1,17 +1,14 @@
 import { Box } from '@mui/material';
-import { HomePage } from './groups/home';
-import { HeaderContainer } from './shared/header';
+import { HeaderContainer, RouterComponent } from './common';
 import * as styles from './styles';
 
-function App(): JSX.Element {
+export const App = (): JSX.Element => {
   return (
     <Box sx={styles.wrapper}>
       <Box sx={styles.contentContainer}>
         <HeaderContainer />
-        <HomePage />
+        <RouterComponent />
       </Box>
     </Box>
   );
-}
-
-export default App;
+};
