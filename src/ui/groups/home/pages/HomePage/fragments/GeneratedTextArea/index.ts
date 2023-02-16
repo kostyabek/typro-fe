@@ -1,0 +1,1 @@
+export { GeneratedTextAreaContainer } from './GeneratedTextAreaContainer';
