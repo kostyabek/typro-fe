@@ -10,3 +10,7 @@ export const enum Groups {
 export const enum HomePages {
   Home = '/'
 }
+
+export const enum ProfilePages {
+  Profile = '/'
+}
