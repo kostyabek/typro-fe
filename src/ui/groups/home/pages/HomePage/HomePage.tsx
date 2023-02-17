@@ -1,9 +1,19 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import {
+  GeneratedTextAreaContainer,
+  RestartButtonContainer,
+  TrainingConfigurationContainer
+} from './fragments';
+import * as styles from './styles';
 
 export const HomePage = (): JSX.Element => {
   return (
-    <Box>
-      <Typography>Home Page</Typography>
+    <Box sx={styles.layoutContainer}>
+      <Box sx={styles.contentContainer}>
+        <TrainingConfigurationContainer />
+        <GeneratedTextAreaContainer />
+        <RestartButtonContainer />
+      </Box>
     </Box>
   );
 };
