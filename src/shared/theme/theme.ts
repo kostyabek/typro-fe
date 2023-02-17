@@ -44,6 +44,17 @@ export const theme = createTheme({
       defaultProps: {
         disablePadding: true
       }
+    },
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true
+      },
+      styleOverrides: {
+        root: {
+          borderColor: colors.primary.main,
+          borderRadius: '20px'
+        }
+      }
     }
   }
 });
