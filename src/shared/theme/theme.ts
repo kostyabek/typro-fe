@@ -34,7 +34,7 @@ export const theme = createTheme({
     MuiPopover: {
       styleOverrides: {
         paper: {
-          backgroundColor: 'transparent',
+          backgroundColor: colors.background.default,
           boxShadow: 'none',
           border: `2px solid ${colors.primary.main}`
         }
