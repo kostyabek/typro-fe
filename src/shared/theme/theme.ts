@@ -52,7 +52,11 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderColor: colors.primary.main,
-          borderRadius: '20px'
+          borderRadius: '20px',
+          '&:active': {
+            transition: '0.1s',
+            transform: 'scale(0.85)'
+          }
         }
       }
     }
