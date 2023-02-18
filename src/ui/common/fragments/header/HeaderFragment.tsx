@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ProfileIcon, SettingsIcon } from './icons';
 
 interface Props {
+  homeLink: string;
   profileLink: string;
   settingsLink: string;
   multiplayerLink: string;
@@ -15,7 +16,9 @@ interface Props {
 export const HeaderFragment = (props: Props): JSX.Element => {
   return (
     <Box sx={styles.mainContainer}>
-      <img src={logo} height="76" alt="LogoIcon" />
+      <MuiLink component={Link} to={{ pathname: props.homeLink }}>
+        <img src={logo} height="76" alt="LogoIcon" />
+      </MuiLink>
       <Box sx={styles.navigationContainer}>
         <Box sx={styles.iconLinksContainer}>
           <MuiLink component={Link} to={{ pathname: props.profileLink }}>
