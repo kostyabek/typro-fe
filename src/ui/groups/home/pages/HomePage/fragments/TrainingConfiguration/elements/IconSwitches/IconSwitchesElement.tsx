@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
+import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
+import { TimeModeType, WordsModeType } from '../../../../../../../../../types';
 import {
   ActiveNumbersIcon,
   ActivePunctuationIcon,
@@ -12,28 +13,12 @@ import {
 } from './icons';
 import * as styles from './styles';
 
-enum TimeModeType {
-  TurnedOff = 0,
-  FifteenSeconds = 15,
-  ThirtySeconds = 30,
-  OneMinute = 60,
-  TwoMinutes = 120
-}
-
 const timeModes = [
   TimeModeType.FifteenSeconds,
   TimeModeType.ThirtySeconds,
   TimeModeType.OneMinute,
   TimeModeType.TwoMinutes
 ];
-
-enum WordsModeType {
-  TurnedOff = 0,
-  TenWords = 10,
-  TwentyFiveWords = 25,
-  FiftyWords = 50,
-  OneHundredWords = 100
-}
 
 const wordsModes = [
   WordsModeType.TenWords,
@@ -42,34 +27,46 @@ const wordsModes = [
   WordsModeType.OneHundredWords
 ];
 
-export const IconSwitchesElement = (): JSX.Element => {
-  const [isPunctuationEnabled, setIsPunctuationEnabled] = useState(false);
-  const [areNumbersEnabled, setAreNumbersEnabled] = useState(false);
-  const [timeMode, setTimeModeType] = useState<TimeModeType>(TimeModeType.TurnedOff);
-  const [wordsMode, setWordsModeType] = useState<WordsModeType>(WordsModeType.TwentyFiveWords);
+interface Props {
+  areNumbersGenerated: boolean;
+  isPunctuationGenerated: boolean;
+  wordsMode: WordsModeType;
+  timeMode: TimeModeType;
+  language: string;
+}
 
-  const punctuationClickHandler = (): void => setIsPunctuationEnabled(!isPunctuationEnabled);
-  const numbersClickHandler = (): void => setAreNumbersEnabled(!areNumbersEnabled);
+export const IconSwitchesElement = (props: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  const punctuationClickHandler = (): void => {
+    dispatch(trainingActions.setPunctuationGeneration(!props.isPunctuationGenerated));
+  };
+
+  const numbersClickHandler = (): void => {
+    dispatch(trainingActions.setNumbersGeneration(!props.areNumbersGenerated));
+  };
+
   const wordsModeClickHandler = (): void => {
-    if (timeMode !== TimeModeType.TurnedOff) {
-      setTimeModeType(TimeModeType.TurnedOff);
+    if (props.timeMode !== TimeModeType.TurnedOff) {
+      dispatch(trainingActions.setTimeMode(TimeModeType.TurnedOff));
     }
-    const index = wordsModes.indexOf(wordsMode);
-    if (wordsModes.indexOf(wordsMode) === wordsModes.length - 1) {
-      setWordsModeType(wordsModes[0]);
+    const index = wordsModes.indexOf(props.wordsMode);
+    if (wordsModes.indexOf(props.wordsMode) === wordsModes.length - 1) {
+      dispatch(trainingActions.setWordsMode(wordsModes[0]));
     } else {
-      setWordsModeType(wordsModes[index + 1]);
+      dispatch(trainingActions.setWordsMode(wordsModes[index + 1]));
     }
   };
+
   const timeModeClickHandler = (): void => {
-    const index = timeModes.indexOf(timeMode);
-    if (wordsMode !== WordsModeType.TurnedOff) {
-      setWordsModeType(WordsModeType.TurnedOff);
+    const index = timeModes.indexOf(props.timeMode);
+    if (props.wordsMode !== WordsModeType.TurnedOff) {
+      dispatch(trainingActions.setWordsMode(WordsModeType.TurnedOff));
     }
-    if (timeModes.indexOf(timeMode) === timeModes.length - 1) {
-      setTimeModeType(timeModes[0]);
+    if (timeModes.indexOf(props.timeMode) === timeModes.length - 1) {
+      dispatch(trainingActions.setTimeMode(timeModes[0]));
     } else {
-      setTimeModeType(timeModes[index + 1]);
+      dispatch(trainingActions.setTimeMode(timeModes[index + 1]));
     }
   };
 
@@ -77,28 +74,36 @@ export const IconSwitchesElement = (): JSX.Element => {
     <Box sx={styles.iconsMainContainer}>
       <Box sx={styles.iconsContainer}>
         <Button onClick={punctuationClickHandler}>
-          {isPunctuationEnabled ? <ActivePunctuationIcon /> : <PunctuationIcon />}
+          {props.isPunctuationGenerated ? <ActivePunctuationIcon /> : <PunctuationIcon />}
         </Button>
         <Button onClick={numbersClickHandler}>
-          {areNumbersEnabled ? <ActiveNumbersIcon /> : <NumbersIcon />}
+          {props.areNumbersGenerated ? <ActiveNumbersIcon /> : <NumbersIcon />}
         </Button>
       </Box>
       <Box sx={styles.iconsContainer}>
         <Box sx={styles.iconContainer}>
           <Button onClick={wordsModeClickHandler}>
-            {wordsMode === WordsModeType.TurnedOff ? <WordsModeIcon /> : <ActiveWordsModeIcon />}
+            {props.wordsMode === WordsModeType.TurnedOff ? (
+              <WordsModeIcon />
+            ) : (
+              <ActiveWordsModeIcon />
+            )}
           </Button>
-          {wordsMode !== WordsModeType.TurnedOff && (
-            <Typography sx={styles.modeLabel}>{wordsMode}</Typography>
+          {props.wordsMode !== WordsModeType.TurnedOff && (
+            <Typography sx={styles.modeLabel}>{props.wordsMode}</Typography>
           )}
         </Box>
         <Box>
           <Box sx={styles.iconContainer}>
             <Button onClick={timeModeClickHandler}>
-              {timeMode === TimeModeType.TurnedOff ? <TimeModeIcon /> : <ActiveTimeModeIcon />}
+              {props.timeMode === TimeModeType.TurnedOff ? (
+                <TimeModeIcon />
+              ) : (
+                <ActiveTimeModeIcon />
+              )}
             </Button>
-            {timeMode !== TimeModeType.TurnedOff && (
-              <Typography sx={styles.modeLabel}>{timeMode}</Typography>
+            {props.timeMode !== TimeModeType.TurnedOff && (
+              <Typography sx={styles.modeLabel}>{props.timeMode}</Typography>
             )}
           </Box>
         </Box>

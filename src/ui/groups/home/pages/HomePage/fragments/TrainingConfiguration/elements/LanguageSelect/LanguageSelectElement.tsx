@@ -1,19 +1,22 @@
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { useState } from 'react';
+import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
 import * as styles from './styles';
 
 interface Props {
+  preferredLanguage: string;
   languages: string[];
 }
 
 export const LanguageSelectElement = (props: Props): JSX.Element => {
-  const [selectedLanguage, setSelectedLanguage] = useState(props.languages[0]);
-  const selectionChangedHandler = (event: SelectChangeEvent<string>): void =>
-    setSelectedLanguage(event.target.value);
+  const dispatch = useAppDispatch();
+
+  const selectionChangedHandler = (event: SelectChangeEvent<string>): void => {
+    dispatch(trainingActions.setLanguage(event.target.value));
+  };
 
   return (
     <FormControl sx={styles.select}>
-      <Select value={selectedLanguage} onChange={selectionChangedHandler}>
+      <Select value={props.preferredLanguage} onChange={selectionChangedHandler}>
         {props.languages.map((e) => (
           <MenuItem key={`${e}_text`} value={e}>
             {e}
