@@ -1,2 +1,1 @@
-export * from './ProfileGroup';
-export { ProfileRouter } from './ProfileRouter';
+export { ProfileRoutes } from './ProfileRoutes';

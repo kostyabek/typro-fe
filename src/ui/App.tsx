@@ -1,14 +1,6 @@
-import { Box } from '@mui/material';
-import { HeaderContainer, RouterComponent } from './common';
-import * as styles from './styles';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './common';
 
 export const App = (): JSX.Element => {
-  return (
-    <Box sx={styles.wrapper}>
-      <Box sx={styles.contentContainer}>
-        <HeaderContainer />
-        <RouterComponent />
-      </Box>
-    </Box>
-  );
+  return <RouterProvider router={router} />;
 };

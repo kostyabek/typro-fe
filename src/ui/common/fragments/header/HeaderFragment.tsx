@@ -1,8 +1,8 @@
-import { Box, Link as MuiLink, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import * as styles from './styles';
 import logo from './images/logo.png';
-import { Link } from 'react-router-dom';
 import { ProfileIcon, SettingsIcon } from './icons';
+import { AppLink } from '../../elements';
 
 interface Props {
   homeLink: string;
@@ -16,34 +16,28 @@ interface Props {
 export const HeaderFragment = (props: Props): JSX.Element => {
   return (
     <Box sx={styles.mainContainer}>
-      <MuiLink component={Link} to={{ pathname: props.homeLink }}>
+      <AppLink to={props.homeLink}>
         <img src={logo} height="76" alt="LogoIcon" />
-      </MuiLink>
+      </AppLink>
       <Box sx={styles.navigationContainer}>
         <Box sx={styles.iconLinksContainer}>
-          <MuiLink component={Link} to={{ pathname: props.profileLink }}>
+          <AppLink to={props.profileLink}>
             <ProfileIcon />
-          </MuiLink>
-          <MuiLink component={Link} to={{ pathname: props.settingsLink }}>
+          </AppLink>
+          <AppLink to={props.settingsLink}>
             <SettingsIcon />
-          </MuiLink>
+          </AppLink>
         </Box>
         <Box sx={styles.textLinksContainer}>
-          <MuiLink
-            sx={styles.noTextDecoration}
-            component={Link}
-            to={{ pathname: props.multiplayerLink }}>
+          <AppLink to={props.multiplayerLink}>
             <Typography sx={styles.link}>Multiplayer</Typography>
-          </MuiLink>
-          <MuiLink
-            sx={styles.noTextDecoration}
-            component={Link}
-            to={{ pathname: props.leaderboardsLink }}>
+          </AppLink>
+          <AppLink to={props.leaderboardsLink}>
             <Typography sx={styles.link}>Leaderboards</Typography>
-          </MuiLink>
-          <MuiLink sx={styles.noTextDecoration} component={Link} to={{ pathname: props.aboutLink }}>
+          </AppLink>
+          <AppLink to={props.aboutLink}>
             <Typography sx={styles.link}>About</Typography>
-          </MuiLink>
+          </AppLink>
         </Box>
       </Box>
     </Box>

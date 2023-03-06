@@ -1,4 +1,5 @@
 export const enum Groups {
+  Root = '/',
   Home = '/',
   Auth = '/auth',
   Profile = '/profile',
@@ -8,16 +9,8 @@ export const enum Groups {
   About = '/about'
 }
 
-export const enum HomePages {
-  Home = '/'
-}
-
 export const enum AuthPages {
-  SignIn = '/sign-in',
-  SignUp = '/sign-up',
-  ForgotPassword = '/forgot-password'
-}
-
-export const enum ProfilePages {
-  Profile = '/'
+  SignIn = 'sign-in',
+  SignUp = 'sign-up',
+  ForgotPassword = 'forgot-password'
 }

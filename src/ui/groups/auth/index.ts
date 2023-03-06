@@ -1,2 +1,1 @@
-export * from './AuthGroup';
-export { AuthRouter } from './AuthRouter';
+export { AuthRoutes } from './AuthRoutes';

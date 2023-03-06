@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
 import { TimeModeType, WordsModeType } from '../../../../../../../../../types';
+import { AppIconButton } from '../../../../../../../../common';
 import {
   ActiveNumbersIcon,
   ActivePunctuationIcon,
@@ -73,35 +74,35 @@ export const IconSwitchesElement = (props: Props): JSX.Element => {
   return (
     <Box sx={styles.iconsMainContainer}>
       <Box sx={styles.iconsContainer}>
-        <Button onClick={punctuationClickHandler}>
+        <AppIconButton onClick={punctuationClickHandler}>
           {props.isPunctuationGenerated ? <ActivePunctuationIcon /> : <PunctuationIcon />}
-        </Button>
-        <Button onClick={numbersClickHandler}>
+        </AppIconButton>
+        <AppIconButton onClick={numbersClickHandler}>
           {props.areNumbersGenerated ? <ActiveNumbersIcon /> : <NumbersIcon />}
-        </Button>
+        </AppIconButton>
       </Box>
       <Box sx={styles.iconsContainer}>
         <Box sx={styles.iconContainer}>
-          <Button onClick={wordsModeClickHandler}>
+          <AppIconButton onClick={wordsModeClickHandler}>
             {props.wordsMode === WordsModeType.TurnedOff ? (
               <WordsModeIcon />
             ) : (
               <ActiveWordsModeIcon />
             )}
-          </Button>
+          </AppIconButton>
           {props.wordsMode !== WordsModeType.TurnedOff && (
             <Typography sx={styles.modeLabel}>{props.wordsMode}</Typography>
           )}
         </Box>
         <Box>
           <Box sx={styles.iconContainer}>
-            <Button onClick={timeModeClickHandler}>
+            <AppIconButton onClick={timeModeClickHandler}>
               {props.timeMode === TimeModeType.TurnedOff ? (
                 <TimeModeIcon />
               ) : (
                 <ActiveTimeModeIcon />
               )}
-            </Button>
+            </AppIconButton>
             {props.timeMode !== TimeModeType.TurnedOff && (
               <Typography sx={styles.modeLabel}>{props.timeMode}</Typography>
             )}

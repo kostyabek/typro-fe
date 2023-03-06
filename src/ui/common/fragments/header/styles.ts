@@ -1,5 +1,5 @@
 import { SxProps } from '@mui/material';
-import { colors } from '../../../../shared/theme';
+import { colors, theme } from '../../../../shared';
 
 const container: SxProps = {
   display: 'flex'
@@ -8,28 +8,35 @@ const container: SxProps = {
 export const mainContainer: SxProps = {
   ...container,
   alignItems: 'center',
-  columnGap: '15px'
+  columnGap: '15px',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column'
+  }
 };
 
 export const navigationContainer: SxProps = {
   ...container,
   justifyContent: 'space-between',
-  flex: 1
+  flex: 1,
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'center',
+    flexDirection: 'column'
+  }
 };
 
 export const iconLinksContainer: SxProps = {
-  display: 'flex',
+  ...container,
   columnGap: '15px',
   alignItems: 'center'
 };
 
 export const textLinksContainer: SxProps = {
-  display: 'flex',
-  columnGap: '125px'
-};
-
-export const noTextDecoration: SxProps = {
-  textDecoration: 'none'
+  ...container,
+  columnGap: '125px',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
 };
 
 export const link: SxProps = {

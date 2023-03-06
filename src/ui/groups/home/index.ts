@@ -1,2 +1,1 @@
-export * from './HomeGroup';
-export { HomeRouter } from './HomeRouter';
+export { HomeRoutes } from './HomeRoutes';
