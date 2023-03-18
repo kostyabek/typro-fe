@@ -24,6 +24,9 @@
                 "project": [
                     "./tsconfig.json"
                 ]
+            },
+            "rules": {
+                "no-throw-literal": "off"
             }
         }
     ],

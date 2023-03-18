@@ -10,11 +10,13 @@ import {
 } from '../../groups';
 import { AuthRoutes } from '../../groups/auth';
 import { RootLayout } from '../fragments';
+import { ErrorPage } from '../pages';
 
 export const router = createBrowserRouter([
   {
     path: Groups.Root,
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       ...HomeRoutes,
       ...AuthRoutes,

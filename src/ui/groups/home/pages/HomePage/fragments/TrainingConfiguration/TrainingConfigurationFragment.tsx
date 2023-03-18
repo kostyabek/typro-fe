@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { TimeModeType, WordsModeType } from '../../../../../../../types';
+import { memo } from 'react';
+import { LanguageInfo, TimeModeType, WordsModeType } from '../../../../../../../types';
 import { IconSwitchesElement, LanguageSelectElement } from './elements';
 import * as styles from './styles';
 
@@ -8,22 +9,24 @@ interface TrainingConfiguration {
   isPunctuationGenerated: boolean;
   wordsMode: WordsModeType;
   timeMode: TimeModeType;
-  language: string;
+  languageInfo: LanguageInfo;
 }
 
 interface Props {
-  languages: string[];
+  languagesInfo: LanguageInfo[];
   trainingConfiguration: TrainingConfiguration;
 }
 
-export const TrainingConfigurationFragment = (props: Props): JSX.Element => {
+const TrainingConfigurationFragment = (props: Props): JSX.Element => {
   return (
     <Box sx={styles.mainContainer}>
       <IconSwitchesElement {...props.trainingConfiguration} />
       <LanguageSelectElement
-        languages={props.languages}
-        preferredLanguage={props.trainingConfiguration.language}
+        languagesInfo={props.languagesInfo}
+        preferredLanguageInfo={props.trainingConfiguration.languageInfo}
       />
     </Box>
   );
 };
+
+export default memo(TrainingConfigurationFragment);

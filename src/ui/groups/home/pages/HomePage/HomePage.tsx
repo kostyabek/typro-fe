@@ -1,4 +1,6 @@
 import { Box } from '@mui/material';
+import { useState } from 'react';
+import { RestartContext } from '../../../../../contexts';
 import {
   GeneratedTextAreaContainer,
   RestartButtonContainer,
@@ -7,13 +9,17 @@ import {
 import * as styles from './styles';
 
 export const HomePage = (): JSX.Element => {
+  const [isRestartScheduled, setRestartScheduledStatus] = useState(true);
+
   return (
-    <Box sx={styles.layoutContainer}>
-      <Box sx={styles.contentContainer}>
-        <TrainingConfigurationContainer />
-        <GeneratedTextAreaContainer />
-        <RestartButtonContainer />
+    <RestartContext.Provider value={{ isRestartScheduled, setRestartScheduledStatus }}>
+      <Box sx={styles.layoutContainer}>
+        <Box sx={styles.contentContainer}>
+          <TrainingConfigurationContainer />
+          <GeneratedTextAreaContainer />
+          <RestartButtonContainer />
+        </Box>
       </Box>
-    </Box>
+    </RestartContext.Provider>
   );
 };

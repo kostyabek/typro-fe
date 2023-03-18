@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TimeModeType, WordsModeType } from '../../../types';
+import { TimeModeType, WordsModeType, LanguageInfo } from '../../../types';
 
 interface TrainingConfigurationSlice {
   areNumbersGenerated: boolean;
   isPunctuationGenerated: boolean;
   wordsMode: WordsModeType;
   timeMode: TimeModeType;
-  language: string;
+  languageInfo: LanguageInfo;
 }
 
 const initialState: TrainingConfigurationSlice = {
@@ -14,7 +14,7 @@ const initialState: TrainingConfigurationSlice = {
   isPunctuationGenerated: false,
   wordsMode: WordsModeType.TwentyFiveWords,
   timeMode: TimeModeType.TurnedOff,
-  language: 'english'
+  languageInfo: { id: 1, name: 'English' }
 };
 
 const slice = createSlice({
@@ -33,8 +33,8 @@ const slice = createSlice({
     setTimeMode: (state, action: PayloadAction<TimeModeType>) => {
       state.timeMode = action.payload;
     },
-    setLanguage: (state, action: PayloadAction<string>) => {
-      state.language = action.payload;
+    setLanguage: (state, action: PayloadAction<LanguageInfo>) => {
+      state.languageInfo = action.payload;
     }
   }
 });

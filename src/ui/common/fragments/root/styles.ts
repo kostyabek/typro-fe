@@ -1,14 +1,15 @@
 import { SxProps } from '@mui/material';
 
-export const wrapper: SxProps = {
+export const rootContainer: SxProps = {
   display: 'grid',
   gridTemplateColumns: 'auto [content] minmax(0,1365px) auto',
   justifyItems: 'stretch'
 };
 
-export const contentContainer: SxProps = {
+export const centeredContainer: SxProps = {
   maxWidth: '1365px',
-  padding: '25px',
+  rowGap: '2rem',
+  padding: '2rem',
   boxSizing: 'border-box',
   display: 'grid',
   gridAutoFlow: 'row',

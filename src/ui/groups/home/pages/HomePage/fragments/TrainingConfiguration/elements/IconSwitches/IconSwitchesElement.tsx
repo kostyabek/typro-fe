@@ -1,4 +1,6 @@
 import { Box, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { RestartContext } from '../../../../../../../../../contexts';
 import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
 import { TimeModeType, WordsModeType } from '../../../../../../../../../types';
 import { AppIconButton } from '../../../../../../../../common';
@@ -33,18 +35,20 @@ interface Props {
   isPunctuationGenerated: boolean;
   wordsMode: WordsModeType;
   timeMode: TimeModeType;
-  language: string;
 }
 
 export const IconSwitchesElement = (props: Props): JSX.Element => {
+  const { setRestartScheduledStatus } = useContext(RestartContext);
   const dispatch = useAppDispatch();
 
   const punctuationClickHandler = (): void => {
     dispatch(trainingActions.setPunctuationGeneration(!props.isPunctuationGenerated));
+    setRestartScheduledStatus(true);
   };
 
   const numbersClickHandler = (): void => {
     dispatch(trainingActions.setNumbersGeneration(!props.areNumbersGenerated));
+    setRestartScheduledStatus(true);
   };
 
   const wordsModeClickHandler = (): void => {
@@ -57,6 +61,7 @@ export const IconSwitchesElement = (props: Props): JSX.Element => {
     } else {
       dispatch(trainingActions.setWordsMode(wordsModes[index + 1]));
     }
+    setRestartScheduledStatus(true);
   };
 
   const timeModeClickHandler = (): void => {
@@ -69,6 +74,7 @@ export const IconSwitchesElement = (props: Props): JSX.Element => {
     } else {
       dispatch(trainingActions.setTimeMode(timeModes[index + 1]));
     }
+    setRestartScheduledStatus(true);
   };
 
   return (

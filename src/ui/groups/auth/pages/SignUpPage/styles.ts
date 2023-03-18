@@ -1,4 +1,5 @@
 import { SxProps } from '@mui/material';
+import { colors } from '../../../../../shared';
 
 export const mainContainer: SxProps = {
   display: 'grid',
@@ -33,4 +34,9 @@ export const linksContainer: SxProps = {
   '& a': {
     whiteSpace: 'nowrap'
   }
+};
+
+export const validationError: SxProps = {
+  fontSize: '18px',
+  color: colors.error.main
 };
