@@ -3,9 +3,19 @@ import { colors } from './colors';
 
 export const theme = createTheme({
   typography: {
-    fontFamily: 'Mulish'
+    fontFamily: 'Mulish',
+    fontSize: 18
   },
   palette: colors,
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 930,
+      lg: 1200,
+      xl: 1536
+    }
+  },
   components: {
     MuiSvgIcon: {
       styleOverrides: {
@@ -51,12 +61,15 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          borderColor: colors.primary.main,
-          borderRadius: '20px',
-          '&:active': {
-            transition: '0.1s',
-            transform: 'scale(0.85)'
-          }
+          textTransform: 'initial'
+        }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '18px',
+          color: colors.primary.main
         }
       }
     }

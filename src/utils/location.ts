@@ -1,5 +1,7 @@
 export const enum Groups {
+  Root = '/',
   Home = '/',
+  Auth = '/auth',
   Profile = '/profile',
   Settings = '/settings',
   Multiplayer = '/multiplayer',
@@ -7,10 +9,8 @@ export const enum Groups {
   About = '/about'
 }
 
-export const enum HomePages {
-  Home = '/'
-}
-
-export const enum ProfilePages {
-  Profile = '/'
+export const enum AuthPages {
+  SignIn = 'sign-in',
+  SignUp = 'sign-up',
+  ForgotPassword = 'forgot-password'
 }

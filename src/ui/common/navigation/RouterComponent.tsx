@@ -1,18 +1,30 @@
-import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { Groups } from '../../../utils';
-import { LoaderElement } from '../elements';
+import {
+  AboutRoutes,
+  HomeRoutes,
+  LeaderboardsRoutes,
+  MultiplayerRoutes,
+  ProfileRoutes,
+  SettingsRoutes
+} from '../../groups';
+import { AuthRoutes } from '../../groups/auth';
+import { RootLayout } from '../fragments';
+import { ErrorPage } from '../pages';
 
-const HomeGroup = lazy(async () => await import('../../groups/home/HomeGroup'));
-const ProfileGroup = lazy(async () => await import('../../groups/profile/ProfileGroup'));
-
-export const RouterComponent = (): JSX.Element => {
-  return (
-    <Suspense fallback={<LoaderElement />}>
-      <Routes>
-        <Route path={Groups.Home} element={<HomeGroup />} />
-        <Route path={Groups.Profile} element={<ProfileGroup />} />
-      </Routes>
-    </Suspense>
-  );
-};
+export const router = createBrowserRouter([
+  {
+    path: Groups.Root,
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      ...HomeRoutes,
+      ...AuthRoutes,
+      ...ProfileRoutes,
+      ...SettingsRoutes,
+      ...MultiplayerRoutes,
+      ...LeaderboardsRoutes,
+      ...AboutRoutes
+    ]
+  }
+]);

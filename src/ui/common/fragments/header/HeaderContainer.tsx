@@ -6,10 +6,10 @@ export const HeaderContainer = (): JSX.Element => {
     <HeaderFragment
       homeLink={Groups.Home}
       profileLink={Groups.Profile}
-      settingsLink="/"
-      multiplayerLink="/"
-      leaderboardsLink="/"
-      aboutLink="/"
+      settingsLink={Groups.Settings}
+      multiplayerLink={Groups.Multiplayer}
+      leaderboardsLink={Groups.Leaderboards}
+      aboutLink={Groups.About}
     />
   );
 };

@@ -15,3 +15,17 @@ export const contentContainer: SxProps = {
   gridAutoRows: 'auto 1fr auto',
   gridColumnStart: 'content'
 };
+
+export const errorContainer: SxProps = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+};
+
+export const title: SxProps = {
+  fontSize: '36px'
+};
+
+export const message: SxProps = {
+  fontSize: '24px'
+};

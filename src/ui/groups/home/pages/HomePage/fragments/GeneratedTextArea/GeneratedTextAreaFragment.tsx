@@ -1,10 +1,22 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import * as styles from './styles';
 
 interface Props {
-  text: string;
+  words: string[][];
 }
 
 export const GeneratedTextAreaFragment = (props: Props): JSX.Element => {
-  return <Box sx={styles.text}>{props.text}</Box>;
+  return (
+    <Box sx={styles.wordsContainer}>
+      {props.words.map((w, i) => (
+        <Box key={`word_${i}`} sx={styles.word}>
+          {w.map((c, i) => (
+            <Typography key={`char_${i}`} sx={styles.letter}>
+              {c}
+            </Typography>
+          ))}
+        </Box>
+      ))}
+    </Box>
+  );
 };
