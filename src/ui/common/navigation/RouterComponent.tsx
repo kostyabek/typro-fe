@@ -6,7 +6,8 @@ import {
   LeaderboardsRoutes,
   MultiplayerRoutes,
   ProfileRoutes,
-  SettingsRoutes
+  SettingsRoutes,
+  TrainingResultsRoutes
 } from '../../groups';
 import { AuthRoutes } from '../../groups/auth';
 import { RootLayout } from '../fragments';
@@ -24,7 +25,8 @@ export const router = createBrowserRouter([
       ...SettingsRoutes,
       ...MultiplayerRoutes,
       ...LeaderboardsRoutes,
-      ...AboutRoutes
+      ...AboutRoutes,
+      ...TrainingResultsRoutes
     ]
   }
 ]);

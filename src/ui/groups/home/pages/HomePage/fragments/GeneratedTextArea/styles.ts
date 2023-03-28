@@ -5,15 +5,11 @@ export const wordsContainer: SxProps = {
   userSelect: 'none',
   height: '135px',
   overflowY: 'hidden',
-  flexWrap: 'wrap'
+  flexWrap: 'wrap',
+  outline: 'none',
+  alignContent: 'flex-start'
 };
 
-export const word: SxProps = {
-  display: 'flex',
-  height: '45px',
-  margin: '0 3px'
-};
-
-export const letter: SxProps = {
-  fontSize: '28px'
+export const innerContainer: SxProps = {
+  position: 'relative'
 };

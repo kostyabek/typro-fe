@@ -1,7 +1,7 @@
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useContext } from 'react';
 import { RestartContext } from '../../../../../../../../../contexts';
-import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
+import { trainingConfigurationActions, useAppDispatch } from '../../../../../../../../../state';
 import { LanguageInfo } from '../../../../../../../../../types';
 import * as styles from './styles';
 
@@ -18,7 +18,7 @@ export const LanguageSelectElement = (props: Props): JSX.Element => {
     const selectedLanguageId = event.target.value;
     const languageInfo =
       props.languagesInfo.find((e) => e.id === selectedLanguageId) ?? props.preferredLanguageInfo;
-    dispatch(trainingActions.setLanguage(languageInfo));
+    dispatch(trainingConfigurationActions.setLanguage(languageInfo));
     setRestartScheduledStatus(true);
   };
 

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { RestartContext } from '../../../../../../../../../contexts';
-import { trainingActions, useAppDispatch } from '../../../../../../../../../state';
+import { trainingConfigurationActions, useAppDispatch } from '../../../../../../../../../state';
 import { TimeModeType, WordsModeType } from '../../../../../../../../../types';
 import { AppIconButton } from '../../../../../../../../common';
 import {
@@ -42,24 +42,24 @@ export const IconSwitchesElement = (props: Props): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const punctuationClickHandler = (): void => {
-    dispatch(trainingActions.setPunctuationGeneration(!props.isPunctuationGenerated));
+    dispatch(trainingConfigurationActions.setPunctuationGeneration(!props.isPunctuationGenerated));
     setRestartScheduledStatus(true);
   };
 
   const numbersClickHandler = (): void => {
-    dispatch(trainingActions.setNumbersGeneration(!props.areNumbersGenerated));
+    dispatch(trainingConfigurationActions.setNumbersGeneration(!props.areNumbersGenerated));
     setRestartScheduledStatus(true);
   };
 
   const wordsModeClickHandler = (): void => {
     if (props.timeMode !== TimeModeType.TurnedOff) {
-      dispatch(trainingActions.setTimeMode(TimeModeType.TurnedOff));
+      dispatch(trainingConfigurationActions.setTimeMode(TimeModeType.TurnedOff));
     }
     const index = wordsModes.indexOf(props.wordsMode);
     if (wordsModes.indexOf(props.wordsMode) === wordsModes.length - 1) {
-      dispatch(trainingActions.setWordsMode(wordsModes[0]));
+      dispatch(trainingConfigurationActions.setWordsMode(wordsModes[0]));
     } else {
-      dispatch(trainingActions.setWordsMode(wordsModes[index + 1]));
+      dispatch(trainingConfigurationActions.setWordsMode(wordsModes[index + 1]));
     }
     setRestartScheduledStatus(true);
   };
@@ -67,12 +67,12 @@ export const IconSwitchesElement = (props: Props): JSX.Element => {
   const timeModeClickHandler = (): void => {
     const index = timeModes.indexOf(props.timeMode);
     if (props.wordsMode !== WordsModeType.TurnedOff) {
-      dispatch(trainingActions.setWordsMode(WordsModeType.TurnedOff));
+      dispatch(trainingConfigurationActions.setWordsMode(WordsModeType.TurnedOff));
     }
     if (timeModes.indexOf(props.timeMode) === timeModes.length - 1) {
-      dispatch(trainingActions.setTimeMode(timeModes[0]));
+      dispatch(trainingConfigurationActions.setTimeMode(timeModes[0]));
     } else {
-      dispatch(trainingActions.setTimeMode(timeModes[index + 1]));
+      dispatch(trainingConfigurationActions.setTimeMode(timeModes[index + 1]));
     }
     setRestartScheduledStatus(true);
   };

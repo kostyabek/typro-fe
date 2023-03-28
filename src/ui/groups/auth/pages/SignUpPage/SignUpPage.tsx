@@ -1,5 +1,5 @@
 import { Box, InputLabel, List, ListItem } from '@mui/material';
-import { Form, useActionData } from 'react-router-dom';
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 import { FailedFieldValidationResponse } from '../../../../../types';
 import { AuthPages } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
@@ -8,11 +8,15 @@ import * as styles from './styles';
 export const SignUpPage = (): JSX.Element => {
   const actionData = useActionData() as FailedFieldValidationResponse[];
 
+  const navigation = useNavigation();
+
   const isEmailInvalid = actionData?.some((e) => e.metadata.field.toLowerCase() === 'email');
   const isPasswordInvalid = actionData?.some((e) => e.metadata.field.toLowerCase() === 'password');
   const isConfirmPasswordInvalid = actionData?.some(
     (e) => e.metadata.field.toLowerCase() === 'confirmpassword'
   );
+
+  const isSubmitting = navigation.state === 'submitting';
 
   return (
     <Box sx={styles.mainContainer}>
@@ -44,8 +48,8 @@ export const SignUpPage = (): JSX.Element => {
                 error={isConfirmPasswordInvalid}
               />
             </Box>
-            <AppTextButton sx={styles.button} type="submit">
-              Sign up
+            <AppTextButton sx={styles.button} type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing up' : 'Sign up'}
             </AppTextButton>
             <Box sx={styles.linksContainer}>
               <AppLink to={`../${AuthPages.SignIn}`}>Already a member?</AppLink>

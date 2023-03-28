@@ -26,9 +26,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Provider store={store}>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <App />
       </Provider>
     </ThemeProvider>
   </QueryClientProvider>
