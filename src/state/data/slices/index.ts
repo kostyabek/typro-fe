@@ -1,1 +1,2 @@
-export { trainingActions } from './trainingSlice';
+export { trainingConfigurationActions } from './trainingConfigurationSlice';
+export { trainingResultsActions } from './trainingResultsSlice';

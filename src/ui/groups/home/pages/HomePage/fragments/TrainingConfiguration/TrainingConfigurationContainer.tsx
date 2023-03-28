@@ -12,7 +12,7 @@ export const TrainingConfigurationContainer = (): JSX.Element => {
   const supportedLanguagesInfo = queryResult.data?.value ?? [];
 
   const { areNumbersGenerated, isPunctuationGenerated, languageInfo, timeMode, wordsMode } =
-    useAppSelector((state) => state.data.training);
+    useAppSelector((state) => state.data.trainingConfiguration);
 
   return (
     <TrainingConfigurationFragment

@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import training from './slices/trainingSlice';
+import trainingConfiguration from './slices/trainingConfigurationSlice';
+import trainingResults from './slices/trainingResultsSlice';
 
-export const dataReducer = combineReducers({ training });
+export const dataReducer = combineReducers({ trainingConfiguration, trainingResults });

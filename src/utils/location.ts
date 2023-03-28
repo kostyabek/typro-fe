@@ -6,7 +6,8 @@ export const enum Groups {
   Settings = '/settings',
   Multiplayer = '/multiplayer',
   Leaderboards = '/leaderboards',
-  About = '/about'
+  About = '/about',
+  TrainingResults = '/training-results'
 }
 
 export const enum AuthPages {

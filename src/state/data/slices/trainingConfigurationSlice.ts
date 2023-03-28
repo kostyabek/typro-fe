@@ -1,13 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TimeModeType, WordsModeType, LanguageInfo } from '../../../types';
+import { TimeModeType, WordsModeType, LanguageInfo, TrainingConfiguration } from '../../../types';
 
-interface TrainingConfigurationSlice {
-  areNumbersGenerated: boolean;
-  isPunctuationGenerated: boolean;
-  wordsMode: WordsModeType;
-  timeMode: TimeModeType;
-  languageInfo: LanguageInfo;
-}
+type TrainingConfigurationSlice = TrainingConfiguration;
 
 const initialState: TrainingConfigurationSlice = {
   areNumbersGenerated: false,
@@ -39,5 +33,5 @@ const slice = createSlice({
   }
 });
 
-export const trainingActions = slice.actions;
+export const trainingConfigurationActions = slice.actions;
 export default slice.reducer;
