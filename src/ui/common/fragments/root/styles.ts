@@ -8,6 +8,7 @@ export const rootContainer: SxProps = {
 
 export const centeredContainer: SxProps = {
   maxWidth: '1365px',
+  minHeight: '100vh',
   rowGap: '2rem',
   padding: '2rem',
   boxSizing: 'border-box',
