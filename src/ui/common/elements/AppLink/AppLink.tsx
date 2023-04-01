@@ -19,6 +19,7 @@ export const AppLink = (props: Props): JSX.Element => {
       component={AppLinkBase}
       to={props.to}
       end={props.end}
+      target={props.target}
       sx={{
         textDecoration: 'none',
         '&.active': {
