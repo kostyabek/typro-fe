@@ -1,5 +1,15 @@
 import { SxProps } from '@mui/material';
 
-export const mainContainer: SxProps = {
-  // backgroundColor: colors.primary.main
+const base: SxProps = {
+  textAlign: 'center'
+};
+
+export const header: SxProps = {
+  ...base,
+  fontSize: '48px'
+};
+
+export const plain: SxProps = {
+  ...base,
+  fontSize: '24px'
 };
