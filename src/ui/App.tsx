@@ -1,20 +1,22 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { createMuiTheme } from '../shared';
-import { useAppDispatch, useAppSelector, userActions } from '../state';
+import { useAppTheme } from '../shared';
+import { useAppDispatch, userActions } from '../state';
 import { router } from './common';
-import { getAccessToken } from '../utils';
+import { getAccessToken, setFaviconBasedOnTheme } from '../utils';
 
 export const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const token = getAccessToken();
-  if (token !== null) {
-    dispatch(userActions.setIsAuthenticated(true));
-  }
+  useEffect(() => {
+    if (token !== null) {
+      dispatch(userActions.setIsAuthenticated(true));
+    }
+  }, [token]);
 
-  const themeMode = useAppSelector((store) => store.ui.theme.mode);
-  const theme = useMemo(() => createMuiTheme(themeMode), [themeMode]);
+  const theme = useAppTheme();
+  setFaviconBasedOnTheme(theme.palette.mode);
 
   return (
     <ThemeProvider theme={theme}>

@@ -6,7 +6,7 @@ interface TrainingStateSlice {
 }
 
 const initialState: TrainingStateSlice = {
-  mode: 'dark'
+  mode: 'light'
 };
 
 const slice = createSlice({
