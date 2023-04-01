@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { Box, Typography, useTheme } from '@mui/material';
+import { useContext, useMemo } from 'react';
 import { RestartContext } from '../../../../../../../../../contexts';
 import { trainingConfigurationActions, useAppDispatch } from '../../../../../../../../../state';
 import { TimeModeType, WordsModeType } from '../../../../../../../../../types';
@@ -14,7 +14,7 @@ import {
   TimeModeIcon,
   WordsModeIcon
 } from './icons';
-import * as styles from './styles';
+import { createStyles } from './styles';
 
 const timeModes = [
   TimeModeType.FifteenSeconds,
@@ -40,6 +40,8 @@ interface Props {
 export const IconSwitchesElement = (props: Props): JSX.Element => {
   const { setRestartScheduledStatus } = useContext(RestartContext);
   const dispatch = useAppDispatch();
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   const punctuationClickHandler = (): void => {
     dispatch(trainingConfigurationActions.setPunctuationGeneration(!props.isPunctuationGenerated));

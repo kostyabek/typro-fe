@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
-import { configuration } from '../utils';
+import { AxiosResponse } from 'axios';
+import { UniversalResponse } from '../types/response';
+import { axiosPublic } from './axios';
 
 const relativeBasePath = 'auth/';
 const headers = {
@@ -7,24 +8,42 @@ const headers = {
   Accept: 'application/json'
 };
 
-interface SignUpRequestModel {
+interface SignInRequestModel {
   email: string;
   password: string;
+}
+
+interface SignUpRequestModel extends SignInRequestModel {
   confirmPassword: string;
 }
 
-interface SignUpResponseModel {
+interface AuthResponseValue {
   accessToken: string;
+  eMail: string;
 }
 
 export const signUp = async (
   requestModel: SignUpRequestModel
-): Promise<AxiosResponse<SignUpResponseModel>> => {
-  return await axios.post<SignUpResponseModel>(
-    `${configuration.serverUrl}${relativeBasePath}sign-up`,
+): Promise<AxiosResponse<UniversalResponse<AuthResponseValue>>> => {
+  return await axiosPublic.post<UniversalResponse<AuthResponseValue>>(
+    `${relativeBasePath}sign-up`,
     requestModel,
     {
-      headers
+      headers,
+      withCredentials: true
+    }
+  );
+};
+
+export const signIn = async (
+  requestModel: SignInRequestModel
+): Promise<AxiosResponse<UniversalResponse<AuthResponseValue>>> => {
+  return await axiosPublic.post<UniversalResponse<AuthResponseValue>>(
+    `${relativeBasePath}sign-in`,
+    requestModel,
+    {
+      headers,
+      withCredentials: true
     }
   );
 };

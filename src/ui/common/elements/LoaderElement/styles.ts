@@ -1,6 +1,13 @@
-import { SxProps } from '@mui/material';
-import { colors } from '../../../../shared';
+import { SxProps, Theme } from '@mui/material';
 
-export const container: SxProps = {
-  color: colors.primary.main
+interface Styles {
+  container: SxProps;
+}
+
+export const createStyles = (theme: Theme): Styles => {
+  const container: SxProps = {
+    color: theme.palette.text.primary
+  };
+
+  return { container };
 };

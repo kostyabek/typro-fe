@@ -1,9 +1,11 @@
-import { Box, Fade, Typography } from '@mui/material';
-import * as styles from './styles';
-import logo from './images/logo.png';
+import { Box, Fade, Typography, useTheme } from '@mui/material';
+import logoLight from './images/logo_light.png';
+import logoDark from './images/logo_dark.png';
 import { ProfileIcon, SettingsIcon } from './icons';
 import { AppLink } from '../../elements';
 import { useAppSelector } from '../../../../state';
+import { useMemo } from 'react';
+import { createStyles } from './styles';
 
 interface Props {
   homeLink: string;
@@ -16,11 +18,14 @@ interface Props {
 
 export const HeaderFragment = (props: Props): JSX.Element => {
   const { state: trainingState } = useAppSelector((store) => store.ui.trainingState);
+  const themeMode = useAppSelector((store) => store.ui.theme.mode);
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   return (
     <Box sx={styles.mainContainer}>
       <AppLink to={props.homeLink}>
-        <img src={logo} height="76" alt="LogoIcon" />
+        <img src={themeMode === 'light' ? logoLight : logoDark} height="76" alt="LogoIcon" />
       </AppLink>
       <Fade in={trainingState !== 'started'}>
         <Box sx={styles.navigationContainer}>

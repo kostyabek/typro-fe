@@ -3,18 +3,17 @@ import { ActionFunctionArgs, json } from 'react-router-dom';
 import { authHttpClient } from '../../../../../httpClients';
 import { setAccessToken } from '../../../../../utils';
 
-export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> => {
+export const signInAction = async (args: ActionFunctionArgs): Promise<Response> => {
   const { request } = args;
   const data = await request.formData();
 
   const payload = {
     email: data.get('email')?.toString() ?? '',
-    password: data.get('password')?.toString() ?? '',
-    confirmPassword: data.get('confirmPassword')?.toString() ?? ''
+    password: data.get('password')?.toString() ?? ''
   };
 
   try {
-    const response = await authHttpClient.signUp({ ...payload });
+    const response = await authHttpClient.signIn({ ...payload });
     if (response.data.value === null) {
       throw new Error('Could not receive access token from positive response!');
     }

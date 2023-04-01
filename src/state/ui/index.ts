@@ -1,2 +1,2 @@
 export { uiReducer } from './uiReducer';
-export { trainingStateActions } from './slices';
+export { trainingStateActions, themeActions } from './slices';

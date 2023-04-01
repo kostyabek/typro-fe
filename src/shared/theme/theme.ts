@@ -1,77 +1,84 @@
-import { createTheme } from '@mui/material';
-import { colors } from './colors';
+import { createTheme, PaletteMode, Theme } from '@mui/material';
+import { darkColors, lightColors } from './colors';
 
-export const theme = createTheme({
-  typography: {
-    fontFamily: 'Mulish',
-    fontSize: 18
-  },
-  palette: colors,
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 930,
-      lg: 1200,
-      xl: 1536
-    }
-  },
-  components: {
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: {
-          width: 'initial',
-          height: 'initial'
-        }
-      }
+export const createMuiTheme = (mode: PaletteMode): Theme => {
+  let theme = createTheme({
+    typography: {
+      fontFamily: 'Mulish',
+      fontSize: 18
     },
-    MuiSelect: {
-      defaultProps: {
-        variant: 'standard',
-        disableUnderline: true
+    palette: mode === 'light' ? lightColors : darkColors,
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 930,
+        lg: 1200,
+        xl: 1536
+      }
+    }
+  });
+
+  theme = createTheme(theme, {
+    components: {
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            width: 'initial',
+            height: 'initial'
+          }
+        }
       },
-      styleOverrides: {
-        icon: {
-          width: 20,
-          height: 20,
-          top: 'initial'
+      MuiSelect: {
+        defaultProps: {
+          variant: 'standard',
+          disableUnderline: true
         },
-        select: {
-          backgroundColor: 'transparent'
+        styleOverrides: {
+          icon: {
+            width: 20,
+            height: 20,
+            top: 'initial'
+          },
+          select: {
+            backgroundColor: 'transparent'
+          }
         }
-      }
-    },
-    MuiPopover: {
-      styleOverrides: {
-        paper: {
-          backgroundColor: colors.background.default,
-          boxShadow: 'none',
-          border: `2px solid ${colors.primary.main}`
-        }
-      }
-    },
-    MuiList: {
-      defaultProps: {
-        disablePadding: true
-      }
-    },
-    MuiButton: {
-      defaultProps: {
-        disableRipple: true
       },
-      styleOverrides: {
-        root: {
-          textTransform: 'initial'
+      MuiPopover: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: theme.palette.background.default,
+            boxShadow: 'none',
+            border: `2px solid ${theme.palette.text.primary}`
+          }
         }
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          fontSize: '18px',
-          color: colors.primary.main
+      },
+      MuiList: {
+        defaultProps: {
+          disablePadding: true
+        }
+      },
+      MuiButton: {
+        defaultProps: {
+          disableRipple: true
+        },
+        styleOverrides: {
+          root: {
+            textTransform: 'initial'
+          }
+        }
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            fontSize: '18px',
+            color: theme.palette.text.primary
+          }
         }
       }
     }
-  }
-});
+  });
+
+  return theme;
+};

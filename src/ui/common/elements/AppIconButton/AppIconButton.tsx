@@ -1,13 +1,14 @@
-import { Button, ButtonProps } from '@mui/material';
-import { colors } from '../../../../shared';
+import { Button, ButtonProps, useTheme } from '@mui/material';
 
 export const AppIconButton = (props: ButtonProps): JSX.Element => {
+  const theme = useTheme();
+
   return (
     <Button
       {...props}
       sx={{
         fontSize: '18px',
-        borderColor: colors.primary.main,
+        borderColor: theme.palette.text.primary,
         borderRadius: '20px',
         '&:active': {
           transition: '0.1s',

@@ -7,7 +7,6 @@ interface LetterStatuses {
 type TrainingResultsSlice = TrainingResults & LetterStatuses;
 
 const initialState: TrainingResultsSlice = {
-  trainingType: '',
   wordsPerMinute: 0,
   accuracy: 0,
   timeInMilliseconds: 0,

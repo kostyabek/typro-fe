@@ -1,2 +1,2 @@
 export { dataReducer } from './dataReducer';
-export { trainingConfigurationActions, trainingResultsActions } from './slices';
+export { trainingConfigurationActions, trainingResultsActions, userActions } from './slices';

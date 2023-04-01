@@ -1,1 +1,1 @@
-export { colors, theme } from './theme';
+export { createMuiTheme } from './theme';
