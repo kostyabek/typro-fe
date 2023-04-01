@@ -1,21 +1,41 @@
-import { SxProps } from '@mui/material';
-import { colors } from '../../../../../../../../../shared';
+import { SxProps, Theme } from '@mui/material';
 
-export const initial: SxProps = {
+interface Styles {
+  initial: SxProps;
+  correct: SxProps;
+  incorrect: SxProps;
+  extra: SxProps;
+}
+
+const base: SxProps = {
   fontSize: '28px'
 };
 
-export const correct: SxProps = {
-  ...initial,
-  color: colors.success.main
-};
+export const createStyles = (theme: Theme): Styles => {
+  const initial: SxProps = {
+    ...base,
+    color: theme.palette.text.secondary
+  };
 
-export const incorrect: SxProps = {
-  ...initial,
-  color: colors.error.main
-};
+  const correct: SxProps = {
+    ...base,
+    color: theme.palette.text.primary
+  };
 
-export const extra: SxProps = {
-  ...initial,
-  color: colors.error.dark
+  const incorrect: SxProps = {
+    ...base,
+    color: theme.palette.error.main
+  };
+
+  const extra: SxProps = {
+    ...base,
+    color: theme.palette.error.dark
+  };
+
+  return {
+    initial,
+    correct,
+    incorrect,
+    extra
+  };
 };

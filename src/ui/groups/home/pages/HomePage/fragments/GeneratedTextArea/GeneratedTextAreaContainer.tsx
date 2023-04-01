@@ -95,7 +95,7 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
     });
   };
 
-  const generatedText = queryResult.data?.value ?? [];
+  const generatedText: string[][] = queryResult.data ?? [];
   useEffect(() => {
     if (generatedText.length > 0) {
       setWordStates(

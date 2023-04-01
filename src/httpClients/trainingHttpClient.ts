@@ -1,6 +1,12 @@
-import axios from 'axios';
-import { TimeModeType, WordsModeType, LanguageInfo } from '../types';
-import { configuration } from '../utils';
+import { Axios } from 'axios';
+import {
+  TimeModeType,
+  WordsModeType,
+  LanguageInfo,
+  UniversalResponse,
+  TrainingResults
+} from '../types';
+import { axiosPublic } from './axios';
 
 const relativeBasePath = 'training/';
 
@@ -12,21 +18,17 @@ interface GetGeneratedTextRequestModel {
   areNumbersGenerated: boolean;
 }
 
-interface GetGeneratedTextResponseModel {
-  value: string[][];
-}
-
 export const getGeneratedText = async (
   requestModel: GetGeneratedTextRequestModel
-): Promise<GetGeneratedTextResponseModel> => {
-  const response = await axios.get<GetGeneratedTextResponseModel>(
-    `${configuration.serverUrl}${relativeBasePath}text-generation`,
+): Promise<string[][]> => {
+  const response = await axiosPublic.get<UniversalResponse<string[][]>>(
+    `${relativeBasePath}text-generation`,
     {
       params: requestModel
     }
   );
 
-  return response.data;
+  return response.data.value ?? [];
 };
 
 interface GetSupportedLanguagesResponse {
@@ -34,9 +36,23 @@ interface GetSupportedLanguagesResponse {
 }
 
 export const getSupportedLanguages = async (): Promise<GetSupportedLanguagesResponse> => {
-  const response = await axios.get<GetSupportedLanguagesResponse>(
-    `${configuration.serverUrl}${relativeBasePath}supported-languages`
+  const response = await axiosPublic.get<GetSupportedLanguagesResponse>(
+    `${relativeBasePath}supported-languages`
   );
 
   return response.data;
+};
+
+interface TrainingResultsSubmissionRequest extends TrainingResults {
+  languageId: number;
+  dateConducted: Date;
+  timeModeType: TimeModeType;
+  wordsModeType: WordsModeType;
+}
+
+export const submitTrainingResults = async (
+  axios: Axios,
+  results: TrainingResultsSubmissionRequest
+): Promise<void> => {
+  await axios.post<GetSupportedLanguagesResponse>(`${relativeBasePath}results`, results);
 };

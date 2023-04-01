@@ -1,16 +1,17 @@
-import { Button, ButtonProps } from '@mui/material';
-import { colors } from '../../../../shared';
+import { Button, ButtonProps, useTheme } from '@mui/material';
 
 // TODO: Fix sx merging
 export const AppTextButton = (props: ButtonProps): JSX.Element => {
+  const theme = useTheme();
+
   return (
     <Button
       {...props}
       sx={{
-        border: `4px solid ${colors.primary.main}`,
+        border: `4px solid ${theme.palette.text.primary}`,
         borderRadius: '20px',
         '&:active': {
-          backgroundColor: colors.primary.light
+          backgroundColor: theme.palette.text.primary
         },
         whiteSpace: 'nowrap',
         width: 'min-content',

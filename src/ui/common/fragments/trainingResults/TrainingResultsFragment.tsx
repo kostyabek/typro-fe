@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
+import { useMemo } from 'react';
 import { CharactersStats } from '../../../../types';
-import * as styles from './styles';
+import { createStyles } from './styles';
 
 interface Props {
   wordsPerMinute: number;
@@ -11,6 +12,9 @@ interface Props {
 }
 
 export const TrainingResultsFragment = (props: Props): JSX.Element => {
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
   return (
     <Box>
       <Typography>WPM: {props.wordsPerMinute.toFixed(2)}</Typography>

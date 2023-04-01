@@ -1,19 +1,35 @@
-import { Box, InputLabel, List, ListItem } from '@mui/material';
-import { Form, useActionData, useNavigation } from 'react-router-dom';
-import { FailedFieldValidationResponse } from '../../../../../types';
-import { AuthPages } from '../../../../../utils';
+import { Box, InputLabel, List, ListItem, useTheme } from '@mui/material';
+import { useMemo } from 'react';
+import { Form, Navigate, useActionData, useNavigation } from 'react-router-dom';
+import { useAppDispatch, userActions } from '../../../../../state';
+import { UniversalResponse } from '../../../../../types';
+import { AuthPages, Groups } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
-import * as styles from './styles';
+import { createStyles } from './styles';
 
 export const SignUpPage = (): JSX.Element => {
-  const actionData = useActionData() as FailedFieldValidationResponse[];
+  const dispatch = useAppDispatch();
+  const actionData = useActionData();
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
+  if (typeof actionData === 'boolean') {
+    dispatch(userActions.setIsAuthenticated(true));
+    return <Navigate to={Groups.Home} />;
+  }
+
+  const errorData = actionData as UniversalResponse<string>;
 
   const navigation = useNavigation();
 
-  const isEmailInvalid = actionData?.some((e) => e.metadata.field.toLowerCase() === 'email');
-  const isPasswordInvalid = actionData?.some((e) => e.metadata.field.toLowerCase() === 'password');
-  const isConfirmPasswordInvalid = actionData?.some(
-    (e) => e.metadata.field.toLowerCase() === 'confirmpassword'
+  const isEmailInvalid = errorData?.reasons.some(
+    (e) => e.metadata.field?.toLowerCase() === 'email'
+  );
+  const isPasswordInvalid = errorData?.reasons.some(
+    (e) => e.metadata.field?.toLowerCase() === 'password'
+  );
+  const isConfirmPasswordInvalid = errorData?.reasons.some(
+    (e) => e.metadata.field?.toLowerCase() === 'confirmpassword'
   );
 
   const isSubmitting = navigation.state === 'submitting';
@@ -58,7 +74,7 @@ export const SignUpPage = (): JSX.Element => {
         </Form>
         <Box>
           <List>
-            {actionData?.map((a) => (
+            {errorData?.reasons.map((a) => (
               <ListItem key={a.message} sx={styles.validationError}>
                 {a.message}
               </ListItem>

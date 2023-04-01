@@ -1,9 +1,16 @@
-import { SxProps } from '@mui/material';
-import { colors } from '../../../../../../../../../shared';
+import { SxProps, Theme } from '@mui/material';
 
-export const text: SxProps = {
-  color: colors.success.main,
-  fontSize: '28px',
-  margin: '0 3px',
-  position: 'absolute'
+interface Styles {
+  text: SxProps;
+}
+
+export const createStyles = (theme: Theme): Styles => {
+  const text: SxProps = {
+    color: theme.palette.success.main,
+    fontSize: '28px',
+    margin: '0 3px',
+    position: 'absolute'
+  };
+
+  return { text };
 };

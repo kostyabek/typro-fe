@@ -2,7 +2,6 @@ import { SxProps } from '@mui/material';
 
 export const wordsContainer: SxProps = {
   display: 'flex',
-  userSelect: 'none',
   height: '135px',
   overflowY: 'hidden',
   flexWrap: 'wrap',

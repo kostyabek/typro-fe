@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link as MuiLink, SxProps } from '@mui/material';
+import { Link as MuiLink, SxProps, useTheme } from '@mui/material';
 import { AppLinkBase } from './elements';
-import { colors } from '../../../../shared';
 import { NavLinkProps } from 'react-router-dom';
 
 interface AppLinkProps {
@@ -13,18 +12,21 @@ type Props = NavLinkProps & AppLinkProps;
 
 // TODO: fix sx merging
 export const AppLink = (props: Props): JSX.Element => {
+  const theme = useTheme();
+
   return (
     <MuiLink
       component={AppLinkBase}
       to={props.to}
       end={props.end}
+      target={props.target}
       sx={{
         textDecoration: 'none',
         '&.active': {
-          color: colors.secondary.main
+          color: theme.palette.secondary.main
         },
         '&:hover': {
-          color: colors.secondary.main
+          color: theme.palette.secondary.main
         },
         transition: '0.2s ease-in-out',
         ...props.sx

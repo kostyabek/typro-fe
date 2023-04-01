@@ -1,14 +1,27 @@
-import { SxProps } from '@mui/material';
-import { colors } from '../../../../shared';
+import { SxProps, Theme } from '@mui/material';
 
-export const correctLetters: SxProps = {
-  color: colors.success.main
-};
+interface Styles {
+  correctLetters: SxProps;
+  incorrectLetters: SxProps;
+  extraLetters: SxProps;
+}
 
-export const incorrectLetters: SxProps = {
-  color: colors.error.main
-};
+export const createStyles = (theme: Theme): Styles => {
+  const correctLetters: SxProps = {
+    color: theme.palette.success.main
+  };
 
-export const extraLetters: SxProps = {
-  color: colors.error.dark
+  const incorrectLetters: SxProps = {
+    color: theme.palette.error.main
+  };
+
+  const extraLetters: SxProps = {
+    color: theme.palette.error.dark
+  };
+
+  return {
+    correctLetters,
+    incorrectLetters,
+    extraLetters
+  };
 };

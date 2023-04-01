@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { ActionFunctionArgs, json, redirect } from 'react-router-dom';
+import { ActionFunctionArgs, json } from 'react-router-dom';
 import { authHttpClient } from '../../../../../httpClients';
-import { Groups } from '../../../../../utils';
+import { setAccessToken } from '../../../../../utils';
 
 export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> => {
   const { request } = args;
@@ -15,7 +15,11 @@ export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> 
 
   try {
     const response = await authHttpClient.signUp({ ...payload });
-    localStorage.setItem('typro-access-token', response.data.accessToken);
+    if (response.data.value === null) {
+      throw new Error('Could not receive access token from positive response!');
+    }
+
+    setAccessToken(response.data.value.accessToken);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(error);
@@ -23,5 +27,5 @@ export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> 
     }
   }
 
-  return redirect(Groups.Home);
+  return json(true);
 };

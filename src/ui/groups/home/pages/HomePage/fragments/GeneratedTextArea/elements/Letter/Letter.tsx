@@ -1,6 +1,7 @@
-import { SxProps, Typography } from '@mui/material';
+import { SxProps, Typography, useTheme } from '@mui/material';
+import { useMemo } from 'react';
 import { LetterStatus } from '../../../../../../../../../types';
-import * as styles from './styles';
+import { createStyles } from './styles';
 
 export interface LetterProps {
   position: number;
@@ -9,6 +10,9 @@ export interface LetterProps {
 }
 
 export const Letter = (props: LetterProps): JSX.Element => {
+  const theme = useTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
   const getStylesBasedOnState = (): SxProps => {
     if (props.status === 'correct') {
       return styles.correct;
