@@ -14,9 +14,7 @@ import { TimeCounter, Word, WordCounter, WordProps } from './elements';
 import { GeneratedTextAreaFragment } from './GeneratedTextAreaFragment';
 import * as styles from './styles';
 import { useStopwatch, useTrainingResults } from '../../../../../../../hooks';
-
-const sleep = async (ms: number): Promise<void> =>
-  await new Promise((resolve) => setTimeout(resolve, ms));
+import { sleep } from '../../../../../../../utils';
 
 const stopwatchTaskName = 'training';
 

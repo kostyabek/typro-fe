@@ -8,4 +8,9 @@ export type {
   TrainingConfiguration,
   CharactersStats
 } from './training';
-export type { UserInfo, AccessTokenBody } from './user';
+export type {
+  UserInfo,
+  AccessTokenBody,
+  HighLevelProfileInfo,
+  HighLevelTrainingResultDto
+} from './user';

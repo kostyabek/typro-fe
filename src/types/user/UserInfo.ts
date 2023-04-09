@@ -1,3 +1,3 @@
 export interface UserInfo {
-  eMail: string;
+  nickname: string;
 }

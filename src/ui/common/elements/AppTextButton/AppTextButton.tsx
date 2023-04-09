@@ -10,9 +10,6 @@ export const AppTextButton = (props: ButtonProps): JSX.Element => {
       sx={{
         border: `4px solid ${theme.palette.text.primary}`,
         borderRadius: '20px',
-        '&:active': {
-          backgroundColor: theme.palette.text.primary
-        },
         whiteSpace: 'nowrap',
         width: 'min-content',
         ...props.sx

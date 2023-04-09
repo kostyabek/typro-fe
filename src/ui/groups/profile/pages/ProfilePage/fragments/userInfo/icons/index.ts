@@ -1,0 +1,1 @@
+export { AvatarPlaceholderIcon } from './AvatarPlaceholderIcon';

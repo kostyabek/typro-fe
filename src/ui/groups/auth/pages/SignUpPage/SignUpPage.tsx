@@ -1,20 +1,17 @@
 import { Box, InputLabel, List, ListItem, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { Form, Navigate, useActionData, useNavigation } from 'react-router-dom';
-import { useAppDispatch, userActions } from '../../../../../state';
 import { UniversalResponse } from '../../../../../types';
 import { AuthPages, Groups } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
 import { createStyles } from './styles';
 
 export const SignUpPage = (): JSX.Element => {
-  const dispatch = useAppDispatch();
   const actionData = useActionData();
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   if (typeof actionData === 'boolean') {
-    dispatch(userActions.setIsAuthenticated(true));
     return <Navigate to={Groups.Home} />;
   }
 

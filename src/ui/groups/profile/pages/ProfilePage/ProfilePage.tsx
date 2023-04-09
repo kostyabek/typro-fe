@@ -1,16 +1,17 @@
-import { Box, Typography } from '@mui/material';
-import { useAppSelector } from '../../../../../state';
-import { Navigate } from 'react-router-dom';
-import { AuthPages, Groups } from '../../../../../utils';
+import { Box } from '@mui/material';
+import { StatsByModeContainer, UserInfoContainer } from './fragments';
+import * as styles from './styles';
+import { useAuthGuard } from '../../../../../hooks';
 
 export const ProfilePage = (): JSX.Element => {
-  const isAuthenticated = useAppSelector((store) => store.data.user.isAuthenticated);
-  if (!isAuthenticated) {
-    return <Navigate to={`${Groups.Auth}/${AuthPages.SignIn}`} />;
-  }
-  return (
-    <Box>
-      <Typography>Profile Page</Typography>
+  const content = (
+    <Box sx={styles.mainContainer}>
+      <Box sx={styles.centeredContainer}>
+        <UserInfoContainer />
+        <StatsByModeContainer />
+      </Box>
     </Box>
   );
+
+  return useAuthGuard(content);
 };
