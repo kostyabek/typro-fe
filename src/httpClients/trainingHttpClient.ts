@@ -28,7 +28,7 @@ export const getGeneratedText = async (
     }
   );
 
-  return response.data.value ?? [];
+  return response.data.value;
 };
 
 interface GetSupportedLanguagesResponse {
@@ -43,16 +43,30 @@ export const getSupportedLanguages = async (): Promise<GetSupportedLanguagesResp
   return response.data;
 };
 
-interface TrainingResultsSubmissionRequest extends TrainingResults {
+interface CreateTrainingResultsRequest {
   languageId: number;
   dateConducted: Date;
   timeModeType: TimeModeType;
   wordsModeType: WordsModeType;
 }
 
-export const submitTrainingResults = async (
+export const createTrainingResults = async (
   axios: Axios,
-  results: TrainingResultsSubmissionRequest
+  results: CreateTrainingResultsRequest
+): Promise<number> => {
+  const response = await axios.post<UniversalResponse<number>>(
+    `${relativeBasePath}results`,
+    results
+  );
+  return response.data.value;
+};
+
+interface UpdateTrainingResultsRequest extends TrainingResults {}
+
+export const updateTrainingResults = async (
+  axios: Axios,
+  results: UpdateTrainingResultsRequest,
+  id: number
 ): Promise<void> => {
-  await axios.post<GetSupportedLanguagesResponse>(`${relativeBasePath}results`, results);
+  await axios.patch(`${relativeBasePath}results/${id}`, results);
 };

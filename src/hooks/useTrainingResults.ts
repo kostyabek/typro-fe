@@ -11,43 +11,37 @@ import { CharactersStats, TrainingResults } from '../types';
 import { Groups } from '../utils';
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
+import { useAuthCheck } from './useAuthCheck';
 
 export const useTrainingResults = (stopwatch: Stopwatch): void => {
   const dispatch = useAppDispatch();
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
-  const letterStatuses = useAppSelector((store) => store.data.trainingResults.letterStatuses);
-  const isAuthenticated = useAppSelector((store) => store.data.user.isAuthenticated);
+  const trainingResults = useAppSelector((store) => store.data.trainingResults);
+  const trainingState = useAppSelector((store) => store.ui.trainingState.state);
+  const isAuthenticated = useAuthCheck();
 
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
-  const submitResults = async (results: TrainingResults): Promise<void> => {
-    await trainingHttpClient.submitTrainingResults(axiosPrivate, {
-      accuracy: results.accuracy,
-      timeInMilliseconds: results.timeInMilliseconds,
-      charactersStats: results.charactersStats,
-      languageId: trainingConfiguration.languageInfo.id,
-      timeModeType: trainingConfiguration.timeMode,
-      wordsModeType: trainingConfiguration.wordsMode,
-      wordsPerMinute: results.wordsPerMinute,
-      dateConducted: new Date()
-    });
-  };
-
-  const resultsCallback = (milliseconds: number): TrainingResults => {
-    const correctLetterCount = letterStatuses.filter((s) => s === 'correct').length;
-    const incorrectLetterCount = letterStatuses.filter((s) => s === 'incorrect').length;
-    const initialLetterCount = letterStatuses.filter((s) => s === 'initial').length;
-    const extraLetterCount = letterStatuses.filter((s) => s === 'extra').length;
+  const resultsCallback = (): TrainingResults => {
+    const milliseconds = stopwatch.getTimeInMilliseconds();
+    const correctLetterCount = trainingResults.letterStatuses.filter((s) => s === 'correct').length;
+    const incorrectLetterCount = trainingResults.letterStatuses.filter(
+      (s) => s === 'incorrect'
+    ).length;
+    const initialLetterCount = trainingResults.letterStatuses.filter((s) => s === 'initial').length;
+    const extraLetterCount = trainingResults.letterStatuses.filter((s) => s === 'extra').length;
     const charactersStats: CharactersStats = {
       correct: correctLetterCount,
       incorrect: incorrectLetterCount,
       extra: extraLetterCount,
       initial: initialLetterCount
     };
-    const affectedLettersCount = letterStatuses.filter((s) => s !== 'initial').length;
+    const affectedLettersCount = trainingResults.letterStatuses.filter(
+      (s) => s !== 'initial'
+    ).length;
     const accuracy = (correctLetterCount / affectedLettersCount) * 100;
-    const wordsPerMinute = (letterStatuses.length * 60) / (milliseconds / 1000) / 5;
+    const wordsPerMinute = (trainingResults.letterStatuses.length * 60) / (milliseconds / 1000) / 5;
 
     return {
       timeInMilliseconds: milliseconds,
@@ -57,15 +51,45 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
     };
   };
 
+  const stubResults = async (): Promise<void> => {
+    const stubId = await trainingHttpClient.createTrainingResults(axiosPrivate, {
+      wordsModeType: trainingConfiguration.wordsMode,
+      timeModeType: trainingConfiguration.timeMode,
+      languageId: trainingConfiguration.languageInfo.id,
+      dateConducted: new Date()
+    });
+
+    dispatch(trainingResultsActions.setId(stubId));
+  };
+
+  const updateResults = async (results: TrainingResults): Promise<void> => {
+    await trainingHttpClient.updateTrainingResults(
+      axiosPrivate,
+      {
+        accuracy: results.accuracy,
+        timeInMilliseconds: results.timeInMilliseconds,
+        charactersStats: results.charactersStats,
+        wordsPerMinute: results.wordsPerMinute
+      },
+      trainingResults.id
+    );
+  };
+
   useEffect(() => {
-    if (letterStatuses.length > 0) {
-      const trainingResults = resultsCallback(stopwatch.getTimeInMilliseconds());
+    if (trainingState === 'started' && isAuthenticated) {
+      void stubResults();
+    }
+  }, [trainingState]);
+
+  useEffect(() => {
+    if (trainingResults.letterStatuses.length > 0) {
+      const trainingResults = resultsCallback();
       if (isAuthenticated) {
-        void submitResults(trainingResults);
+        void updateResults(trainingResults);
       }
       dispatch(trainingResultsActions.setTrainingResults(trainingResults));
       dispatch(trainingStateActions.setState('initial'));
       navigate(Groups.TrainingResults);
     }
-  }, [letterStatuses, isAuthenticated, submitResults, stopwatch]);
+  }, [trainingResults.letterStatuses, isAuthenticated, updateResults, stopwatch]);
 };

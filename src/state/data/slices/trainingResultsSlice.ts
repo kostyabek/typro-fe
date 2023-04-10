@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LetterStatus, TrainingResults } from '../../../types';
 
-interface LetterStatuses {
+interface ResultsMetadata {
+  id: number;
   letterStatuses: LetterStatus[];
 }
-type TrainingResultsSlice = TrainingResults & LetterStatuses;
+
+type TrainingResultsSlice = TrainingResults & ResultsMetadata;
 
 const initialState: TrainingResultsSlice = {
   wordsPerMinute: 0,
@@ -16,7 +18,8 @@ const initialState: TrainingResultsSlice = {
     extra: 0,
     incorrect: 0
   },
-  letterStatuses: []
+  letterStatuses: [],
+  id: 0
 };
 
 const slice = createSlice({
@@ -26,11 +29,15 @@ const slice = createSlice({
     setTrainingResults: (state, action: PayloadAction<TrainingResults>) => {
       return {
         ...action.payload,
-        letterStatuses: []
+        letterStatuses: [],
+        id: state.id
       };
     },
     addLetterStatuses: (state, action: PayloadAction<LetterStatus[]>) => {
       state.letterStatuses = state.letterStatuses.concat(action.payload);
+    },
+    setId: (state, action: PayloadAction<number>) => {
+      state.id = action.payload;
     }
   }
 });

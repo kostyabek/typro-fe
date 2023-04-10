@@ -4,6 +4,6 @@ interface Reason {
 }
 
 export interface UniversalResponse<T> {
-  value: T | null;
+  value: T;
   reasons: Reason[];
 }
