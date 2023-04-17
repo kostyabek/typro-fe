@@ -1,26 +1,25 @@
 import { useAppSelector } from '../../../../../../../state';
 import TrainingConfigurationFragment from './TrainingConfigurationFragment';
-import { trainingHttpClient } from '../../../../../../../httpClients';
-import { useQuery } from '@tanstack/react-query';
+import { LoaderElement } from '../../../../../../common';
+import { ensure } from '../../../../../../../utils';
 
 export const TrainingConfigurationContainer = (): JSX.Element => {
-  const queryResult = useQuery({
-    queryKey: ['supportedLanguages'],
-    queryFn: trainingHttpClient.getSupportedLanguages
-  });
-
-  const supportedLanguagesInfo = queryResult.data?.value ?? [];
-
-  const { areNumbersGenerated, isPunctuationGenerated, languageInfo, timeMode, wordsMode } =
+  const { areNumbersGenerated, isPunctuationGenerated, languagesInfo, timeMode, wordsMode } =
     useAppSelector((state) => state.data.trainingConfiguration);
+
+  if (languagesInfo.length === 0) {
+    return <LoaderElement />;
+  }
+
+  const activeLanguageInfo = ensure(languagesInfo.find((e) => e.isActive));
 
   return (
     <TrainingConfigurationFragment
-      languagesInfo={supportedLanguagesInfo}
+      languagesInfo={languagesInfo}
       trainingConfiguration={{
         areNumbersGenerated,
         isPunctuationGenerated,
-        languageInfo,
+        languageInfo: activeLanguageInfo,
         timeMode,
         wordsMode
       }}

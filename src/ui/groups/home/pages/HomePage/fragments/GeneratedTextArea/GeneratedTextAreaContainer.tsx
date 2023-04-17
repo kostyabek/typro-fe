@@ -14,7 +14,7 @@ import { TimeCounter, Word, WordCounter, WordProps } from './elements';
 import { GeneratedTextAreaFragment } from './GeneratedTextAreaFragment';
 import * as styles from './styles';
 import { useStopwatch, useTrainingResults } from '../../../../../../../hooks';
-import { sleep } from '../../../../../../../utils';
+import { ensure, sleep } from '../../../../../../../utils';
 
 const stopwatchTaskName = 'training';
 
@@ -32,11 +32,11 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
   useTrainingResults(stopwatch);
 
   const queryResult = useQuery({
-    queryKey: ['generatedText'],
+    queryKey: ['generatedText', trainingConfiguration],
     queryFn: async () => {
       const data = await trainingHttpClient.getGeneratedText({
         ...trainingConfiguration,
-        languageId: trainingConfiguration.languageInfo.id
+        languageId: ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).id
       });
 
       await sleep(100);
@@ -46,7 +46,7 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
 
       return data;
     },
-    enabled: isRestartScheduled
+    enabled: isRestartScheduled && trainingConfiguration.languagesInfo.length > 0
   });
 
   const trainingStartHandler = (): void => {

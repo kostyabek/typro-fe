@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TimeModeType, WordsModeType, LanguageInfo, TrainingConfiguration } from '../../../types';
+import { ensure } from '../../../utils';
 
 type TrainingConfigurationSlice = TrainingConfiguration;
 
@@ -8,7 +9,7 @@ const initialState: TrainingConfigurationSlice = {
   isPunctuationGenerated: false,
   wordsMode: WordsModeType.TwentyFiveWords,
   timeMode: TimeModeType.TurnedOff,
-  languageInfo: { id: 1, name: 'English' }
+  languagesInfo: []
 };
 
 const slice = createSlice({
@@ -27,8 +28,12 @@ const slice = createSlice({
     setTimeMode: (state, action: PayloadAction<TimeModeType>) => {
       state.timeMode = action.payload;
     },
-    setLanguage: (state, action: PayloadAction<LanguageInfo>) => {
-      state.languageInfo = action.payload;
+    setLanguages: (state, action: PayloadAction<LanguageInfo[]>) => {
+      state.languagesInfo = action.payload;
+    },
+    setActiveLanguage: (state, action: PayloadAction<number>) => {
+      ensure(state.languagesInfo.find((e) => e.isActive)).isActive = false;
+      ensure(state.languagesInfo.find((e) => e.id === action.payload)).isActive = true;
     }
   }
 });
