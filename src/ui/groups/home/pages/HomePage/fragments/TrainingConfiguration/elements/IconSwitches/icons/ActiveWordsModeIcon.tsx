@@ -1,10 +1,10 @@
-import { SvgIcon, SvgIconProps, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 
-export const ActiveWordsModeIcon = (props: SvgIconProps): JSX.Element => {
+export const ActiveWordsModeIcon = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <SvgIcon width="40" height="40" viewBox="0 0 42 42" fill="none">
+    <svg width="40" height="40" viewBox="0 0 42 42" fill="none">
       <path
         d="M36.786 1H5.21396C2.88648 1 1 2.89465 1 5.21396V36.786C1 39.1135 2.89465 41 5.21396 41H36.786C39.1135 41 41 39.1053 41 36.786V5.21396C41 2.89465 39.1053 1 36.786 1ZM38.9992 36.786C38.9992 38.0029 38.0029 38.9992 36.786 38.9992H5.21396C3.99714 38.9992 3.00082 38.0029 3.00082 36.786V5.21396C3.00082 3.99714 3.99714 3.00082 5.21396 3.00082H36.786C38.0029 3.00082 38.9992 3.99714 38.9992 5.21396V36.786V36.786Z"
         stroke={theme.palette.secondary.main}
@@ -15,6 +15,6 @@ export const ActiveWordsModeIcon = (props: SvgIconProps): JSX.Element => {
         stroke={theme.palette.secondary.main}
         strokeWidth="2"
       />
-    </SvgIcon>
+    </svg>
   );
 };

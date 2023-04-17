@@ -1,10 +1,10 @@
-import { SvgIcon, SvgIconProps, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 
-export const ActiveTimeModeIcon = (props: SvgIconProps): JSX.Element => {
+export const ActiveTimeModeIcon = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <SvgIcon width="36" height="42" viewBox="0 0 36 42">
+    <svg width="36" height="42" viewBox="0 0 36 42">
       <path
         d="M20.4586 7.48192V4.37579H21.8764C22.8085 4.37579 23.5643 3.62002 23.5643 2.68789C23.5643 1.75577 22.8087 1 21.8764 1H13.842C12.9099 1 12.1541 1.75577 12.1541 2.68789C12.1541 3.62002 12.9099 4.37579 13.842 4.37579H15.2599V7.48192C7.19336 8.73569 1 15.7284 1 24.1408C1 33.437 8.56312 41 17.8592 41C27.1553 41 34.7185 33.4369 34.7185 24.1408C34.7185 15.7284 28.5251 8.73569 20.4586 7.48192ZM17.8592 37.6243C10.4244 37.6243 4.37579 31.5756 4.37579 24.1409C4.37579 16.7062 10.4245 10.6575 17.8592 10.6575C25.2939 10.6575 31.3427 16.7062 31.3427 24.1409C31.3427 31.5756 25.2941 37.6243 17.8592 37.6243Z"
         fill={theme.palette.secondary.main}
@@ -15,6 +15,6 @@ export const ActiveTimeModeIcon = (props: SvgIconProps): JSX.Element => {
         fill={theme.palette.secondary.main}
         stroke={theme.palette.secondary.main}
       />
-    </SvgIcon>
+    </svg>
   );
 };

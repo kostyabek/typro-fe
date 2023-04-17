@@ -21,14 +21,6 @@ export const createMuiTheme = (mode: PaletteMode): Theme => {
 
   theme = createTheme(theme, {
     components: {
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            width: 'initial',
-            height: 'initial'
-          }
-        }
-      },
       MuiSelect: {
         defaultProps: {
           variant: 'standard',

@@ -14,3 +14,4 @@ export type {
   HighLevelProfileInfo,
   HighLevelTrainingResultDto
 } from './user';
+export type { LeaderboardEntry } from './leaderboard';

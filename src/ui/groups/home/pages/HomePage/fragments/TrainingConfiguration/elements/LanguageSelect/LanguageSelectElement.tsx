@@ -4,6 +4,7 @@ import { RestartContext } from '../../../../../../../../../contexts';
 import { trainingConfigurationActions, useAppDispatch } from '../../../../../../../../../state';
 import { LanguageInfo } from '../../../../../../../../../types';
 import * as styles from './styles';
+import { ensure } from '../../../../../../../../../utils';
 
 interface Props {
   preferredLanguageInfo: LanguageInfo;
@@ -16,9 +17,8 @@ export const LanguageSelectElement = (props: Props): JSX.Element => {
 
   const selectionChangedHandler = (event: SelectChangeEvent<number>): void => {
     const selectedLanguageId = event.target.value;
-    const languageInfo =
-      props.languagesInfo.find((e) => e.id === selectedLanguageId) ?? props.preferredLanguageInfo;
-    dispatch(trainingConfigurationActions.setLanguage(languageInfo));
+    const languageInfo = ensure(props.languagesInfo.find((e) => e.id === selectedLanguageId));
+    dispatch(trainingConfigurationActions.setActiveLanguage(languageInfo.id));
     setRestartScheduledStatus(true);
   };
 

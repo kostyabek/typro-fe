@@ -6,5 +6,5 @@ export interface TrainingConfiguration {
   isPunctuationGenerated: boolean;
   wordsMode: WordsModeType;
   timeMode: TimeModeType;
-  languageInfo: LanguageInfo;
+  languagesInfo: LanguageInfo[];
 }

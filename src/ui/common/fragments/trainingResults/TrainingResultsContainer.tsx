@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../state';
 import { TrainingConfiguration, TimeModeType } from '../../../../types';
-import { Groups } from '../../../../utils';
+import { Groups, ensure } from '../../../../utils';
 import { TrainingResultsFragment } from './TrainingResultsFragment';
 
 const getTrainingTypeName = (trainingConfiguration: TrainingConfiguration): string => {
-  const language = trainingConfiguration.languageInfo.name;
+  const language = ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).name;
   const isWordsMode = trainingConfiguration.timeMode === TimeModeType.TurnedOff;
   const mode = isWordsMode ? 'words' : 'time';
   const modeRelatedValue = Number(

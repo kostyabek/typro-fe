@@ -7,7 +7,8 @@ export const mainContainer: SxProps = {
 
 export const contentContainer: SxProps = {
   display: 'flex',
-  columnGap: '5px'
+  columnGap: '5px',
+  alignItems: 'center'
 };
 
 export const versionLabel: SxProps = {

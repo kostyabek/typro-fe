@@ -8,7 +8,7 @@ import {
   useAppSelector
 } from '../state';
 import { CharactersStats, TrainingResults } from '../types';
-import { Groups } from '../utils';
+import { Groups, ensure } from '../utils';
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
 import { useAuthCheck } from './useAuthCheck';
@@ -55,7 +55,7 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
     const stubId = await trainingHttpClient.createTrainingResults(axiosPrivate, {
       wordsModeType: trainingConfiguration.wordsMode,
       timeModeType: trainingConfiguration.timeMode,
-      languageId: trainingConfiguration.languageInfo.id,
+      languageId: ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).id,
       dateConducted: new Date()
     });
 
