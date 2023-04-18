@@ -7,7 +7,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from '../state';
-import { CharactersStats, TrainingResults } from '../types';
+import { CharactersStats, TimeModeType, TrainingResults } from '../types';
 import { Groups, ensure } from '../utils';
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
@@ -24,7 +24,10 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
   const axiosPrivate = useAxiosPrivate();
 
   const resultsCallback = (): TrainingResults => {
-    const milliseconds = stopwatch.getTimeInMilliseconds();
+    const milliseconds =
+      trainingConfiguration.timeMode === TimeModeType.TurnedOff
+        ? stopwatch.getTimeInMilliseconds()
+        : trainingConfiguration.timeMode * 1000;
     const correctLetterCount = trainingResults.letterStatuses.filter((s) => s === 'correct').length;
     const incorrectLetterCount = trainingResults.letterStatuses.filter(
       (s) => s === 'incorrect'
@@ -41,7 +44,7 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
       (s) => s !== 'initial'
     ).length;
     const accuracy = (correctLetterCount / affectedLettersCount) * 100;
-    const wordsPerMinute = (trainingResults.letterStatuses.length * 60) / (milliseconds / 1000) / 5;
+    const wordsPerMinute = trainingResults.letterStatuses.length / (milliseconds / 1000 / 60) / 5;
 
     return {
       timeInMilliseconds: milliseconds,

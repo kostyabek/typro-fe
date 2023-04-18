@@ -1,3 +1,16 @@
-export { HeaderContainer, RootLayout, TrainingResultsContainer } from './fragments';
+export {
+  HeaderContainer,
+  RootLayout,
+  TrainingResultsContainer,
+  GeneratedTextAreaContainer
+} from './fragments';
 export { router } from './navigation';
-export { AppTextField, AppIconButton, AppLink, AppTextButton, LoaderElement } from './elements';
+export {
+  AppTextField,
+  AppIconButton,
+  AppLink,
+  AppTextButton,
+  LoaderElement,
+  TimeCounter,
+  WordCounter
+} from './elements';

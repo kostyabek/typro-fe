@@ -3,8 +3,8 @@ import { useState, KeyboardEvent, useEffect } from 'react';
 import { Letter, LetterProps } from '../Letter';
 import * as styles from './styles';
 import FocusLock from 'react-focus-lock';
-import { useAppSelector } from '../../../../../../../../../state';
-import { LetterStatus } from '../../../../../../../../../types';
+import { useAppSelector } from '../../../../../../state';
+import { LetterStatus } from '../../../../../../types';
 
 export interface WordProps {
   isActive: boolean;
@@ -12,7 +12,7 @@ export interface WordProps {
   letters: string[];
   onMoveToAnotherWord: (isForward: boolean) => void;
   onTrainingStart: () => void;
-  onTrainingEnd: (letterStatuses: LetterStatus[]) => void;
+  onWordModeTrainingEnd: (letterStatuses: LetterStatus[]) => void;
 }
 
 const backspaceCode = 'Backspace';
@@ -79,15 +79,11 @@ export const Word = (props: WordProps): JSX.Element => {
   useEffect(() => {
     if (trainingState === 'finished') {
       const letterStatuses = letterStates.map((e) => e.status);
-      props.onTrainingEnd(letterStatuses);
+      props.onWordModeTrainingEnd(letterStatuses);
     }
   }, [trainingState, letterStates]);
 
   const keyDownHandler = (event: KeyboardEvent<HTMLDivElement>): void => {
-    if (trainingState !== 'started') {
-      props.onTrainingStart();
-    }
-
     const char = event.key;
     const code = event.code;
 
@@ -95,11 +91,16 @@ export const Word = (props: WordProps): JSX.Element => {
       return;
     }
 
+    if (trainingState !== 'started') {
+      props.onTrainingStart();
+    }
+
     setLetterStates((oldStates) => {
-      const newStates = [...oldStates];
+      let newStates = [...oldStates];
 
       if (code === backspaceCode) {
         if (event.ctrlKey) {
+          newStates = newStates.filter((e) => e.status !== 'extra');
           newStates.forEach((s) => (s.status = 'initial'));
           setPosition(0);
           return newStates;

@@ -9,3 +9,7 @@ export const layoutContainer: SxProps = {
 export const contentContainer: SxProps = {
   gridColumn: 2
 };
+
+export const generatedTextAreaContainer: SxProps = {
+  position: 'relative'
+};

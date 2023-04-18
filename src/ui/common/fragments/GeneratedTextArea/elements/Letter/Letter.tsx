@@ -1,7 +1,7 @@
 import { SxProps, Typography, useTheme } from '@mui/material';
 import { useMemo } from 'react';
-import { LetterStatus } from '../../../../../../../../../types';
 import { createStyles } from './styles';
+import { LetterStatus } from '../../../../../../types';
 
 export interface LetterProps {
   position: number;

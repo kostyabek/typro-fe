@@ -8,7 +8,3 @@ export const wordsContainer: SxProps = {
   outline: 'none',
   alignContent: 'flex-start'
 };
-
-export const innerContainer: SxProps = {
-  position: 'relative'
-};
