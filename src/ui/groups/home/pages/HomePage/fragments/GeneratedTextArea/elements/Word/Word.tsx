@@ -17,6 +17,49 @@ export interface WordProps {
 
 const backspaceCode = 'Backspace';
 const spaceCode = 'Space';
+const invalidCharCodes = [
+  'Escape',
+  'Tab',
+  'ControlLeft',
+  'AltLeft',
+  'CapsLock',
+  'F1',
+  'F2',
+  'F3',
+  'F4',
+  'F5',
+  'F6',
+  'F7',
+  'F8',
+  'F9',
+  'F10',
+  'F11',
+  'F12',
+  'Pause',
+  'ScrollLock',
+  'ControlRight',
+  'PrintScreen',
+  'AltRight',
+  'NumLock',
+  'Pause',
+  'Home',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'End',
+  'PageUp',
+  'PageDown',
+  'Insert',
+  'Delete',
+  'ShiftLeft',
+  'ShiftRight',
+  'Enter',
+  'NumpadEnter',
+  'MetaLeft',
+  'MetaRight',
+  'ContextMenu'
+];
 
 export const Word = (props: WordProps): JSX.Element => {
   const trainingState = useAppSelector((store) => store.ui.trainingState.state);
@@ -46,12 +89,22 @@ export const Word = (props: WordProps): JSX.Element => {
     }
 
     const char = event.key;
-    const charCode = event.code;
+    const code = event.code;
+
+    if (invalidCharCodes.find((e) => e === code) !== undefined) {
+      return;
+    }
 
     setLetterStates((oldStates) => {
       const newStates = [...oldStates];
 
-      if (charCode === backspaceCode) {
+      if (code === backspaceCode) {
+        if (event.ctrlKey) {
+          newStates.forEach((s) => (s.status = 'initial'));
+          setPosition(0);
+          return newStates;
+        }
+
         const previousLetterPosition = position - 1;
 
         if (previousLetterPosition === -1) {
@@ -77,7 +130,7 @@ export const Word = (props: WordProps): JSX.Element => {
       }
 
       if (position === letterStates.length) {
-        if (charCode === spaceCode) {
+        if (code === spaceCode) {
           props.onMoveToAnotherWord(true);
           return newStates;
         } else {
