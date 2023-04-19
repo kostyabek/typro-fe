@@ -17,7 +17,7 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
   const dispatch = useAppDispatch();
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
   const trainingResults = useAppSelector((store) => store.data.trainingResults);
-  const trainingState = useAppSelector((store) => store.ui.trainingState.state);
+  const trainingState = useAppSelector((store) => store.data.trainingState.state);
   const isAuthenticated = useAuthCheck();
 
   const navigate = useNavigate();

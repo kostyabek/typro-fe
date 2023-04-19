@@ -13,7 +13,7 @@ const initialState: TrainingStateSlice = {
 };
 
 const slice = createSlice({
-  name: 'ui/trainingState',
+  name: 'data/trainingState',
   initialState,
   reducers: {
     setState: (state, action: PayloadAction<TrainingState>) => {

@@ -10,7 +10,7 @@ interface Props {
 export const WordCounter = (props: Props): JSX.Element => {
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
-  const wordsTyped = useAppSelector((store) => store.ui.trainingState.wordsTyped);
+  const wordsTyped = useAppSelector((store) => store.data.trainingState.wordsTyped);
 
   return (
     <Typography sx={styles.text}>

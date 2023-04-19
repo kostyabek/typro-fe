@@ -62,7 +62,7 @@ const invalidCharCodes = [
 ];
 
 export const Word = (props: WordProps): JSX.Element => {
-  const trainingState = useAppSelector((store) => store.ui.trainingState.state);
+  const trainingState = useAppSelector((store) => store.data.trainingState.state);
 
   const [letterStates, setLetterStates] = useState<LetterProps[]>([]);
   const [position, setPosition] = useState(0);

@@ -11,7 +11,7 @@ export const HomePage = (): JSX.Element => {
   const [isRestartScheduled, setRestartScheduledStatus] = useState(true);
   const dispatch = useAppDispatch();
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
-  const trainingState = useAppSelector((store) => store.ui.trainingState.state);
+  const trainingState = useAppSelector((store) => store.data.trainingState.state);
 
   const counter =
     trainingConfiguration.timeMode === TimeModeType.TurnedOff ? (
