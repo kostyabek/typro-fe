@@ -9,7 +9,8 @@ export const createStyles = (theme: Theme): Styles => {
     color: theme.palette.success.main,
     fontSize: '28px',
     margin: '0 3px',
-    position: 'absolute'
+    position: 'absolute',
+    top: '-35px'
   };
 
   return { text };

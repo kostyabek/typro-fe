@@ -4,18 +4,23 @@ type TrainingState = 'initial' | 'started' | 'finished';
 
 interface TrainingStateSlice {
   state: TrainingState;
+  wordsTyped: number;
 }
 
 const initialState: TrainingStateSlice = {
-  state: 'initial'
+  state: 'initial',
+  wordsTyped: 0
 };
 
 const slice = createSlice({
-  name: 'ui/trainingState',
+  name: 'data/trainingState',
   initialState,
   reducers: {
     setState: (state, action: PayloadAction<TrainingState>) => {
       state.state = action.payload;
+    },
+    setWordsTyped: (state, action: PayloadAction<number>) => {
+      state.wordsTyped = action.payload;
     }
   }
 });

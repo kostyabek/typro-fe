@@ -7,7 +7,7 @@ import { AppLink } from '../../elements';
 import { configuration } from '../../../../utils';
 
 const FooterFragment = (): JSX.Element => {
-  const { state: trainingState } = useAppSelector((store) => store.ui.trainingState);
+  const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
 
   const version = process.env.REACT_APP_VERSION;
 

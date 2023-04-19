@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const HeaderFragment = (props: Props): JSX.Element => {
-  const { state: trainingState } = useAppSelector((store) => store.ui.trainingState);
+  const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
   const themeMode = useAppSelector((store) => store.ui.theme.mode);
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);

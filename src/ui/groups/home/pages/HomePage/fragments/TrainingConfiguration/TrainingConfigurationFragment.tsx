@@ -19,7 +19,7 @@ interface Props {
 }
 
 const TrainingConfigurationFragment = (props: Props): JSX.Element => {
-  const { state: trainingState } = useAppSelector((store) => store.ui.trainingState);
+  const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
 
   return (
     <Fade in={trainingState !== 'started'}>
