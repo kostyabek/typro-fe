@@ -1,0 +1,1 @@
+export { PlayersInfoElement } from './PlayersInfoElement';

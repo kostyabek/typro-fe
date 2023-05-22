@@ -7,9 +7,9 @@ import {
   MultiplayerRoutes,
   ProfileRoutes,
   SettingsRoutes,
-  TrainingResultsRoutes
+  TrainingResultsRoutes,
+  AuthRoutes
 } from '../../groups';
-import { AuthRoutes } from '../../groups/auth';
 import { RootLayout } from '../fragments';
 import { ErrorPage } from '../pages';
 

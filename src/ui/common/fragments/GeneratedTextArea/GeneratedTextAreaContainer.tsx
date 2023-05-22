@@ -39,7 +39,7 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
 
       await sleep(100);
       setRestartScheduledStatus(false);
-      trainingStateActions.setWordsTyped(0);
+      dispatch(trainingStateActions.setWordsTyped(0));
       dispatch(trainingStateActions.setState('initial'));
 
       return data;
@@ -148,13 +148,6 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
   }, [generatedText, setWordStates]);
 
   const words = wordStates.map((wordState, index) => <Word key={`word_${index}`} {...wordState} />);
-
-  // const counter =
-  //   trainingConfiguration.timeMode === TimeModeType.TurnedOff ? (
-  //     <WordCounter wordsTyped={trainingRelatedValue} totalWords={trainingConfiguration.wordsMode} />
-  //   ) : (
-  //     <TimeCounter onTimesUp={() => dispatch(trainingStateActions.setState('finished'))} />
-  //   );
 
   return (
     <Fade in={!isRestartScheduled}>

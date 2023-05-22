@@ -8,17 +8,16 @@ import {
   useAppSelector
 } from '../state';
 import { CharactersStats, TimeModeType, TrainingResults } from '../types';
-import { Groups, ensure } from '../utils';
+import { Groups, ensure, isUserAuthenticated } from '../utils';
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
-import { useAuthCheck } from './useAuthCheck';
 
 export const useTrainingResults = (stopwatch: Stopwatch): void => {
   const dispatch = useAppDispatch();
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
   const trainingResults = useAppSelector((store) => store.data.trainingResults);
   const trainingState = useAppSelector((store) => store.data.trainingState.state);
-  const isAuthenticated = useAuthCheck();
+  const isAuthenticated = isUserAuthenticated();
 
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();

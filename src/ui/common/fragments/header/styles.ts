@@ -9,7 +9,9 @@ interface Styles {
   navigationContainer: SxProps;
   iconLinksContainer: SxProps;
   textLinksContainer: SxProps;
-  link: SxProps;
+  mainLink: SxProps;
+  signOutLink: SxProps;
+  iconLink: SxProps;
 }
 
 export const createStyles = (theme: Theme): Styles => {
@@ -47,7 +49,7 @@ export const createStyles = (theme: Theme): Styles => {
     }
   };
 
-  const link: SxProps = {
+  const mainLink: SxProps = {
     fontSize: '24px',
     '&:after': {
       display: 'block',
@@ -61,11 +63,22 @@ export const createStyles = (theme: Theme): Styles => {
     }
   };
 
+  const signOutLink: SxProps = {
+    fontSize: '18px'
+  };
+
+  const iconLink: SxProps = {
+    display: 'flex',
+    alignItems: 'center'
+  };
+
   return {
     mainContainer,
     navigationContainer,
     iconLinksContainer,
     textLinksContainer,
-    link
+    mainLink,
+    signOutLink,
+    iconLink
   };
 };

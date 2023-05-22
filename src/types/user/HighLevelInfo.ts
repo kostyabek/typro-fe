@@ -14,3 +14,9 @@ export interface HighLevelTrainingResultDto {
   accuracy: number;
   dateConducted: Date;
 }
+
+export interface HighLevelTrainingResultChartDto {
+  dateConducted: Date;
+  wordsPerMinute: number;
+  accuracy: number;
+}

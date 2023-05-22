@@ -1,0 +1,1 @@
+export { MultiplayerTrainingConfigurationContainer } from './MultiplayerTrainingConfigurationContainer';

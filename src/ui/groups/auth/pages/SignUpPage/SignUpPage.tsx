@@ -1,17 +1,28 @@
 import { Box, InputLabel, List, ListItem, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { Form, Navigate, useActionData, useNavigation } from 'react-router-dom';
-import { UniversalResponse } from '../../../../../types';
-import { AuthPages, Groups } from '../../../../../utils';
+import { AuthResponse, UniversalResponse } from '../../../../../types';
+import { AuthPages, Groups, ensure, getAccessToken } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
 import { createStyles } from './styles';
+import { useAppDispatch, userActions } from '../../../../../state';
+import { useAbly } from '../../../../../hooks';
 
 export const SignUpPage = (): JSX.Element => {
-  const actionData = useActionData();
+  const actionData = useActionData() as object;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
+  const dispatch = useAppDispatch();
 
-  if (typeof actionData === 'boolean') {
+  if (
+    actionData !== undefined &&
+    actionData !== null &&
+    Object.keys(actionData).some((e) => e === 'nickname')
+  ) {
+    const userData = actionData as AuthResponse;
+    dispatch(userActions.setAccessToken(ensure(getAccessToken())));
+    dispatch(userActions.setUserInfo({ nickname: userData.nickname }));
+    useAbly(userData.nickname);
     return <Navigate to={Groups.Home} />;
   }
 

@@ -1,0 +1,1 @@
+export { TrainingStatsChartContainer } from './TrainingsStatsChartContainer';

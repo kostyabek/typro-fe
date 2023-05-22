@@ -5,6 +5,7 @@ export {
   trainingConfigurationActions,
   trainingResultsActions,
   userActions,
-  trainingStateActions
+  trainingStateActions,
+  multiplayerActions
 } from './data';
 export { themeActions } from './ui';

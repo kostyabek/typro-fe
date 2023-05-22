@@ -1,22 +1,43 @@
-import { trainingConfigurationActions, useAppDispatch, useAppSelector } from '../state';
-import { trainingHttpClient } from '../httpClients';
+import {
+  trainingConfigurationActions,
+  useAppDispatch,
+  useAppSelector,
+  userActions
+} from '../state';
+import { trainingHttpClient, userHttpClient } from '../httpClients';
 import { useQuery } from '@tanstack/react-query';
+import { ensure, getAccessToken } from '../utils';
+import { useAxiosPrivate } from './useAxiosPrivate';
+import { useAbly } from './useAbly';
 
 export const useAppInitialization = (): boolean => {
   const dispatch = useAppDispatch();
   const languagesInfo = useAppSelector((store) => store.data.trainingConfiguration.languagesInfo);
+  const accessToken = getAccessToken();
+  const axiosPrivate = useAxiosPrivate();
 
-  const { isLoading } = useQuery({
+  const { isLoading: isLoadingSupportedLanguages } = useQuery({
     queryKey: ['supportedLanguages'],
     queryFn: async () => {
       const response = await trainingHttpClient.getSupportedLanguages();
-      const data = response.value;
-      dispatch(trainingConfigurationActions.setLanguages(data));
-
-      return data;
+      const supportedLanguages = response.value;
+      dispatch(trainingConfigurationActions.setLanguages(supportedLanguages));
+      return supportedLanguages;
     },
     enabled: languagesInfo.length === 0
   });
 
-  return !isLoading;
+  const { isLoading: isLoadingUserInfo } = useQuery({
+    queryKey: ['userInfo', accessToken],
+    queryFn: async () => {
+      const nickname = await userHttpClient.getNickname(axiosPrivate);
+      useAbly(nickname);
+      dispatch(userActions.setUserInfo({ nickname }));
+      dispatch(userActions.setAccessToken(ensure(accessToken)));
+      return nickname;
+    },
+    enabled: accessToken !== null
+  });
+
+  return !isLoadingSupportedLanguages && (!isLoadingUserInfo || accessToken === null);
 };

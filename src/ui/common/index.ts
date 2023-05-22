@@ -2,7 +2,11 @@ export {
   HeaderContainer,
   RootLayout,
   TrainingResultsContainer,
-  GeneratedTextAreaContainer
+  GeneratedTextAreaContainer,
+  MultiplayerGeneratedTextAreaContainer,
+  TrainingConfigurationContainer,
+  RestartButtonContainer,
+  MultiplayerTrainingConfigurationContainer
 } from './fragments';
 export { router } from './navigation';
 export {
@@ -12,5 +16,6 @@ export {
   AppTextButton,
   LoaderElement,
   TimeCounter,
-  WordCounter
+  WordCounter,
+  ProtectedRoute
 } from './elements';

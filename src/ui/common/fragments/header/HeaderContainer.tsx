@@ -1,4 +1,4 @@
-import { Groups } from '../../../../utils';
+import { AuthPages, Groups } from '../../../../utils';
 import { HeaderFragment } from './HeaderFragment';
 
 export const HeaderContainer = (): JSX.Element => {
@@ -10,6 +10,7 @@ export const HeaderContainer = (): JSX.Element => {
       multiplayerLink={Groups.Multiplayer}
       leaderboardsLink={Groups.Leaderboards}
       aboutLink={Groups.About}
+      signOutLink={`${Groups.Auth}/${AuthPages.SignOut}`}
     />
   );
 };

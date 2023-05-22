@@ -3,5 +3,6 @@ export {
   trainingConfigurationActions,
   trainingResultsActions,
   userActions,
-  trainingStateActions
+  trainingStateActions,
+  multiplayerActions
 } from './slices';

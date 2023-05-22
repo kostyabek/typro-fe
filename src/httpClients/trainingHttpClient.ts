@@ -18,11 +18,39 @@ interface GetGeneratedTextRequestModel {
   areNumbersGenerated: boolean;
 }
 
+interface GetMultiplayerGeneratedTextRequestModel extends GetGeneratedTextRequestModel {
+  lobbyId: string;
+  isForceRewrite: boolean;
+}
+
 export const getGeneratedText = async (
   requestModel: GetGeneratedTextRequestModel
 ): Promise<string[][]> => {
   const response = await axiosPublic.get<UniversalResponse<string[][]>>(
     `${relativeBasePath}text-generation`,
+    {
+      params: requestModel
+    }
+  );
+
+  return response.data.value;
+};
+
+interface PreparedMultiplayerTextInfoDto {
+  symbols: string[][];
+  wordsMode: WordsModeType;
+  timeMode: TimeModeType;
+  languageId: number;
+  isPunctuationEnabled: boolean;
+  areNumbersEnabled: boolean;
+}
+
+export const getMultiplayerGeneratedText = async (
+  axios: Axios,
+  requestModel: GetMultiplayerGeneratedTextRequestModel
+): Promise<PreparedMultiplayerTextInfoDto> => {
+  const response = await axios.get<UniversalResponse<PreparedMultiplayerTextInfoDto>>(
+    `${relativeBasePath}multiplayer-text-generation`,
     {
       params: requestModel
     }

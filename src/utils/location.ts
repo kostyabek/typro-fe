@@ -13,5 +13,13 @@ export const enum Groups {
 export const enum AuthPages {
   SignIn = 'sign-in',
   SignUp = 'sign-up',
+  SignOut = 'sign-out',
   ForgotPassword = 'forgot-password'
+}
+
+export const enum MultiplayerPages {
+  NewLobby = 'new-lobby',
+  JoinLobby = 'existing-lobby',
+  JoinLobbyProcessing = 'lobby/:lobbyId',
+  Lobby = 'lobby'
 }

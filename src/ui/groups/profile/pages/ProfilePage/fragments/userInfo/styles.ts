@@ -56,3 +56,10 @@ export const statLabel: SxProps = {
 export const statNumberValue: SxProps = {
   fontSize: '36px'
 };
+
+export const buttonsContainer: SxProps = {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  columnGap: '10px',
+  justifyContent: 'stretch'
+};

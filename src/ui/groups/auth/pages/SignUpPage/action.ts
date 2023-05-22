@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ActionFunctionArgs, json } from 'react-router-dom';
 import { authHttpClient } from '../../../../../httpClients';
-import { setAccessToken } from '../../../../../utils';
+import { ensure, setAccessToken } from '../../../../../utils';
+import { UniversalResponse, AuthResponse } from '../../../../../types';
 
 export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> => {
   const { request } = args;
@@ -13,8 +14,9 @@ export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> 
     confirmPassword: data.get('confirmPassword')?.toString() ?? ''
   };
 
+  let response: AxiosResponse<UniversalResponse<AuthResponse>> | null = null;
   try {
-    const response = await authHttpClient.signUp({ ...payload });
+    response = await authHttpClient.signUp({ ...payload });
     if (response.data.value === null) {
       throw new Error('Could not receive access token from positive response!');
     }
@@ -27,5 +29,5 @@ export const signUpAction = async (args: ActionFunctionArgs): Promise<Response> 
     }
   }
 
-  return json(true);
+  return json(ensure(response).data.value);
 };
