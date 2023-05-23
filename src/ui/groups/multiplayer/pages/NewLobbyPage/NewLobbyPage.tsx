@@ -12,7 +12,7 @@ export const NewLobbyPage = (): JSX.Element => {
     if (!multiplayerState.isActive) {
       const lobbyInfo = generateLobbyInfo();
       dispatch(multiplayerActions.setLobbyInfo(lobbyInfo));
-      dispatch(multiplayerActions.setIsCreatorStatus(true));
+      dispatch(multiplayerActions.setIsCreator(true));
     }
   }, []);
 

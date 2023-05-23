@@ -4,7 +4,7 @@ import {
   AppIconButton,
   AppTextButton,
   MultiplayerGeneratedTextAreaContainer,
-  RestartButtonContainer,
+  MultiplayerRestartButtonContainer,
   TimeCounter,
   MultiplayerTrainingConfigurationContainer,
   WordCounter
@@ -76,7 +76,7 @@ export const LobbyFragment = (props: Props): JSX.Element => {
               {trainingState === 'started' && counter}
               <MultiplayerGeneratedTextAreaContainer />
             </Box>
-            {props.isCreator && <RestartButtonContainer />}
+            {props.isCreator && <MultiplayerRestartButtonContainer />}
             {props.isCreator && (
               <AppTextButton disabled={props.playersInfo.length === 1} onClick={props.onStart}>
                 Start

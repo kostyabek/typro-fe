@@ -7,3 +7,4 @@ export { MultiplayerGeneratedTextAreaContainer } from './MultiplayerGeneratedTex
 export { TrainingConfigurationContainer } from './TrainingConfiguration';
 export { MultiplayerTrainingConfigurationContainer } from './MultiplayerTrainingConfiguration';
 export { RestartButtonContainer } from './RestartButton';
+export { MultiplayerRestartButtonContainer } from './MultiplayerRestartButton';

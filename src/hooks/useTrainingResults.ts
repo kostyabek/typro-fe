@@ -17,6 +17,7 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
   const trainingResults = useAppSelector((store) => store.data.trainingResults);
   const trainingState = useAppSelector((store) => store.data.trainingState.state);
+  const { isActive, place } = useAppSelector((store) => store.data.multiplayer);
   const isAuthenticated = isUserAuthenticated();
 
   const navigate = useNavigate();
@@ -45,11 +46,14 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
     const accuracy = (correctLetterCount / affectedLettersCount) * 100;
     const wordsPerMinute = trainingResults.letterStatuses.length / (milliseconds / 1000 / 60) / 5;
 
+    const finalPlace = isActive ? place : undefined;
+
     return {
       timeInMilliseconds: milliseconds,
       accuracy,
       charactersStats,
-      wordsPerMinute
+      wordsPerMinute,
+      place: finalPlace
     };
   };
 

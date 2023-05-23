@@ -10,7 +10,7 @@ export const PlayersInfoElement = (props: Props): JSX.Element => {
   const peers = props.playersInfo.map((msg, index): JSX.Element => {
     return (
       <Typography key={index}>
-        {msg.playerId}: {msg.percentageOfCompleteness}% {msg.isCreator && <StarIcon />}
+        {msg.playerId}: {msg.percentageOfCompleteness.toFixed(0)}% {msg.isCreator && <StarIcon />}
       </Typography>
     );
   });

@@ -8,9 +8,10 @@ import {
   useAppSelector,
   trainingStateActions,
   trainingResultsActions,
-  trainingConfigurationActions
+  trainingConfigurationActions,
+  multiplayerActions
 } from '../../../../state';
-import { WordsModeType, LetterStatus, TimeModeType } from '../../../../types';
+import { WordsModeType, LetterStatus, TimeModeType, AppPresenceData } from '../../../../types';
 import { ensure, sleep } from '../../../../utils';
 import { MultiplayerGeneratedTextAreaFragment } from './MultiplayerGeneratedTextAreaFragment';
 import { WordProps, Word } from './elements';
@@ -23,9 +24,12 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const trainingState = useAppSelector((store) => store.data.trainingState.state);
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
-  const { lobbyInfo, isCreator } = useAppSelector((store) => store.data.multiplayer);
+  const { updatePresence, lobbyInfo, isCreator, place } = useAppSelector(
+    (store) => store.data.multiplayer
+  );
   const axiosPrivate = useAxiosPrivate();
   const { isRestartScheduled, setRestartScheduledStatus } = useContext(RestartContext);
+  const [channel] = useChannel(lobbyInfo.channelId, () => {});
 
   const [wordStates, setWordStates] = useState<WordProps[]>([]);
 
@@ -44,7 +48,9 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
       trainingConfiguration.isPunctuationGenerated,
       trainingConfiguration.timeMode,
       trainingConfiguration.wordsMode,
-      trainingConfiguration.languagesInfo
+      trainingConfiguration.languagesInfo,
+      isCreator,
+      lobbyInfo.lobbyId
     ],
     queryFn: async () => {
       const data = await trainingHttpClient.getMultiplayerGeneratedText(axiosPrivate, {
@@ -83,7 +89,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
     ) {
       stopwatch.stop();
     }
-  }, [trainingState]);
+  }, [trainingState, trainingConfiguration.wordsMode]);
 
   const letterStatusesSubmissionHandler = (letterStatuses: LetterStatus[]): void => {
     if (trainingConfiguration.wordsMode !== WordsModeType.TurnedOff) {
@@ -131,6 +137,8 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
       }
 
       if (activeWordIndex === oldStates.length - 1 && isForward) {
+        const currentPlace: number = place;
+        channel.publish('increment-place', { incrementedPlace: currentPlace + 1 });
         dispatch(trainingStateActions.setState('finished'));
         return oldStates;
       }
@@ -145,7 +153,20 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
       const wordToMoveOnToIndex = isForward ? activeWordIndex + 1 : activeWordIndex - 1;
       newStates[wordToMoveOnToIndex].isActive = true;
 
-      const numberOfCompletedWords = newStates.filter((s) => s.isCounted).length;
+      const completedWords = newStates.filter((s) => s.isCounted);
+      const numberOfCompletedWords = completedWords.length;
+      const completedLettersQty = completedWords.flatMap((e) => e.letters).length;
+      const allLettersQty = newStates.flatMap((e) => e.letters).length;
+
+      const newPresenceData: AppPresenceData = {
+        isCreator,
+        percentageOfCompleteness: (completedLettersQty / allLettersQty) * 100,
+        place
+      };
+      updatePresence(newPresenceData);
+      dispatch(
+        multiplayerActions.setPercentageOfCompleteness(newPresenceData.percentageOfCompleteness)
+      );
       dispatch(trainingStateActions.setWordsTyped(numberOfCompletedWords));
 
       return newStates;

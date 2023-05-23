@@ -30,7 +30,8 @@ const createLegendConfiguration = (
       }
     },
     labels: {
-      usePointStyle: true
+      usePointStyle: true,
+      color
     }
   };
 };

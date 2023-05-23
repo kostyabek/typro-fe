@@ -6,7 +6,8 @@ export {
   MultiplayerGeneratedTextAreaContainer,
   TrainingConfigurationContainer,
   RestartButtonContainer,
-  MultiplayerTrainingConfigurationContainer
+  MultiplayerTrainingConfigurationContainer,
+  MultiplayerRestartButtonContainer
 } from './fragments';
 export { router } from './navigation';
 export {

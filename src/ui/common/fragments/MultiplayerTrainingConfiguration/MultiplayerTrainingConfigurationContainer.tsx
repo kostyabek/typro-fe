@@ -11,7 +11,7 @@ export const MultiplayerTrainingConfigurationContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { areNumbersGenerated, isPunctuationGenerated, languagesInfo, timeMode, wordsMode } =
     useAppSelector((state) => state.data.trainingConfiguration);
-  const { isActive, isCreator, lobbyInfo } = useAppSelector((store) => store.data.multiplayer);
+  const { isActive, lobbyInfo, isCreator } = useAppSelector((store) => store.data.multiplayer);
   const [channel] = useChannel(lobbyInfo.channelId, () => {});
   const { setRestartScheduledStatus } = useContext(RestartContext);
 
@@ -52,6 +52,13 @@ export const MultiplayerTrainingConfigurationContainer = (): JSX.Element => {
       return;
     }
     dispatch(trainingConfigurationActions.setActiveLanguage(message.data.languageId));
+    setRestartScheduledStatus(true);
+  });
+
+  useChannel(lobbyInfo.channelId, 'restart-scheduled', () => {
+    if (isCreator) {
+      return;
+    }
     setRestartScheduledStatus(true);
   });
 

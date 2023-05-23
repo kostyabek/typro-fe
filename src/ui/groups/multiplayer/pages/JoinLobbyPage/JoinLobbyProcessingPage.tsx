@@ -10,7 +10,8 @@ export const JoinLobbyProcessingPage = (): JSX.Element => {
   const channelId = getLobbyChannelId(passedLobbyId);
   const [presenceData] = usePresence<AppPresenceData>(channelId, {
     percentageOfCompleteness: 0,
-    isCreator: false
+    isCreator: false,
+    place: 1
   });
   const [channel] = useChannel(channelId, () => {});
   const dispatch = useAppDispatch();

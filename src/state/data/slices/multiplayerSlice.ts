@@ -1,19 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LobbyInfo } from '../../../types';
+import { AppPresenceData, LobbyInfo } from '../../../types';
 
 interface MultiplayerSlice {
   isActive: boolean;
-  isCreator: boolean;
   lobbyInfo: LobbyInfo;
+  updatePresence: (messageOrPresenceObject: AppPresenceData) => void;
+  isCreator: boolean;
+  percentageOfCompleteness: number;
+  place: number;
 }
 
 const initialState: MultiplayerSlice = {
   isActive: false,
-  isCreator: false,
   lobbyInfo: {
     lobbyId: '',
     channelId: ''
-  }
+  },
+  updatePresence: () => {},
+  isCreator: false,
+  percentageOfCompleteness: 0,
+  place: 1
 };
 
 const slice = createSlice({
@@ -24,11 +30,23 @@ const slice = createSlice({
       state.lobbyInfo = action.payload;
       state.isActive = true;
     },
-    setIsCreatorStatus: (state, action: PayloadAction<boolean>) => {
-      state.isCreator = action.payload;
-    },
     setLobbyAsNotActive: (state) => {
       state.isActive = false;
+    },
+    setUpdatePresenceMethod: (
+      state,
+      action: PayloadAction<(messageOrPresenceObject: AppPresenceData) => void>
+    ) => {
+      state.updatePresence = action.payload;
+    },
+    setIsCreator: (state, action: PayloadAction<boolean>) => {
+      state.isCreator = action.payload;
+    },
+    setPercentageOfCompleteness: (state, action: PayloadAction<number>) => {
+      state.percentageOfCompleteness = action.payload;
+    },
+    setPlace: (state, action: PayloadAction<number>) => {
+      state.place = action.payload;
     }
   }
 });

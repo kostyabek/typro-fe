@@ -18,7 +18,7 @@ export const LobbyPage = (): JSX.Element => {
     return () => {
       channel.detach();
       dispatch(multiplayerActions.setLobbyAsNotActive());
-      dispatch(multiplayerActions.setIsCreatorStatus(false));
+      dispatch(multiplayerActions.setIsCreator(false));
     };
   });
 
