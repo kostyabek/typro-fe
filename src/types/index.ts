@@ -12,6 +12,11 @@ export type {
   UserInfo,
   AccessTokenBody,
   HighLevelProfileInfo,
-  HighLevelTrainingResultDto
+  HighLevelTrainingResultDto,
+  AuthResponse,
+  HighLevelTrainingResultChartDto,
+  GetHighLevelTrainingResultChartInfo
 } from './user';
 export type { LeaderboardEntry } from './leaderboard';
+export type { LobbyInfo, PlayerInfo, AppPresenceData } from './multiplayer';
+export type { Point } from './charts';

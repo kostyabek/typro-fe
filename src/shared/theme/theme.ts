@@ -57,7 +57,15 @@ export const createMuiTheme = (mode: PaletteMode): Theme => {
         },
         styleOverrides: {
           root: {
-            textTransform: 'initial'
+            textTransform: 'initial',
+            width: 'initial'
+          }
+        }
+      },
+      MuiButtonBase: {
+        styleOverrides: {
+          root: {
+            width: 'initial'
           }
         }
       },

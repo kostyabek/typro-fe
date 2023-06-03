@@ -9,6 +9,7 @@ interface Props {
   testType: string;
   characterStats: CharactersStats;
   timeInSeconds: number;
+  place?: number;
 }
 
 export const TrainingResultsFragment = (props: Props): JSX.Element => {
@@ -37,6 +38,7 @@ export const TrainingResultsFragment = (props: Props): JSX.Element => {
         <Typography component={'span'}>{`${props.characterStats.initial}`}</Typography>
       </Box>
       <Typography>{`Time: ${props.timeInSeconds.toFixed(2)}s`}</Typography>
+      {props.place !== undefined && <Typography>{`Place: ${props.place}`}</Typography>}
     </Box>
   );
 };

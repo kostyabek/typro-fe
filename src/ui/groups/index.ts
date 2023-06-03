@@ -5,3 +5,4 @@ export { LeaderboardsRoutes } from './leaderboards';
 export { AboutRoutes } from './about';
 export { SettingsRoutes } from './settings';
 export { TrainingResultsRoutes } from './results';
+export { AuthRoutes } from './auth';

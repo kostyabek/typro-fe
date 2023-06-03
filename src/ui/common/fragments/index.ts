@@ -1,5 +1,10 @@
 export { HeaderContainer } from './header';
 export { RootLayout } from './root';
 export { FooterContainer } from './footer';
-export { TrainingResultsContainer } from './trainingResults';
+export { TrainingResultsContainer } from './TrainingResults';
 export { GeneratedTextAreaContainer } from './GeneratedTextArea';
+export { MultiplayerGeneratedTextAreaContainer } from './MultiplayerGeneratedTextArea';
+export { TrainingConfigurationContainer } from './TrainingConfiguration';
+export { MultiplayerTrainingConfigurationContainer } from './MultiplayerTrainingConfiguration';
+export { RestartButtonContainer } from './RestartButton';
+export { MultiplayerRestartButtonContainer } from './MultiplayerRestartButton';

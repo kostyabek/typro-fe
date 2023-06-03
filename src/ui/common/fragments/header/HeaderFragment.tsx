@@ -14,10 +14,12 @@ interface Props {
   multiplayerLink: string;
   leaderboardsLink: string;
   aboutLink: string;
+  signOutLink: string;
 }
 
 export const HeaderFragment = (props: Props): JSX.Element => {
   const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
+  const accessToken = useAppSelector((store) => store.data.user.accessToken);
   const themeMode = useAppSelector((store) => store.ui.theme.mode);
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -30,22 +32,27 @@ export const HeaderFragment = (props: Props): JSX.Element => {
       <Fade in={trainingState !== 'started'}>
         <Box sx={styles.navigationContainer}>
           <Box sx={styles.iconLinksContainer}>
-            <AppLink to={props.profileLink}>
+            <AppLink to={props.profileLink} sx={styles.iconLink}>
               <ProfileIcon />
             </AppLink>
-            <AppLink to={props.settingsLink}>
+            <AppLink to={props.settingsLink} sx={styles.iconLink}>
               <SettingsIcon />
             </AppLink>
+            {accessToken !== '' && (
+              <AppLink to={props.signOutLink}>
+                <Typography sx={styles.signOutLink}>Sign out</Typography>
+              </AppLink>
+            )}
           </Box>
           <Box sx={styles.textLinksContainer}>
             <AppLink to={props.multiplayerLink}>
-              <Typography sx={styles.link}>Multiplayer</Typography>
+              <Typography sx={styles.mainLink}>Multiplayer</Typography>
             </AppLink>
             <AppLink to={props.leaderboardsLink}>
-              <Typography sx={styles.link}>Leaderboards</Typography>
+              <Typography sx={styles.mainLink}>Leaderboards</Typography>
             </AppLink>
             <AppLink to={props.aboutLink}>
-              <Typography sx={styles.link}>About</Typography>
+              <Typography sx={styles.mainLink}>About</Typography>
             </AppLink>
           </Box>
         </Box>

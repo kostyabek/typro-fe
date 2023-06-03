@@ -1,0 +1,1 @@
+export { IconSwitchesElement } from './IconSwitchesElement';

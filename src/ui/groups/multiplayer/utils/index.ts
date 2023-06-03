@@ -1,1 +1,1 @@
-export {};
+export { generateLobbyInfo } from './generateLobbyInfo';

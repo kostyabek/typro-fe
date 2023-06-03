@@ -3,6 +3,7 @@ export interface TrainingResults {
   accuracy: number;
   timeInMilliseconds: number;
   charactersStats: CharactersStats;
+  place?: number;
 }
 
 export interface CharactersStats {

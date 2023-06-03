@@ -38,6 +38,7 @@ export const TrainingResultsContainer = (): JSX.Element => {
       testType={trainingType}
       timeInSeconds={timeInSeconds}
       characterStats={trainingResults.charactersStats}
+      place={trainingResults.place}
     />
   );
 };

@@ -1,9 +1,14 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
 import { RestartContext } from '../../../../../contexts';
-import { RestartButtonContainer, TrainingConfigurationContainer } from './fragments';
 import * as styles from './styles';
-import { GeneratedTextAreaContainer, TimeCounter, WordCounter } from '../../../../common';
+import {
+  GeneratedTextAreaContainer,
+  RestartButtonContainer,
+  TimeCounter,
+  TrainingConfigurationContainer,
+  WordCounter
+} from '../../../../common';
 import { trainingStateActions, useAppDispatch, useAppSelector } from '../../../../../state';
 import { TimeModeType } from '../../../../../types';
 

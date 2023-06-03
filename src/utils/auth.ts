@@ -7,6 +7,10 @@ export const setAccessToken = (token: string): void => {
   localStorage.setItem(accessTokenItemName, token);
 };
 
+export const removeAccessToken = (): void => {
+  localStorage.removeItem(accessTokenItemName);
+};
+
 export const getAccessToken = (): string | null => {
   const token = localStorage.getItem(accessTokenItemName);
   return token;
@@ -14,4 +18,8 @@ export const getAccessToken = (): string | null => {
 
 export const decodeAccessToken = (token: string): AccessTokenBody => {
   return jwt_decode(token);
+};
+
+export const isUserAuthenticated = (): boolean => {
+  return getAccessToken() !== null;
 };
