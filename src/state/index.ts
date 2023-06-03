@@ -8,4 +8,4 @@ export {
   trainingStateActions,
   multiplayerActions
 } from './data';
-export { themeActions } from './ui';
+export { themeActions, toastActions } from './ui';

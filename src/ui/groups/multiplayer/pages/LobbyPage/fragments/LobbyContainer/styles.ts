@@ -8,8 +8,7 @@ export const outerLayoutContainer: SxProps = {
 
 export const innerLayoutContainer: SxProps = {
   display: 'grid',
-  gridTemplateColumns: '1fr minmax(10px, 905px) 1fr',
-  gridTemplateRows: '1fr auto 1fr'
+  gridTemplateColumns: '1fr minmax(10px, 905px) 1fr'
 };
 
 export const contentContainer: SxProps = {

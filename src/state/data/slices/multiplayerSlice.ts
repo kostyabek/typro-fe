@@ -6,7 +6,7 @@ interface MultiplayerSlice {
   lobbyInfo: LobbyInfo;
   updatePresence: (messageOrPresenceObject: AppPresenceData) => void;
   isCreator: boolean;
-  percentageOfCompleteness: number;
+  indicatorValue: number;
   place: number;
 }
 
@@ -18,7 +18,7 @@ const initialState: MultiplayerSlice = {
   },
   updatePresence: () => {},
   isCreator: false,
-  percentageOfCompleteness: 0,
+  indicatorValue: 0,
   place: 1
 };
 
@@ -42,8 +42,8 @@ const slice = createSlice({
     setIsCreator: (state, action: PayloadAction<boolean>) => {
       state.isCreator = action.payload;
     },
-    setPercentageOfCompleteness: (state, action: PayloadAction<number>) => {
-      state.percentageOfCompleteness = action.payload;
+    setIndicatorValue: (state, action: PayloadAction<number>) => {
+      state.indicatorValue = action.payload;
     },
     setPlace: (state, action: PayloadAction<number>) => {
       state.place = action.payload;

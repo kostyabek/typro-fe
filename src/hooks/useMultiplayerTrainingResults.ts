@@ -7,16 +7,17 @@ import {
   useAppDispatch,
   useAppSelector
 } from '../state';
-import { CharactersStats, TimeModeType, TrainingResults } from '../types';
+import { CharactersStats, TimeModeType, TrainingResults, WordsModeType } from '../types';
 import { Groups, ensure, isUserAuthenticated } from '../utils';
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
 
-export const useTrainingResults = (stopwatch: Stopwatch): void => {
+export const useMultiplayerTrainingResults = (stopwatch: Stopwatch): void => {
   const dispatch = useAppDispatch();
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
   const trainingResults = useAppSelector((store) => store.data.trainingResults);
   const trainingState = useAppSelector((store) => store.data.trainingState.state);
+  const { place } = useAppSelector((store) => store.data.multiplayer);
   const isAuthenticated = isUserAuthenticated();
 
   const navigate = useNavigate();
@@ -45,11 +46,20 @@ export const useTrainingResults = (stopwatch: Stopwatch): void => {
     const accuracy = (correctLetterCount / affectedLettersCount) * 100;
     const wordsPerMinute = trainingResults.letterStatuses.length / (milliseconds / 1000 / 60) / 5;
 
+    let finalPlace: number;
+    if (trainingConfiguration.wordsMode !== WordsModeType.TurnedOff) {
+      finalPlace = place;
+    } else {
+      // TODO Make time mode training rely on back-end server as a source of truth
+      finalPlace = -1;
+    }
+
     return {
       timeInMilliseconds: milliseconds,
       accuracy,
       charactersStats,
-      wordsPerMinute
+      wordsPerMinute,
+      place: finalPlace
     };
   };
 

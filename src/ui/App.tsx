@@ -1,6 +1,6 @@
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
-import { useAppTheme } from '../shared';
+import { useAppTheme } from '../common';
 import { LoaderElement, router } from './common';
 import { setFaviconBasedOnTheme } from '../utils';
 import { createStyles } from './styles';

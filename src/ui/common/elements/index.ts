@@ -5,4 +5,5 @@ export { AppIconButton } from './AppIconButton';
 export { AppTextButton } from './AppTextButton';
 export { WordCounter } from './WordCounter';
 export { TimeCounter } from './TimeCounter';
-export { ProtectedRoute } from './ProtectedRoute';
+export { LinearProgressWithLabel } from './LinearProgressWithLabel';
+export { AppToast } from './AppToast';

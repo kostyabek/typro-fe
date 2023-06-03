@@ -18,5 +18,6 @@ export {
   LoaderElement,
   TimeCounter,
   WordCounter,
-  ProtectedRoute
+  LinearProgressWithLabel,
+  AppToast
 } from './elements';

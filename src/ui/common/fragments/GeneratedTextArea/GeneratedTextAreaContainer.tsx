@@ -21,7 +21,7 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
   const { isRestartScheduled, setRestartScheduledStatus } = useContext(RestartContext);
 
   const dispatch = useAppDispatch();
-  const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
+  const trainingState = useAppSelector((store) => store.data.trainingState.state);
   const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
 
   const [wordStates, setWordStates] = useState<WordProps[]>([]);

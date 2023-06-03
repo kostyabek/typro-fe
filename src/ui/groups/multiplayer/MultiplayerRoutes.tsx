@@ -2,16 +2,52 @@ import { RouteObject } from 'react-router-dom';
 import { Groups, MultiplayerPages } from '../../../utils';
 import { JoinLobbyPage, JoinLobbyProcessingPage, LobbyPage, MultiplayerPage } from './pages';
 import { NewLobbyPage } from './pages/NewLobbyPage';
+import { Protected } from '../Protected';
 
 export const MultiplayerRoutes: RouteObject[] = [
   {
     path: Groups.Multiplayer,
     children: [
-      { element: <MultiplayerPage />, index: true },
-      { element: <NewLobbyPage />, path: MultiplayerPages.NewLobby },
-      { element: <LobbyPage />, path: MultiplayerPages.Lobby },
-      { element: <JoinLobbyPage />, path: MultiplayerPages.JoinLobby },
-      { element: <JoinLobbyProcessingPage />, path: MultiplayerPages.JoinLobbyProcessing }
+      {
+        element: (
+          <Protected>
+            <MultiplayerPage />
+          </Protected>
+        ),
+        index: true
+      },
+      {
+        element: (
+          <Protected>
+            <NewLobbyPage />
+          </Protected>
+        ),
+        path: MultiplayerPages.NewLobby
+      },
+      {
+        element: (
+          <Protected>
+            <LobbyPage />
+          </Protected>
+        ),
+        path: MultiplayerPages.Lobby
+      },
+      {
+        element: (
+          <Protected>
+            <JoinLobbyPage />
+          </Protected>
+        ),
+        path: MultiplayerPages.JoinLobby
+      },
+      {
+        element: (
+          <Protected>
+            <JoinLobbyProcessingPage />
+          </Protected>
+        ),
+        path: MultiplayerPages.JoinLobbyProcessing
+      }
     ]
   }
 ];

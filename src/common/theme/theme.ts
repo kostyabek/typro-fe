@@ -12,7 +12,7 @@ export const createMuiTheme = (mode: PaletteMode): Theme => {
       values: {
         xs: 0,
         sm: 600,
-        md: 930,
+        md: 1040,
         lg: 1200,
         xl: 1536
       }
