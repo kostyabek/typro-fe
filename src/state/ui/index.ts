@@ -1,2 +1,2 @@
 export { uiReducer } from './uiReducer';
-export { themeActions } from './slices';
+export { themeActions, toastActions } from './slices';

@@ -1,7 +1,7 @@
 import { Box, Fade } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useContext } from 'react';
-import { useAxiosPrivate, useStopwatch, useTrainingResults } from '../../../../hooks';
+import { useAxiosPrivate, useStopwatch, useMultiplayerTrainingResults } from '../../../../hooks';
 import { trainingHttpClient } from '../../../../httpClients';
 import {
   useAppDispatch,
@@ -34,7 +34,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
   const [wordStates, setWordStates] = useState<WordProps[]>([]);
 
   const stopwatch = useStopwatch(stopwatchTaskName);
-  useTrainingResults(stopwatch);
+  useMultiplayerTrainingResults(stopwatch);
 
   useChannel(lobbyInfo.channelId, 'start-training', () => {
     dispatch(trainingStateActions.setState('started'));
@@ -155,19 +155,29 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
 
       const completedWords = newStates.filter((s) => s.isCounted);
       const numberOfCompletedWords = completedWords.length;
-      const completedLettersQty = completedWords.flatMap((e) => e.letters).length;
-      const allLettersQty = newStates.flatMap((e) => e.letters).length;
+      let newPresenceData: AppPresenceData;
 
-      const newPresenceData: AppPresenceData = {
-        isCreator,
-        percentageOfCompleteness: (completedLettersQty / allLettersQty) * 100,
-        place
-      };
-      updatePresence(newPresenceData);
-      dispatch(
-        multiplayerActions.setPercentageOfCompleteness(newPresenceData.percentageOfCompleteness)
-      );
+      if (trainingConfiguration.wordsMode !== WordsModeType.TurnedOff) {
+        const completedLettersQty = completedWords.flatMap((e) => e.letters).length;
+        const allLettersQty = newStates.flatMap((e) => e.letters).length;
+
+        newPresenceData = {
+          isCreator,
+          indicatorValue: (completedLettersQty / allLettersQty) * 100,
+          place
+        };
+        updatePresence(newPresenceData);
+      } else {
+        newPresenceData = {
+          isCreator,
+          indicatorValue: numberOfCompletedWords,
+          place
+        };
+        updatePresence(newPresenceData);
+      }
+
       dispatch(trainingStateActions.setWordsTyped(numberOfCompletedWords));
+      dispatch(multiplayerActions.setIndicatorValue(newPresenceData.indicatorValue));
 
       return newStates;
     });

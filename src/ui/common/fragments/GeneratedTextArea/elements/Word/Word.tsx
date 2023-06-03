@@ -5,6 +5,7 @@ import * as styles from './styles';
 import FocusLock from 'react-focus-lock';
 import { useAppSelector } from '../../../../../../state';
 import { LetterStatus } from '../../../../../../types';
+import { invalidCharCodes, backspaceCode, spaceCode } from './codes';
 
 export interface WordProps {
   isActive: boolean;
@@ -14,52 +15,6 @@ export interface WordProps {
   onTrainingStart: () => void;
   onWordModeTrainingEnd: (letterStatuses: LetterStatus[]) => void;
 }
-
-const backspaceCode = 'Backspace';
-const spaceCode = 'Space';
-const invalidCharCodes = [
-  'Escape',
-  'Tab',
-  'ControlLeft',
-  'AltLeft',
-  'CapsLock',
-  'F1',
-  'F2',
-  'F3',
-  'F4',
-  'F5',
-  'F6',
-  'F7',
-  'F8',
-  'F9',
-  'F10',
-  'F11',
-  'F12',
-  'Pause',
-  'ScrollLock',
-  'ControlRight',
-  'PrintScreen',
-  'AltRight',
-  'NumLock',
-  'Pause',
-  'Home',
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-  'End',
-  'PageUp',
-  'PageDown',
-  'Insert',
-  'Delete',
-  'ShiftLeft',
-  'ShiftRight',
-  'Enter',
-  'NumpadEnter',
-  'MetaLeft',
-  'MetaRight',
-  'ContextMenu'
-];
 
 export const Word = (props: WordProps): JSX.Element => {
   const trainingState = useAppSelector((store) => store.data.trainingState.state);

@@ -8,3 +8,4 @@ export { useAppInitialization } from './useAppInitialization';
 export { useMediatorChannel } from './useMediatorChannel';
 export { useAbly } from './useAbly';
 export { useCopyToClipboard } from './useCopyToClipboard';
+export { useMultiplayerTrainingResults } from './useMultiplayerTrainingResults';

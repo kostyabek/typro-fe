@@ -3,44 +3,46 @@ import { AppPresenceData, PlayerInfo } from '../../../../../../../types';
 import { multiplayerActions, useAppDispatch, useAppSelector } from '../../../../../../../state';
 import { LobbyFragment } from './LobbyFragment';
 import { useEffect } from 'react';
+import { ensure } from '../../../../../../../utils';
 
 export const LobbyContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { lobbyInfo, isCreator, percentageOfCompleteness, place } = useAppSelector(
+  const { lobbyInfo, isCreator, place, indicatorValue } = useAppSelector(
     (store) => store.data.multiplayer
   );
-  const [presenceData, updatePresenceData] = usePresence<AppPresenceData>(lobbyInfo.channelId, {
+  const [presence, updatePresence] = usePresence<AppPresenceData>(lobbyInfo.channelId, {
     isCreator,
-    percentageOfCompleteness,
+    indicatorValue,
     place
   });
   const [channel] = useChannel(lobbyInfo.channelId, 'restart-scheduled', () => {
-    updatePresenceData({
+    updatePresence({
       isCreator,
-      percentageOfCompleteness: 0,
+      indicatorValue: 0,
       place: 1
     });
   });
 
   useChannel(lobbyInfo.channelId, 'increment-place', (message) => {
+    const myPresenceData = ensure(presence.find((e) => e.clientId === message.clientId)).data;
     const newPresenceData: AppPresenceData = {
-      isCreator,
-      percentageOfCompleteness,
+      isCreator: myPresenceData.isCreator,
+      indicatorValue: myPresenceData.indicatorValue,
       place: message.data.incrementedPlace
     };
 
-    updatePresenceData(newPresenceData);
+    updatePresence(newPresenceData);
     dispatch(multiplayerActions.setPlace(newPresenceData.place));
   });
 
   useEffect(() => {
-    dispatch(multiplayerActions.setUpdatePresenceMethod(updatePresenceData));
+    dispatch(multiplayerActions.setUpdatePresenceMethod(updatePresence));
   }, []);
 
-  const playersInfo = presenceData.map<PlayerInfo>((e) => {
+  const playersInfo = presence.map<PlayerInfo>((e) => {
     return {
       playerId: e.clientId,
-      percentageOfCompleteness: e.data.percentageOfCompleteness,
+      indicatorValue: e.data.indicatorValue,
       isCreator: e.data.isCreator,
       place: e.data.place
     };
@@ -55,7 +57,7 @@ export const LobbyContainer = (): JSX.Element => {
       isCreator={isCreator}
       lobbyId={lobbyInfo.lobbyId}
       playersInfo={playersInfo}
-      updatePresenceData={updatePresenceData}
+      updatePresenceData={updatePresence}
       onStart={startHandler}
     />
   );

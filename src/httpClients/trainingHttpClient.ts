@@ -98,3 +98,14 @@ export const updateTrainingResults = async (
 ): Promise<void> => {
   await axios.patch(`${relativeBasePath}results/${id}`, results);
 };
+
+export const deleteLobbyInfo = async (axios: Axios, lobbyId: string): Promise<void> => {
+  await axios.delete(`${relativeBasePath}lobby`, { params: { lobbyId } });
+};
+
+export const checkIfLobbyExists = async (axios: Axios, lobbyId: string): Promise<boolean> => {
+  const response = await axios.get<UniversalResponse<boolean>>(`${relativeBasePath}lobby`, {
+    params: { lobbyId }
+  });
+  return response.data.value;
+};

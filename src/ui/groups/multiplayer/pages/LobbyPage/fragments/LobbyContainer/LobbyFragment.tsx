@@ -1,5 +1,10 @@
 import { Box, Fade, Typography } from '@mui/material';
-import { AppPresenceData, PlayerInfo, TimeModeType } from '../../../../../../../types';
+import {
+  AppPresenceData,
+  PlayerInfo,
+  TimeModeType,
+  WordsModeType
+} from '../../../../../../../types';
 import {
   AppIconButton,
   AppTextButton,
@@ -36,6 +41,8 @@ export const LobbyFragment = (props: Props): JSX.Element => {
     void copyMethod(props.lobbyId);
   };
 
+  const isWordsMode = trainingConfiguration.wordsMode !== WordsModeType.TurnedOff;
+
   const counter =
     trainingConfiguration.timeMode === TimeModeType.TurnedOff ? (
       <WordCounter totalWords={trainingConfiguration.wordsMode} />
@@ -67,7 +74,7 @@ export const LobbyFragment = (props: Props): JSX.Element => {
               </Fade>
             )}
           </Box>
-          <PlayersInfoElement playersInfo={props.playersInfo} />
+          <PlayersInfoElement playersInfo={props.playersInfo} isWordsMode={isWordsMode} />
         </Box>
         <Box sx={styles.innerLayoutContainer}>
           <Box sx={styles.contentContainer}>
@@ -78,9 +85,13 @@ export const LobbyFragment = (props: Props): JSX.Element => {
             </Box>
             {props.isCreator && <MultiplayerRestartButtonContainer />}
             {props.isCreator && (
-              <AppTextButton disabled={props.playersInfo.length === 1} onClick={props.onStart}>
-                Start
-              </AppTextButton>
+              <Fade in={trainingState !== 'started'}>
+                <Box>
+                  <AppTextButton disabled={props.playersInfo.length === 1} onClick={props.onStart}>
+                    Start
+                  </AppTextButton>
+                </Box>
+              </Fade>
             )}
           </Box>
         </Box>

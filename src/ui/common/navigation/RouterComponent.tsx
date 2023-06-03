@@ -11,13 +11,12 @@ import {
   AuthRoutes
 } from '../../groups';
 import { RootLayout } from '../fragments';
-import { ErrorPage } from '../pages';
+import { NotFoundPage } from '../pages';
 
 export const router = createBrowserRouter([
   {
     path: Groups.Root,
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
     children: [
       ...HomeRoutes,
       ...AuthRoutes,
@@ -26,7 +25,8 @@ export const router = createBrowserRouter([
       ...MultiplayerRoutes,
       ...LeaderboardsRoutes,
       ...AboutRoutes,
-      ...TrainingResultsRoutes
+      ...TrainingResultsRoutes,
+      { path: '*', element: <NotFoundPage /> }
     ]
   }
 ]);

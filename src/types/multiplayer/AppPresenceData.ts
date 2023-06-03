@@ -1,5 +1,5 @@
 export interface AppPresenceData {
-  percentageOfCompleteness: number;
+  indicatorValue: number;
   isCreator: boolean;
   place: number;
 }
