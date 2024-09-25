@@ -6,6 +6,8 @@ import { Groups, ensure } from '../../../../utils';
 
 import { TrainingResultsFragment } from './TrainingResultsFragment';
 
+const millisecondsInSecond = 1000;
+
 const getTrainingTypeName = (trainingConfiguration: TrainingConfiguration): string => {
   const language = ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).name;
   const isWordsMode = trainingConfiguration.timeMode === TimeModeType.TurnedOff;
@@ -29,7 +31,7 @@ export const TrainingResultsContainer = (): JSX.Element => {
   }
 
   const trainingType = getTrainingTypeName(trainingConfiguration);
-  const timeInSeconds = trainingResults.timeInMilliseconds / 1000;
+  const timeInSeconds = trainingResults.timeInMilliseconds / millisecondsInSecond;
 
   return (
     <TrainingResultsFragment

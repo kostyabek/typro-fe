@@ -26,5 +26,5 @@
     "allowUnreachableCode": false,
     "downlevelIteration": true
   },
-  "include": ["src", "augmentation.d.ts"]
+  "include": ["src"]
 }

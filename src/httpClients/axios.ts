@@ -8,9 +8,9 @@ const isIsoDateString = (value: unknown): boolean => (
     value !== null && value !== undefined && typeof value === 'string' && isoDateFormat.test(value)
   );
 
-const handleDates = (body: any): unknown => {
+const handleDates = (body: any): void => {
   if (body === null || body === undefined || typeof body !== 'object') {
-    return body;
+    return;
   }
 
   for (const key of Object.keys(body)) {
