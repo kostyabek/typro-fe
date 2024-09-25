@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
 import { authHttpClient } from '../../../../../httpClients';
 import { useAppDispatch, useAppSelector, userActions } from '../../../../../state';
 import { Groups, isUserAuthenticated, removeAccessToken } from '../../../../../utils';
-import { Navigate } from 'react-router-dom';
 import { LoaderElement } from '../../../../common';
 import { useAxiosPrivate } from '../../../../../hooks';
 

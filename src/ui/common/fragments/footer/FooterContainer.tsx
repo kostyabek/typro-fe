@@ -1,5 +1,3 @@
 import FooterFragment from './FooterFragment';
 
-export const FooterContainer = (): JSX.Element => {
-  return <FooterFragment />;
-};
+export const FooterContainer = (): JSX.Element => <FooterFragment />;

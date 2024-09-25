@@ -1,6 +1,8 @@
 import { Box, Fade } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect, useContext } from 'react';
+import { useChannel } from '@ably-labs/react-hooks';
+
 import { useAxiosPrivate, useStopwatch, useMultiplayerTrainingResults } from '../../../../hooks';
 import { trainingHttpClient } from '../../../../httpClients';
 import {
@@ -13,10 +15,10 @@ import {
 } from '../../../../state';
 import { WordsModeType, LetterStatus, TimeModeType, AppPresenceData } from '../../../../types';
 import { ensure, sleep } from '../../../../utils';
+import { RestartContext } from '../../../../contexts';
+
 import { MultiplayerGeneratedTextAreaFragment } from './MultiplayerGeneratedTextAreaFragment';
 import { WordProps, Word } from './elements';
-import { useChannel } from '@ably-labs/react-hooks';
-import { RestartContext } from '../../../../contexts';
 
 const stopwatchTaskName = 'training';
 
@@ -107,8 +109,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
     });
 
     setWordStates((prevStates) => {
-      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => {
-        return {
+      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => ({
           isDisabled: trainingState !== 'started',
           letters: wordChars,
           isActive: false,
@@ -116,8 +117,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
           onMoveToAnotherWord: moveOnToAnotherWordHandler,
           onTrainingStart: () => {},
           onWordModeTrainingEnd: letterStatusesSubmissionHandler
-        };
-      });
+        }));
       return [...prevStates, ...newStates];
     });
   };
@@ -187,8 +187,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
   useEffect(() => {
     if (generatedText.length > 0) {
       setWordStates(
-        generatedText.map<WordProps>((wordChars, wordCharsIndex) => {
-          return {
+        generatedText.map<WordProps>((wordChars, wordCharsIndex) => ({
             isDisabled: trainingState !== 'started',
             letters: wordChars,
             isActive: wordCharsIndex === 0,
@@ -196,8 +195,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
             onMoveToAnotherWord: moveOnToAnotherWordHandler,
             onTrainingStart: () => {},
             onWordModeTrainingEnd: letterStatusesSubmissionHandler
-          };
-        })
+          }))
       );
     }
   }, [generatedText, setWordStates, trainingState]);

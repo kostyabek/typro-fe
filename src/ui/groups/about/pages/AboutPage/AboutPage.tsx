@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
+
 import * as styles from './styles';
 
-export const AboutPage = (): JSX.Element => {
-  return (
+export const AboutPage = (): JSX.Element => (
     <Box>
       <Typography component={'h1'} sx={styles.header}>
         typro
@@ -11,4 +11,3 @@ export const AboutPage = (): JSX.Element => {
       <Typography sx={styles.plain}>&#x1F603;</Typography>
     </Box>
   );
-};

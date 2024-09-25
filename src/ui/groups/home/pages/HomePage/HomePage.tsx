@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useState } from 'react';
+
 import { RestartContext } from '../../../../../contexts';
-import * as styles from './styles';
 import {
   GeneratedTextAreaContainer,
   RestartButtonContainer,
@@ -11,6 +11,8 @@ import {
 } from '../../../../common';
 import { trainingStateActions, useAppDispatch, useAppSelector } from '../../../../../state';
 import { TimeModeType } from '../../../../../types';
+
+import * as styles from './styles';
 
 export const HomePage = (): JSX.Element => {
   const [isRestartScheduled, setRestartScheduledStatus] = useState(true);

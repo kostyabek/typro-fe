@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { dataReducer as data } from './data';
 import { uiReducer as ui } from './ui';
 

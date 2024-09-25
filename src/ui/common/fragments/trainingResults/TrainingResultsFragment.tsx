@@ -1,6 +1,8 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useMemo } from 'react';
+
 import { CharactersStats } from '../../../../types';
+
 import { createStyles } from './styles';
 
 interface Props {

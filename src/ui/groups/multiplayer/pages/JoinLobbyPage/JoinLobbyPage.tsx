@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
-import { AppTextButton, AppTextField } from '../../../../common';
 import { useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
+
+import { AppTextButton, AppTextField } from '../../../../common';
+
 import * as styles from './styles';
 
 export const JoinLobbyPage = (): JSX.Element => {

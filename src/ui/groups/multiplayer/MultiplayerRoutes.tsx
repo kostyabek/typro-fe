@@ -1,8 +1,10 @@
 import { RouteObject } from 'react-router-dom';
+
 import { Groups, MultiplayerPages } from '../../../utils';
+import { Protected } from '../Protected';
+
 import { JoinLobbyPage, JoinLobbyProcessingPage, LobbyPage, MultiplayerPage } from './pages';
 import { NewLobbyPage } from './pages/NewLobbyPage';
-import { Protected } from '../Protected';
 
 export const MultiplayerRoutes: RouteObject[] = [
   {

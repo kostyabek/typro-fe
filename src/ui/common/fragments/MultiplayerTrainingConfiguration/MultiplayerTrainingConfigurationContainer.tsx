@@ -1,11 +1,13 @@
 import { useChannel } from '@ably-labs/react-hooks';
+import { useContext } from 'react';
+
 import { trainingConfigurationActions, useAppDispatch, useAppSelector } from '../../../../state';
 import { ensure } from '../../../../utils';
 import { LoaderElement } from '../../elements';
-import TrainingConfigurationFragment from './MultiplayerTrainingConfigurationFragment';
 import { WordsModeType, TimeModeType } from '../../../../types';
-import { useContext } from 'react';
 import { RestartContext } from '../../../../contexts';
+
+import TrainingConfigurationFragment from './MultiplayerTrainingConfigurationFragment';
 
 export const MultiplayerTrainingConfigurationContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();

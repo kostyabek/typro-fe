@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 import {
   trainingConfigurationActions,
   useAppDispatch,
@@ -5,8 +7,8 @@ import {
   userActions
 } from '../state';
 import { trainingHttpClient, userHttpClient } from '../httpClients';
-import { useQuery } from '@tanstack/react-query';
 import { ensure, getAccessToken } from '../utils';
+
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { useAbly } from './useAbly';
 

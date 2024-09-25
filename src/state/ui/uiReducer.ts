@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
+
 import theme from './slices/themeSlice';
 import toast from './slices/toastSlice';
 

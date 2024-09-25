@@ -1,12 +1,14 @@
 import { Box, InputLabel, List, ListItem, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { Form, Navigate, useActionData, useNavigation } from 'react-router-dom';
+
 import { AuthResponse, UniversalResponse } from '../../../../../types';
 import { AuthPages, Groups, ensure, getAccessToken } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
-import { createStyles } from './styles';
 import { useAppDispatch, userActions } from '../../../../../state';
 import { useAbly } from '../../../../../hooks';
+
+import { createStyles } from './styles';
 
 export const SignUpPage = (): JSX.Element => {
   const actionData = useActionData() as object;

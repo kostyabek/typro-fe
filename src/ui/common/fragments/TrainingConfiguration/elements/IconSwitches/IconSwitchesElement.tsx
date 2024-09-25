@@ -1,5 +1,12 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { useContext, useMemo } from 'react';
+
+import { RestartContext } from '../../../../../../contexts';
+import { useAppDispatch, trainingConfigurationActions } from '../../../../../../state';
+import { TimeModeType, WordsModeType } from '../../../../../../types';
+import { AppIconButton } from '../../../../elements';
+
+import { createStyles } from './styles';
 import {
   ActiveNumbersIcon,
   ActivePunctuationIcon,
@@ -10,11 +17,6 @@ import {
   TimeModeIcon,
   WordsModeIcon
 } from './icons';
-import { createStyles } from './styles';
-import { RestartContext } from '../../../../../../contexts';
-import { useAppDispatch, trainingConfigurationActions } from '../../../../../../state';
-import { TimeModeType, WordsModeType } from '../../../../../../types';
-import { AppIconButton } from '../../../../elements';
 
 const timeModes = [
   TimeModeType.FifteenSeconds,

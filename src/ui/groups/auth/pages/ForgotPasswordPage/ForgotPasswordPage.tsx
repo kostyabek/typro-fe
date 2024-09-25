@@ -1,10 +1,11 @@
 import { Box, InputLabel } from '@mui/material';
+
 import { AuthPages } from '../../../../../utils';
 import { AppTextField, AppTextButton, AppLink } from '../../../../common';
+
 import * as styles from './styles';
 
-export const ForgotPasswordPage = (): JSX.Element => {
-  return (
+export const ForgotPasswordPage = (): JSX.Element => (
     <Box sx={styles.mainContainer}>
       <Box sx={styles.formContainer}>
         <form>
@@ -22,4 +23,3 @@ export const ForgotPasswordPage = (): JSX.Element => {
       </Box>
     </Box>
   );
-};

@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { userHttpClient, axiosPrivate } from '../../../../../../../httpClients';
-import { Point, TimeModeType, WordsModeType } from '../../../../../../../types';
-import { TrainingStatsChartFragment } from './TrainingStatsChartFragment';
-import { ensure } from '../../../../../../../utils';
-import { LoaderElement } from '../../../../../../common';
 import { Box, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
+
+import { userHttpClient, axiosPrivate } from '../../../../../../../httpClients';
+import { Point, TimeModeType, WordsModeType } from '../../../../../../../types';
+import { ensure } from '../../../../../../../utils';
+import { LoaderElement } from '../../../../../../common';
 import { useAppSelector } from '../../../../../../../state';
+
+import { TrainingStatsChartFragment } from './TrainingStatsChartFragment';
 import * as styles from './styles';
 
 const millisecondsInDay = 24 * 60 * 60 * 1000;

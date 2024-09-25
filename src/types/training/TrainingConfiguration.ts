@@ -1,4 +1,5 @@
 import { WordsModeType, TimeModeType } from '../enums';
+
 import { LanguageInfo } from './LanguageInfo';
 
 export interface TrainingConfiguration {

@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
+
 import * as styles from './styles';
 
-export const NotFoundPage = (): JSX.Element => {
-  return (
+export const NotFoundPage = (): JSX.Element => (
     <Box sx={styles.wrapper}>
       <Box sx={styles.contentContainer}>
         <Box sx={styles.errorContainer}>
@@ -12,4 +12,3 @@ export const NotFoundPage = (): JSX.Element => {
       </Box>
     </Box>
   );
-};

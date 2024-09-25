@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+
 import * as styles from './styles';
 
 interface Props {
@@ -7,8 +8,7 @@ interface Props {
   accuracy?: number;
 }
 
-export const ModeInfoElement = (props: Props): JSX.Element => {
-  return (
+export const ModeInfoElement = (props: Props): JSX.Element => (
     <Box sx={styles.mainContainer}>
       <Typography sx={styles.modeLabel}>{props.mode}</Typography>
       <Typography sx={styles.wordsPerMinuteLabel}>
@@ -21,4 +21,3 @@ export const ModeInfoElement = (props: Props): JSX.Element => {
       </Typography>
     </Box>
   );
-};

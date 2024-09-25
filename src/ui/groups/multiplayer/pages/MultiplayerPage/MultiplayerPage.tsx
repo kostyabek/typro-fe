@@ -1,10 +1,11 @@
 import { Box } from '@mui/material';
+
 import { AppLink, AppTextButton, AppToast } from '../../../../common';
 import { Groups, MultiplayerPages } from '../../../../../utils';
+
 import * as styles from './styles';
 
-export const MultiplayerPage = (): JSX.Element => {
-  return (
+export const MultiplayerPage = (): JSX.Element => (
     <Box sx={styles.mainContainer}>
       <AppLink
         to={`${Groups.Multiplayer}/${MultiplayerPages.NewLobby}`}
@@ -19,4 +20,3 @@ export const MultiplayerPage = (): JSX.Element => {
       <AppToast />
     </Box>
   );
-};

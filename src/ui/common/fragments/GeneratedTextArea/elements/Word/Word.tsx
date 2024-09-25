@@ -1,10 +1,12 @@
 import { Box } from '@mui/system';
 import { useState, KeyboardEvent, useEffect } from 'react';
-import { Letter, LetterProps } from '../Letter';
-import * as styles from './styles';
 import FocusLock from 'react-focus-lock';
+
+import { Letter, LetterProps } from '../Letter';
 import { useAppSelector } from '../../../../../../state';
 import { LetterStatus } from '../../../../../../types';
+
+import * as styles from './styles';
 import { invalidCharCodes, backspaceCode, spaceCode } from './codes';
 
 export interface WordProps {
@@ -24,9 +26,7 @@ export const Word = (props: WordProps): JSX.Element => {
 
   useEffect(() => {
     setLetterStates(
-      props.letters.map<LetterProps>((l, i) => {
-        return { status: 'initial', character: l, position: i };
-      })
+      props.letters.map<LetterProps>((l, i) => ({ status: 'initial', character: l, position: i }))
     );
     setPosition(0);
   }, [props.letters]);

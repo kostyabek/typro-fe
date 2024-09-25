@@ -1,4 +1,5 @@
 import { TimeModeType, WordsModeType, UniversalResponse, LeaderboardEntry } from '../types';
+
 import { axiosPublic } from './axios';
 
 const relativeBasePath = 'leaderboards/';

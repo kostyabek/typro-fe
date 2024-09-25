@@ -1,10 +1,11 @@
 import { useChannel, usePresence } from '@ably-labs/react-hooks';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import { Groups, MultiplayerPages, getLobbyChannelId } from '../../../../../utils';
 import { multiplayerActions, toastActions, useAppDispatch } from '../../../../../state';
 import { LoaderElement } from '../../../../common';
 import { AppPresenceData } from '../../../../../types';
-import { useEffect, useState } from 'react';
 import { trainingHttpClient } from '../../../../../httpClients';
 import { useAxiosPrivate } from '../../../../../hooks';
 

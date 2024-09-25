@@ -3,11 +3,9 @@ import { defineConfig } from "vite";
 import eslint from "vite-plugin-eslint";
 import mkcert from "vite-plugin-mkcert";
 
-export default defineConfig(() => {
-  return {
+export default defineConfig(() => ({
     plugins: [react(), eslint(), mkcert()],
     server: {
       port: 443
     }
-  };
-});
+  }));

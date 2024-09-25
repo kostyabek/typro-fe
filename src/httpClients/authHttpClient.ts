@@ -1,7 +1,9 @@
 import { Axios, AxiosResponse } from 'axios';
+
 import { UniversalResponse } from '../types/response';
-import { axiosPublic } from './axios';
 import { AuthResponse } from '../types';
+
+import { axiosPublic } from './axios';
 
 const relativeBasePath = 'auth/';
 const headers = {
@@ -20,8 +22,7 @@ interface SignUpRequestModel extends SignInRequestModel {
 
 export const signUp = async (
   requestModel: SignUpRequestModel
-): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => {
-  return await axiosPublic.post<UniversalResponse<AuthResponse>>(
+): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => await axiosPublic.post<UniversalResponse<AuthResponse>>(
     `${relativeBasePath}sign-up`,
     requestModel,
     {
@@ -29,12 +30,10 @@ export const signUp = async (
       withCredentials: true
     }
   );
-};
 
 export const signIn = async (
   requestModel: SignInRequestModel
-): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => {
-  return await axiosPublic.post<UniversalResponse<AuthResponse>>(
+): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => await axiosPublic.post<UniversalResponse<AuthResponse>>(
     `${relativeBasePath}sign-in`,
     requestModel,
     {
@@ -42,10 +41,7 @@ export const signIn = async (
       withCredentials: true
     }
   );
-};
 
-export const signOut = async (axios: Axios): Promise<AxiosResponse<void>> => {
-  return await axios.post(`${relativeBasePath}sign-out`, {
+export const signOut = async (axios: Axios): Promise<AxiosResponse<void>> => await axios.post(`${relativeBasePath}sign-out`, {
     headers
   });
-};

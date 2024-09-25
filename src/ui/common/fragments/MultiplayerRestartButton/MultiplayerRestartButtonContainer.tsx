@@ -1,8 +1,10 @@
-import MultiplayerRestartButtonFragment from './MultiplayerRestartButtonFragment';
-import { RestartContext } from '../../../../contexts';
 import { useContext } from 'react';
 import { useChannel } from '@ably-labs/react-hooks';
+
+import { RestartContext } from '../../../../contexts';
 import { useAppSelector } from '../../../../state';
+
+import MultiplayerRestartButtonFragment from './MultiplayerRestartButtonFragment';
 
 export const MultiplayerRestartButtonContainer = (): JSX.Element => {
   const { setRestartScheduledStatus } = useContext(RestartContext);

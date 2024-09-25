@@ -1,5 +1,7 @@
 import { Box, MenuItem, PaletteMode, Select, SelectChangeEvent, Typography } from '@mui/material';
+
 import { themeActions, useAppDispatch, useAppSelector } from '../../../../../state';
+
 import * as styles from './styles';
 
 const themeModes = ['light', 'dark'];

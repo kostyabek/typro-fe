@@ -1,14 +1,16 @@
-import { Axios } from 'axios';
+import { Axios } from "axios";
+
 import {
   TimeModeType,
   WordsModeType,
   LanguageInfo,
   UniversalResponse,
   TrainingResults
-} from '../types';
-import { axiosPublic } from './axios';
+} from "../types";
 
-const relativeBasePath = 'training/';
+import { axiosPublic } from "./axios";
+
+const relativeBasePath = "training/";
 
 interface GetGeneratedTextRequestModel {
   languageId: number;
@@ -18,7 +20,8 @@ interface GetGeneratedTextRequestModel {
   areNumbersGenerated: boolean;
 }
 
-interface GetMultiplayerGeneratedTextRequestModel extends GetGeneratedTextRequestModel {
+interface GetMultiplayerGeneratedTextRequestModel
+  extends GetGeneratedTextRequestModel {
   lobbyId: string;
   isForceRewrite: boolean;
 }
@@ -49,12 +52,11 @@ export const getMultiplayerGeneratedText = async (
   axios: Axios,
   requestModel: GetMultiplayerGeneratedTextRequestModel
 ): Promise<PreparedMultiplayerTextInfoDto> => {
-  const response = await axios.get<UniversalResponse<PreparedMultiplayerTextInfoDto>>(
-    `${relativeBasePath}multiplayer-text-generation`,
-    {
-      params: requestModel
-    }
-  );
+  const response = await axios.get<
+    UniversalResponse<PreparedMultiplayerTextInfoDto>
+  >(`${relativeBasePath}multiplayer-text-generation`, {
+    params: requestModel
+  });
 
   return response.data.value;
 };
@@ -63,13 +65,14 @@ interface GetSupportedLanguagesResponse {
   value: LanguageInfo[];
 }
 
-export const getSupportedLanguages = async (): Promise<GetSupportedLanguagesResponse> => {
-  const response = await axiosPublic.get<GetSupportedLanguagesResponse>(
-    `${relativeBasePath}supported-languages`
-  );
+export const getSupportedLanguages =
+  async (): Promise<GetSupportedLanguagesResponse> => {
+    const response = await axiosPublic.get<GetSupportedLanguagesResponse>(
+      `${relativeBasePath}supported-languages`
+    );
 
-  return response.data;
-};
+    return response.data;
+  };
 
 interface CreateTrainingResultsRequest {
   languageId: number;
@@ -89,7 +92,7 @@ export const createTrainingResults = async (
   return response.data.value;
 };
 
-interface UpdateTrainingResultsRequest extends TrainingResults {}
+type UpdateTrainingResultsRequest = TrainingResults;
 
 export const updateTrainingResults = async (
   axios: Axios,
@@ -99,13 +102,22 @@ export const updateTrainingResults = async (
   await axios.patch(`${relativeBasePath}results/${id}`, results);
 };
 
-export const deleteLobbyInfo = async (axios: Axios, lobbyId: string): Promise<void> => {
+export const deleteLobbyInfo = async (
+  axios: Axios,
+  lobbyId: string
+): Promise<void> => {
   await axios.delete(`${relativeBasePath}lobby`, { params: { lobbyId } });
 };
 
-export const checkIfLobbyExists = async (axios: Axios, lobbyId: string): Promise<boolean> => {
-  const response = await axios.get<UniversalResponse<boolean>>(`${relativeBasePath}lobby`, {
-    params: { lobbyId }
-  });
+export const checkIfLobbyExists = async (
+  axios: Axios,
+  lobbyId: string
+): Promise<boolean> => {
+  const response = await axios.get<UniversalResponse<boolean>>(
+    `${relativeBasePath}lobby`,
+    {
+      params: { lobbyId }
+    }
+  );
   return response.data.value;
 };

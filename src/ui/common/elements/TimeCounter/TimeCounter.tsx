@@ -1,7 +1,9 @@
 import { Typography, useTheme } from '@mui/material';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { createStyles } from './styles';
+
 import { useAppSelector } from '../../../../state';
+
+import { createStyles } from './styles';
 
 interface Props {
   onTimesUp: () => void;

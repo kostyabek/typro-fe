@@ -1,10 +1,13 @@
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
+
 import { useAppTheme } from '../common';
-import { LoaderElement, router } from './common';
 import { setFaviconBasedOnTheme } from '../utils';
-import { createStyles } from './styles';
 import { useAppInitialization } from '../hooks';
+
+import { LoaderElement, router } from './common';
+import { createStyles } from './styles';
+
 
 export const App = (): JSX.Element => {
   const isInitialized = useAppInitialization();

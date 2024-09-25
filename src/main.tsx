@@ -1,12 +1,13 @@
 import ReactDOM from "react-dom/client";
-import { store } from "./state";
-import { App } from "./ui";
 import { Provider } from "react-redux";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider
 } from "@tanstack/react-query";
+
+import { store } from "./state";
+import { App } from "./ui";
 import "./index.css";
 
 const root = ReactDOM.createRoot(

@@ -1,10 +1,10 @@
 import { LinearProgressProps, Box, Typography, LinearProgress } from '@mui/material';
+
 import * as styles from './styles';
 
 type Props = LinearProgressProps & { value: number };
 
-export const LinearProgressWithLabel = (props: Props): JSX.Element => {
-  return (
+export const LinearProgressWithLabel = (props: Props): JSX.Element => (
     <Box sx={styles.mainContainer}>
       <Box sx={styles.progressContainer}>
         <LinearProgress variant="determinate" {...props} />
@@ -16,4 +16,3 @@ export const LinearProgressWithLabel = (props: Props): JSX.Element => {
       </Box>
     </Box>
   );
-};

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { AppPresenceData, LobbyInfo } from '../../../types';
 
 interface MultiplayerSlice {

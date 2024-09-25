@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+
 import { AuthPages, Groups, getAccessToken } from '../utils';
 
 export const useAuthGuard = (protectedContent: JSX.Element): JSX.Element => {

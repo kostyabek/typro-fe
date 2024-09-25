@@ -1,28 +1,35 @@
-import { Fade, Box } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { useContext, useState, useEffect } from 'react';
-import { RestartContext } from '../../../../contexts';
-import { useStopwatch, useTrainingResults } from '../../../../hooks';
-import { trainingHttpClient } from '../../../../httpClients';
+import { Fade, Box } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { useContext, useState, useEffect } from "react";
+
+import { RestartContext } from "../../../../contexts";
+import { useStopwatch, useTrainingResults } from "../../../../hooks";
+import { trainingHttpClient } from "../../../../httpClients";
 import {
   useAppDispatch,
   useAppSelector,
   trainingStateActions,
   trainingResultsActions
-} from '../../../../state';
-import { WordsModeType, LetterStatus, TimeModeType } from '../../../../types';
-import { ensure, sleep } from '../../../../utils';
-import { GeneratedTextAreaFragment } from './GeneratedTextAreaFragment';
-import { WordProps, Word } from './elements';
+} from "../../../../state";
+import { WordsModeType, LetterStatus, TimeModeType } from "../../../../types";
+import { ensure, sleep } from "../../../../utils";
 
-const stopwatchTaskName = 'training';
+import { GeneratedTextAreaFragment } from "./GeneratedTextAreaFragment";
+import { WordProps, Word } from "./elements";
+
+const stopwatchTaskName = "training";
 
 export const GeneratedTextAreaContainer = (): JSX.Element => {
-  const { isRestartScheduled, setRestartScheduledStatus } = useContext(RestartContext);
+  const { isRestartScheduled, setRestartScheduledStatus } =
+    useContext(RestartContext);
 
   const dispatch = useAppDispatch();
-  const trainingState = useAppSelector((store) => store.data.trainingState.state);
-  const trainingConfiguration = useAppSelector((store) => store.data.trainingConfiguration);
+  const trainingState = useAppSelector(
+    (store) => store.data.trainingState.state
+  );
+  const trainingConfiguration = useAppSelector(
+    (store) => store.data.trainingConfiguration
+  );
 
   const [wordStates, setWordStates] = useState<WordProps[]>([]);
 
@@ -30,25 +37,28 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
   useTrainingResults(stopwatch);
 
   const { data } = useQuery({
-    queryKey: ['generatedText', trainingConfiguration],
+    queryKey: ["generatedText", trainingConfiguration],
     queryFn: async () => {
       const data = await trainingHttpClient.getGeneratedText({
         ...trainingConfiguration,
-        languageId: ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).id
+        languageId: ensure(
+          trainingConfiguration.languagesInfo.find((e) => e.isActive)
+        ).id
       });
 
       await sleep(100);
       setRestartScheduledStatus(false);
       dispatch(trainingStateActions.setWordsTyped(0));
-      dispatch(trainingStateActions.setState('initial'));
+      dispatch(trainingStateActions.setState("initial"));
 
       return data;
     },
-    enabled: isRestartScheduled && trainingConfiguration.languagesInfo.length > 0
+    enabled:
+      isRestartScheduled && trainingConfiguration.languagesInfo.length > 0
   });
 
   const trainingStartHandler = (): void => {
-    dispatch(trainingStateActions.setState('started'));
+    dispatch(trainingStateActions.setState("started"));
     if (trainingConfiguration.wordsMode !== WordsModeType.TurnedOff) {
       stopwatch.start();
     }
@@ -56,39 +66,45 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
 
   useEffect(() => {
     if (
-      trainingState === 'finished' &&
+      trainingState === "finished" &&
       trainingConfiguration.wordsMode !== WordsModeType.TurnedOff
     ) {
       stopwatch.stop();
     }
   }, [trainingState]);
 
-  const letterStatusesSubmissionHandler = (letterStatuses: LetterStatus[]): void => {
+  const letterStatusesSubmissionHandler = (
+    letterStatuses: LetterStatus[]
+  ): void => {
     if (trainingConfiguration.wordsMode !== WordsModeType.TurnedOff) {
       dispatch(trainingResultsActions.addLetterStatuses(letterStatuses));
     } else {
-      const nonInitialLetterStatuses = letterStatuses.filter((e) => e !== 'initial');
-      dispatch(trainingResultsActions.addLetterStatuses(nonInitialLetterStatuses));
+      const nonInitialLetterStatuses = letterStatuses.filter(
+        (e) => e !== "initial"
+      );
+      dispatch(
+        trainingResultsActions.addLetterStatuses(nonInitialLetterStatuses)
+      );
     }
   };
 
   const requestAdditionalWords = async (): Promise<void> => {
     const data = await trainingHttpClient.getGeneratedText({
       ...trainingConfiguration,
-      languageId: ensure(trainingConfiguration.languagesInfo.find((e) => e.isActive)).id
+      languageId: ensure(
+        trainingConfiguration.languagesInfo.find((e) => e.isActive)
+      ).id
     });
 
     setWordStates((prevStates) => {
-      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => {
-        return {
-          letters: wordChars,
-          isActive: false,
-          isCounted: false,
-          onMoveToAnotherWord: moveOnToAnotherWordHandler,
-          onTrainingStart: trainingStartHandler,
-          onWordModeTrainingEnd: letterStatusesSubmissionHandler
-        };
-      });
+      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => ({
+        letters: wordChars,
+        isActive: false,
+        isCounted: false,
+        onMoveToAnotherWord: moveOnToAnotherWordHandler,
+        onTrainingStart: trainingStartHandler,
+        onWordModeTrainingEnd: letterStatusesSubmissionHandler
+      }));
       return [...prevStates, ...newStates];
     });
   };
@@ -100,15 +116,19 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
         return oldStates;
       }
 
-      if (isForward && trainingConfiguration.timeMode !== TimeModeType.TurnedOff) {
-        const shouldRequestWords = oldStates.filter((e) => !e.isCounted).length < 21;
+      if (
+        isForward &&
+        trainingConfiguration.timeMode !== TimeModeType.TurnedOff
+      ) {
+        const shouldRequestWords =
+          oldStates.filter((e) => !e.isCounted).length < 21;
         if (shouldRequestWords) {
           void requestAdditionalWords();
         }
       }
 
       if (activeWordIndex === oldStates.length - 1 && isForward) {
-        dispatch(trainingStateActions.setState('finished'));
+        dispatch(trainingStateActions.setState("finished"));
         return oldStates;
       }
 
@@ -119,10 +139,14 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
         newWordState.isCounted = true;
       }
 
-      const wordToMoveOnToIndex = isForward ? activeWordIndex + 1 : activeWordIndex - 1;
+      const wordToMoveOnToIndex = isForward
+        ? activeWordIndex + 1
+        : activeWordIndex - 1;
       newStates[wordToMoveOnToIndex].isActive = true;
 
-      const numberOfCompletedWords = newStates.filter((s) => s.isCounted).length;
+      const numberOfCompletedWords = newStates.filter(
+        (s) => s.isCounted
+      ).length;
       dispatch(trainingStateActions.setWordsTyped(numberOfCompletedWords));
 
       return newStates;
@@ -133,21 +157,21 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
   useEffect(() => {
     if (generatedText.length > 0) {
       setWordStates(
-        generatedText.map<WordProps>((wordChars, wordCharsIndex) => {
-          return {
-            letters: wordChars,
-            isActive: wordCharsIndex === 0,
-            isCounted: false,
-            onMoveToAnotherWord: moveOnToAnotherWordHandler,
-            onTrainingStart: trainingStartHandler,
-            onWordModeTrainingEnd: letterStatusesSubmissionHandler
-          };
-        })
+        generatedText.map<WordProps>((wordChars, wordCharsIndex) => ({
+          letters: wordChars,
+          isActive: wordCharsIndex === 0,
+          isCounted: false,
+          onMoveToAnotherWord: moveOnToAnotherWordHandler,
+          onTrainingStart: trainingStartHandler,
+          onWordModeTrainingEnd: letterStatusesSubmissionHandler
+        }))
       );
     }
   }, [generatedText, setWordStates]);
 
-  const words = wordStates.map((wordState, index) => <Word key={`word_${index}`} {...wordState} />);
+  const words = wordStates.map((wordState, index) => (
+    <Word key={`word_${index}`} {...wordState} />
+  ));
 
   return (
     <Fade in={!isRestartScheduled}>

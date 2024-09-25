@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { TimeModeType, WordsModeType, LanguageInfo, TrainingConfiguration } from '../../../types';
 import { ensure } from '../../../utils';
 

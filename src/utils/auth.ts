@@ -1,5 +1,6 @@
-import { AccessTokenBody } from '../types';
 import jwt_decode from 'jwt-decode';
+
+import { AccessTokenBody } from '../types';
 
 const accessTokenItemName = 'typro-access-token';
 
@@ -16,10 +17,6 @@ export const getAccessToken = (): string | null => {
   return token;
 };
 
-export const decodeAccessToken = (token: string): AccessTokenBody => {
-  return jwt_decode(token);
-};
+export const decodeAccessToken = (token: string): AccessTokenBody => jwt_decode(token);
 
-export const isUserAuthenticated = (): boolean => {
-  return getAccessToken() !== null;
-};
+export const isUserAuthenticated = (): boolean => getAccessToken() !== null;

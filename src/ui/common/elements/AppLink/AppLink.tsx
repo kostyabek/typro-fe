@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link as MuiLink, SxProps, useTheme } from '@mui/material';
-import { AppLinkBase } from './elements';
 import { NavLinkProps } from 'react-router-dom';
+
+import { AppLinkBase } from './elements';
 
 interface AppLinkProps {
   children?: React.ReactNode;

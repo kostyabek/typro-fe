@@ -1,5 +1,7 @@
 import { RouteObject } from 'react-router-dom';
+
 import { AuthPages, Groups } from '../../../utils';
+
 import {
   SignInPage,
   SignUpPage,

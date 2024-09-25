@@ -1,9 +1,11 @@
 import { SelectChangeEvent, FormControl, Select, MenuItem } from '@mui/material';
 import { useContext } from 'react';
+
 import { RestartContext } from '../../../../../../contexts';
 import { useAppDispatch, trainingConfigurationActions } from '../../../../../../state';
 import { LanguageInfo } from '../../../../../../types';
 import { ensure } from '../../../../../../utils';
+
 import * as styles from './styles';
 
 interface Props {

@@ -1,7 +1,9 @@
 import { Box, Typography } from '@mui/material';
+
 import { PlayerInfo } from '../../../../../../../types';
-import { StarIcon } from './icons';
 import { LinearProgressWithLabel } from '../../../../../../common';
+
+import { StarIcon } from './icons';
 import * as styles from './styles';
 
 interface Props {
