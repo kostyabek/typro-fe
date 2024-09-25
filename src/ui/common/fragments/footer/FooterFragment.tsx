@@ -1,15 +1,15 @@
 import { memo } from 'react';
 import { Box, Fade, Typography } from '@mui/material';
-import * as styles from './styles';
-import { GithubIcon } from './icons';
+
 import { useAppSelector } from '../../../../state';
 import { AppLink } from '../../elements';
 import { configuration } from '../../../../utils';
 
+import { GithubIcon } from './icons';
+import * as styles from './styles';
+
 const FooterFragment = (): JSX.Element => {
   const { state: trainingState } = useAppSelector((store) => store.data.trainingState);
-
-  const version = process.env.REACT_APP_VERSION;
 
   return (
     <Fade in={trainingState !== 'started'}>
@@ -17,7 +17,7 @@ const FooterFragment = (): JSX.Element => {
         <AppLink to={configuration.githubRepositoryUrl} target="_blank">
           <Box sx={styles.contentContainer}>
             <GithubIcon />
-            <Typography sx={styles.versionLabel}>v{version}</Typography>
+            <Typography sx={styles.versionLabel}>v1.0.0</Typography>
           </Box>
         </AppLink>
       </Box>

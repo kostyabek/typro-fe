@@ -1,7 +1,9 @@
 import { Typography, useTheme } from '@mui/material';
 import { useMemo } from 'react';
-import { createStyles } from './styles';
+
 import { useAppSelector } from '../../../../state';
+
+import { createStyles } from './styles';
 
 interface Props {
   totalWords: number;

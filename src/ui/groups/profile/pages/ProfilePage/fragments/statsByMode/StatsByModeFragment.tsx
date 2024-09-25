@@ -1,11 +1,13 @@
 import { Box, useTheme } from '@mui/material';
-import { ModeInfoElement } from './elements';
-import { createStyles } from './styles';
+
 import {
   HighLevelTrainingResultDto,
   TimeModeType,
   WordsModeType
 } from '../../../../../../../types';
+
+import { ModeInfoElement } from './elements';
+import { createStyles } from './styles';
 
 interface Props {
   resultsInfo: HighLevelTrainingResultDto[];

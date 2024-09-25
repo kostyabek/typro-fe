@@ -1,3 +1,1 @@
-export const getLobbyChannelId = (lobbyId: string): string => {
-  return `lobby-${lobbyId}`;
-};
+export const getLobbyChannelId = (lobbyId: string): string => `lobby-${lobbyId}`;

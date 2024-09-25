@@ -1,10 +1,12 @@
 import { Box, Fade, Typography, useTheme } from '@mui/material';
+import { useMemo } from 'react';
+
+import { AppLink } from '../../elements';
+import { useAppSelector } from '../../../../state';
+
 import logoLight from './images/logo_light.png';
 import logoDark from './images/logo_dark.png';
 import { ProfileIcon, SettingsIcon } from './icons';
-import { AppLink } from '../../elements';
-import { useAppSelector } from '../../../../state';
-import { useMemo } from 'react';
 import { createStyles } from './styles';
 
 interface Props {

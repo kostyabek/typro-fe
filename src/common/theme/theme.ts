@@ -1,4 +1,5 @@
 import { createTheme, PaletteMode, Theme } from '@mui/material';
+
 import { darkColors, lightColors } from './colors';
 
 export const createMuiTheme = (mode: PaletteMode): Theme => {

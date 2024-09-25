@@ -1,8 +1,8 @@
 import { AuthPages, Groups } from '../../../../utils';
+
 import { HeaderFragment } from './HeaderFragment';
 
-export const HeaderContainer = (): JSX.Element => {
-  return (
+export const HeaderContainer = (): JSX.Element => (
     <HeaderFragment
       homeLink={Groups.Home}
       profileLink={Groups.Profile}
@@ -13,4 +13,3 @@ export const HeaderContainer = (): JSX.Element => {
       signOutLink={`${Groups.Auth}/${AuthPages.SignOut}`}
     />
   );
-};

@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import { useAxiosPrivate } from '../../../../../../../hooks';
 import { userHttpClient } from '../../../../../../../httpClients';
-import { UserInfoFragment } from './UserInfoFragment';
 import { LoaderElement } from '../../../../../../common';
-import { useState } from 'react';
 import { useAppDispatch, userActions } from '../../../../../../../state';
+
+import { UserInfoFragment } from './UserInfoFragment';
 
 export const UserInfoContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();

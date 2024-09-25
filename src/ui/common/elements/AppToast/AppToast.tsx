@@ -1,4 +1,5 @@
 import { Snackbar } from '@mui/material';
+
 import { useAppDispatch, useAppSelector, toastActions } from '../../../../state';
 
 export const AppToast = (): JSX.Element => {

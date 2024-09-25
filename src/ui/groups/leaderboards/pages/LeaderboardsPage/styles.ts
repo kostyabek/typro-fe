@@ -6,8 +6,7 @@ interface Styles {
   dataGrid: SxProps;
 }
 
-export const createStyles = (theme: Theme): Styles => {
-  return {
+export const createStyles = (theme: Theme): Styles => ({
     mainContainer: {
       display: 'grid',
       gridTemplateColumns: 'minmax(0, 1365px)'
@@ -23,5 +22,4 @@ export const createStyles = (theme: Theme): Styles => {
         maxHeight: '57vh'
       }
     }
-  };
-};
+  });

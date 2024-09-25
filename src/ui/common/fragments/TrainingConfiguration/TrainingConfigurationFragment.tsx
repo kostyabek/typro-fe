@@ -1,9 +1,11 @@
 import { Box, Fade } from '@mui/material';
 import { memo } from 'react';
-import { IconSwitchesElement, LanguageSelectElement } from './elements';
-import * as styles from './styles';
+
 import { useAppSelector } from '../../../../state';
 import { WordsModeType, TimeModeType, LanguageInfo } from '../../../../types';
+
+import { IconSwitchesElement, LanguageSelectElement } from './elements';
+import * as styles from './styles';
 
 interface TrainingConfiguration {
   areNumbersGenerated: boolean;

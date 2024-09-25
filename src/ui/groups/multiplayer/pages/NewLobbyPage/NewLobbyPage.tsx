@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
 import { useMediatorChannel } from '../../../../../hooks';
 import { generateLobbyInfo } from '../../utils';
 import { multiplayerActions, useAppDispatch, useAppSelector } from '../../../../../state';
-import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
 import { Groups, MultiplayerPages } from '../../../../../utils';
 
 export const NewLobbyPage = (): JSX.Element => {

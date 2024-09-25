@@ -1,18 +1,20 @@
 import { useChannel } from '@ably-labs/react-hooks';
+import { useContext } from 'react';
+
 import { trainingConfigurationActions, useAppDispatch, useAppSelector } from '../../../../state';
 import { ensure } from '../../../../utils';
 import { LoaderElement } from '../../elements';
-import TrainingConfigurationFragment from './MultiplayerTrainingConfigurationFragment';
 import { WordsModeType, TimeModeType } from '../../../../types';
-import { useContext } from 'react';
 import { RestartContext } from '../../../../contexts';
+
+import TrainingConfigurationFragment from './MultiplayerTrainingConfigurationFragment';
 
 export const MultiplayerTrainingConfigurationContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { areNumbersGenerated, isPunctuationGenerated, languagesInfo, timeMode, wordsMode } =
     useAppSelector((state) => state.data.trainingConfiguration);
   const { isActive, lobbyInfo, isCreator } = useAppSelector((store) => store.data.multiplayer);
-  const [channel] = useChannel(lobbyInfo.channelId, () => {});
+  const [channel] = useChannel(lobbyInfo.channelId, () => 0);
   const { setRestartScheduledStatus } = useContext(RestartContext);
 
   useChannel(lobbyInfo.channelId, 'punctuation-change', (message) => {

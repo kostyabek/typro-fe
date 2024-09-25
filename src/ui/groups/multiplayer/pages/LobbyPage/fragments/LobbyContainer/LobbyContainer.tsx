@@ -1,9 +1,11 @@
 import { useChannel, usePresence } from '@ably-labs/react-hooks';
+import { useEffect } from 'react';
+
 import { AppPresenceData, PlayerInfo } from '../../../../../../../types';
 import { multiplayerActions, useAppDispatch, useAppSelector } from '../../../../../../../state';
-import { LobbyFragment } from './LobbyFragment';
-import { useEffect } from 'react';
 import { ensure } from '../../../../../../../utils';
+
+import { LobbyFragment } from './LobbyFragment';
 
 export const LobbyContainer = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -39,14 +41,12 @@ export const LobbyContainer = (): JSX.Element => {
     dispatch(multiplayerActions.setUpdatePresenceMethod(updatePresence));
   }, []);
 
-  const playersInfo = presence.map<PlayerInfo>((e) => {
-    return {
+  const playersInfo = presence.map<PlayerInfo>((e) => ({
       playerId: e.clientId,
       indicatorValue: e.data.indicatorValue,
       isCreator: e.data.isCreator,
       place: e.data.place
-    };
-  });
+    }));
 
   const startHandler = (): void => {
     channel.publish('start-training', { started: true });

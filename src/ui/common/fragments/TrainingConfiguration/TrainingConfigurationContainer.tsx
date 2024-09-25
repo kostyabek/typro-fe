@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../../../state';
 import { ensure } from '../../../../utils';
 import { LoaderElement } from '../../elements';
+
 import TrainingConfigurationFragment from './TrainingConfigurationFragment';
 
 export const TrainingConfigurationContainer = (): JSX.Element => {

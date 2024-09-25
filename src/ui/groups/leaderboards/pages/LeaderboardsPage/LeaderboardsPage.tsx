@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { leaderboardHttpClient } from '../../../../../httpClients';
-import { useAppSelector } from '../../../../../state';
-import { TimeModeType, WordsModeType } from '../../../../../types';
 import { DataGrid, GridColDef, GridValueFormatterParams } from '@mui/x-data-grid';
-import { createStyles } from './styles';
 import { useState } from 'react';
 import { Box, MenuItem, Select, SelectChangeEvent, useTheme } from '@mui/material';
+
+import { TimeModeType, WordsModeType } from '../../../../../types';
+import { useAppSelector } from '../../../../../state';
+import { leaderboardHttpClient } from '../../../../../httpClients';
 import { ensure } from '../../../../../utils';
 import { LoaderElement } from '../../../../common';
+
+import { createStyles } from './styles';
 
 const millisecondsInDay = 24 * 60 * 60 * 1000;
 const modeFilterValues: Array<WordsModeType | TimeModeType> = [
@@ -44,9 +46,7 @@ const columns: GridColDef[] = [
     headerName: 'WPM',
     flex: 1,
     minWidth: 100,
-    valueFormatter: (params: GridValueFormatterParams<number>) => {
-      return params.value.toFixed(2);
-    },
+    valueFormatter: (params: GridValueFormatterParams<number>) => params.value.toFixed(2),
     sortable: false,
     disableColumnMenu: true
   },
@@ -55,9 +55,7 @@ const columns: GridColDef[] = [
     headerName: 'Accuracy',
     flex: 1,
     minWidth: 100,
-    valueFormatter: (params: GridValueFormatterParams<number>) => {
-      return `${params.value.toFixed(2)}%`;
-    },
+    valueFormatter: (params: GridValueFormatterParams<number>) => `${params.value.toFixed(2)}%`,
     sortable: false,
     disableColumnMenu: true
   },
@@ -66,9 +64,7 @@ const columns: GridColDef[] = [
     headerName: 'Date',
     flex: 2,
     minWidth: 150,
-    valueFormatter: (params: GridValueFormatterParams<Date>) => {
-      return params.value.toDateString();
-    },
+    valueFormatter: (params: GridValueFormatterParams<Date>) => params.value.toDateString(),
     sortable: false,
     disableColumnMenu: true
   }

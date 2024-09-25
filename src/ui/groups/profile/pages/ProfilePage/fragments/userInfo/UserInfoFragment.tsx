@@ -1,8 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import { AvatarPlaceholderIcon } from './icons';
-import { AppTextButton, AppTextField } from '../../../../../../common';
-import * as styles from './styles';
 import { ChangeEvent, useState } from 'react';
+
+import { AppTextButton, AppTextField } from '../../../../../../common';
+
+import { AvatarPlaceholderIcon } from './icons';
+import * as styles from './styles';
+
 
 interface Props {
   nickname: string;

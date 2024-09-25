@@ -1,4 +1,6 @@
 import { Box, Fade, Typography } from '@mui/material';
+import { useState } from 'react';
+
 import {
   AppPresenceData,
   PlayerInfo,
@@ -15,12 +17,12 @@ import {
   WordCounter
 } from '../../../../../../common';
 import { PlayersInfoElement } from '../../elements';
-import * as styles from './styles';
-import { useState } from 'react';
 import { RestartContext } from '../../../../../../../contexts';
-import { CheckMarkIcon, CopyIcon, CrossIcon } from './icons';
 import { useCopyToClipboard } from '../../../../../../../hooks';
 import { useAppSelector, trainingStateActions, useAppDispatch } from '../../../../../../../state';
+
+import { CheckMarkIcon, CopyIcon, CrossIcon } from './icons';
+import * as styles from './styles';
 
 interface Props {
   isCreator: boolean;

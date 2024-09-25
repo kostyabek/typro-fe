@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { LetterStatus, TrainingResults } from '../../../types';
 
 interface ResultsMetadata {
@@ -26,13 +27,11 @@ const slice = createSlice({
   name: 'data/trainingResults',
   initialState,
   reducers: {
-    setTrainingResults: (state, action: PayloadAction<TrainingResults>) => {
-      return {
+    setTrainingResults: (state, action: PayloadAction<TrainingResults>) => ({
         ...action.payload,
         letterStatuses: [],
         id: state.id
-      };
-    },
+      }),
     addLetterStatuses: (state, action: PayloadAction<LetterStatus[]>) => {
       state.letterStatuses = state.letterStatuses.concat(action.payload);
     },

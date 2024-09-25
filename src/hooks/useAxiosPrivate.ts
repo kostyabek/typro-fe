@@ -1,8 +1,10 @@
-import { axiosPrivate } from '../httpClients';
 import { useEffect } from 'react';
-import { useRefreshToken } from './useRefreshToken';
 import { Axios, AxiosError } from 'axios';
+
+import { axiosPrivate } from '../httpClients';
 import { getAccessToken } from '../utils';
+
+import { useRefreshToken } from './useRefreshToken';
 
 export const useAxiosPrivate = (): Axios => {
   const refresh = useRefreshToken();

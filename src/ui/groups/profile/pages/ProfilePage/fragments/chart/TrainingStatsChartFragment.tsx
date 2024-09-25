@@ -1,4 +1,5 @@
 import { useTheme } from '@mui/material';
+
 import { Point } from '../../../../../../../types';
 import { ChartJs } from '../../../../../../common/modules';
 
@@ -7,9 +8,8 @@ interface Props {
   points: Point[];
 }
 
-const onlyUnique = (value: unknown, index: number, array: unknown[]): boolean => {
-  return array.indexOf(value) === index;
-};
+const onlyUnique = (value: unknown, index: number, array: unknown[]): boolean =>
+  array.indexOf(value) === index;
 
 const tooltipConfiguration: ChartJs.DeepPartial<ChartJs.TooltipOptions<'line'>> = {
   usePointStyle: true,
@@ -18,8 +18,7 @@ const tooltipConfiguration: ChartJs.DeepPartial<ChartJs.TooltipOptions<'line'>> 
 
 const createLegendConfiguration = (
   color: string
-): ChartJs.DeepPartial<ChartJs.LegendOptions<'line'>> => {
-  return {
+): ChartJs.DeepPartial<ChartJs.LegendOptions<'line'>> => ({
     display: true,
     position: 'top',
     title: {
@@ -33,11 +32,9 @@ const createLegendConfiguration = (
       usePointStyle: true,
       color
     }
-  };
-};
+  });
 
-const createYScaleTitleConfiguration = (title: string, color: string): object => {
-  return {
+const createYScaleTitleConfiguration = (title: string, color: string): object => ({
     display: true,
     text: title,
     color,
@@ -49,8 +46,7 @@ const createYScaleTitleConfiguration = (title: string, color: string): object =>
       top: 10,
       bottom: 10
     }
-  };
-};
+  });
 
 export const TrainingStatsChartFragment = (props: Props): JSX.Element => {
   const theme = useTheme();

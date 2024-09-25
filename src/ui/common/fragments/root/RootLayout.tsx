@@ -1,11 +1,12 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+
 import { FooterContainer } from '../footer';
 import { HeaderContainer } from '../header';
+
 import * as styles from './styles';
 
-export const RootLayout = (): JSX.Element => {
-  return (
+export const RootLayout = (): JSX.Element => (
     <Box sx={styles.rootContainer}>
       <Box sx={styles.centeredContainer}>
         <HeaderContainer />
@@ -14,4 +15,3 @@ export const RootLayout = (): JSX.Element => {
       </Box>
     </Box>
   );
-};

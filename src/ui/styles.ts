@@ -4,8 +4,7 @@ interface Styles {
   scrollOverrideContainer: SxProps;
 }
 
-export const createStyles = (theme: Theme): Styles => {
-  return {
+export const createStyles = (theme: Theme): Styles => ({
     scrollOverrideContainer: {
       '*': {
         '::-webkit-scrollbar': {
@@ -29,5 +28,4 @@ export const createStyles = (theme: Theme): Styles => {
         }
       }
     }
-  };
-};
+  });

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { trainingHttpClient } from '../httpClients';
 import {
   trainingResultsActions,
@@ -9,6 +10,7 @@ import {
 } from '../state';
 import { CharactersStats, TimeModeType, TrainingResults } from '../types';
 import { Groups, ensure, isUserAuthenticated } from '../utils';
+
 import { useAxiosPrivate } from './useAxiosPrivate';
 import { Stopwatch } from './useStopwatch';
 
