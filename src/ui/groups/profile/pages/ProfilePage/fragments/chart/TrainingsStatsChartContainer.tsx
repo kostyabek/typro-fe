@@ -1,17 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
 import { Box, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { userHttpClient, axiosPrivate } from '../../../../../../../httpClients';
+import { axiosPrivate, userHttpClient } from '../../../../../../../httpClients';
+import { useAppSelector } from '../../../../../../../state';
 import { Point, TimeModeType, WordsModeType } from '../../../../../../../types';
 import { ensure } from '../../../../../../../utils';
+import toMilliseconds from '../../../../../../../utils/toMilliseconds';
 import { LoaderElement } from '../../../../../../common';
-import { useAppSelector } from '../../../../../../../state';
 
 import { TrainingStatsChartFragment } from './TrainingStatsChartFragment';
 import * as styles from './styles';
 
-const millisecondsInDay = 24 * 60 * 60 * 1000;
+const millisecondsInDay = toMilliseconds({days: 1});
+const daysInWeek = 7;
+const daysInMonth = 31;
+const daysInYear = 365;
+const year2000 = 2000;
+
 const modeFilterValues: Array<WordsModeType | TimeModeType> = [
   WordsModeType.TenWords,
   WordsModeType.TwentyFiveWords,
@@ -35,10 +41,10 @@ export const TrainingStatsChartContainer = (): JSX.Element => {
   const now = new Date();
   const dateFilterValues: Array<{ date: Date; label: string }> = [
     { date: new Date(now.getTime() - millisecondsInDay), label: 'past day' },
-    { date: new Date(now.getTime() - millisecondsInDay * 7), label: 'past week' },
-    { date: new Date(now.getTime() - millisecondsInDay * 31), label: 'past month (31 days)' },
-    { date: new Date(now.getTime() - millisecondsInDay * 365), label: 'past year (365 days)' },
-    { date: new Date(2000, 0), label: 'all time' }
+    { date: new Date(now.getTime() - millisecondsInDay * daysInWeek), label: 'past week' },
+    { date: new Date(now.getTime() - millisecondsInDay * daysInMonth), label: 'past month (31 days)' },
+    { date: new Date(now.getTime() - millisecondsInDay * daysInYear), label: 'past year (365 days)' },
+    { date: new Date(year2000, 0), label: 'all time' }
   ];
 
   const { isLoading, data } = useQuery({

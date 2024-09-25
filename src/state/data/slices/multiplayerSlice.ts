@@ -17,7 +17,7 @@ const initialState: MultiplayerSlice = {
     lobbyId: '',
     channelId: ''
   },
-  updatePresence: () => {},
+  updatePresence: () => 0,
   isCreator: false,
   indicatorValue: 0,
   place: 1

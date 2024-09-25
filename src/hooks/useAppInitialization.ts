@@ -1,16 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { trainingHttpClient, userHttpClient } from '../httpClients';
 import {
   trainingConfigurationActions,
   useAppDispatch,
   useAppSelector,
   userActions
 } from '../state';
-import { trainingHttpClient, userHttpClient } from '../httpClients';
 import { ensure, getAccessToken } from '../utils';
 
 import { useAxiosPrivate } from './useAxiosPrivate';
-import { useAbly } from './useAbly';
+
+// TODO: Fix useAbly conditional usage
 
 export const useAppInitialization = (): boolean => {
   const dispatch = useAppDispatch();
@@ -33,7 +34,7 @@ export const useAppInitialization = (): boolean => {
     queryKey: ['userInfo', accessToken],
     queryFn: async () => {
       const nickname = await userHttpClient.getNickname(axiosPrivate);
-      useAbly(nickname);
+      // useAbly(nickname);
       dispatch(userActions.setUserInfo({ nickname }));
       dispatch(userActions.setAccessToken(ensure(accessToken)));
       return nickname;

@@ -2,19 +2,21 @@ import { Box, InputLabel, List, ListItem, useTheme } from '@mui/material';
 import { useMemo } from 'react';
 import { Form, Navigate, useActionData, useNavigation } from 'react-router-dom';
 
+import { useAppDispatch, userActions } from '../../../../../state';
 import { AuthResponse, UniversalResponse } from '../../../../../types';
 import { AuthPages, Groups, ensure, getAccessToken } from '../../../../../utils';
-import { AppTextField, AppTextButton, AppLink } from '../../../../common';
-import { useAppDispatch, userActions } from '../../../../../state';
-import { useAbly } from '../../../../../hooks';
+import { AppLink, AppTextButton, AppTextField } from '../../../../common';
 
 import { createStyles } from './styles';
+
+// TODO: Fix useAbly conditional usage
 
 export const SignUpPage = (): JSX.Element => {
   const actionData = useActionData() as object;
   const theme = useTheme();
   const styles = useMemo(() => createStyles(theme), [theme]);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   if (
     actionData !== undefined &&
@@ -24,13 +26,11 @@ export const SignUpPage = (): JSX.Element => {
     const userData = actionData as AuthResponse;
     dispatch(userActions.setAccessToken(ensure(getAccessToken())));
     dispatch(userActions.setUserInfo({ nickname: userData.nickname }));
-    useAbly(userData.nickname);
+    // useAbly(userData.nickname);
     return <Navigate to={Groups.Home} />;
   }
 
   const errorData = actionData as UniversalResponse<string>;
-
-  const navigation = useNavigation();
 
   const isEmailInvalid = errorData?.reasons.some(
     (e) => e.metadata.field?.toLowerCase() === 'email'

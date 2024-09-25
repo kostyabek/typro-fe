@@ -7,4 +7,5 @@ interface Props {
   words: ReactNode;
 }
 
-export const MultiplayerGeneratedTextAreaFragment = (props: Props): JSX.Element => <Box sx={styles.wordsContainer}>{props.words}</Box>;
+export const MultiplayerGeneratedTextAreaFragment = ({words}: Props): JSX.Element =>
+  <Box sx={styles.wordsContainer}>{words}</Box>;

@@ -8,7 +8,8 @@ interface Props {
   points: Point[];
 }
 
-const onlyUnique = (value: unknown, index: number, array: unknown[]): boolean => array.indexOf(value) === index;
+const onlyUnique = (value: unknown, index: number, array: unknown[]): boolean =>
+  array.indexOf(value) === index;
 
 const tooltipConfiguration: ChartJs.DeepPartial<ChartJs.TooltipOptions<'line'>> = {
   usePointStyle: true,

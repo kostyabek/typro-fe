@@ -9,7 +9,7 @@ import MultiplayerRestartButtonFragment from './MultiplayerRestartButtonFragment
 export const MultiplayerRestartButtonContainer = (): JSX.Element => {
   const { setRestartScheduledStatus } = useContext(RestartContext);
   const lobbyInfo = useAppSelector((store) => store.data.multiplayer.lobbyInfo);
-  const [channel] = useChannel(lobbyInfo.channelId, () => {});
+  const [channel] = useChannel(lobbyInfo.channelId, () => 0);
 
   const restartScheduledHandler = (): void => {
     channel.publish('restart-scheduled', {});

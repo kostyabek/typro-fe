@@ -7,4 +7,5 @@ interface Props {
   words: ReactNode;
 }
 
-export const GeneratedTextAreaFragment = (props: Props): JSX.Element => <Box sx={styles.wordsContainer}>{props.words}</Box>;
+export const GeneratedTextAreaFragment = (props: Props): JSX.Element => 
+  <Box sx={styles.wordsContainer}>{props.words}</Box>;

@@ -10,7 +10,7 @@ import { LobbyContainer } from './fragments';
 export const LobbyPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const lobbyInfo = useAppSelector((store) => store.data.multiplayer.lobbyInfo);
-  const [channel] = useChannel(lobbyInfo.channelId, () => {});
+  const [channel] = useChannel(lobbyInfo.channelId, () => 0);
   const axiosPrivate = useAxiosPrivate();
 
   const deleteLobbyInfo = async (): Promise<void> => {

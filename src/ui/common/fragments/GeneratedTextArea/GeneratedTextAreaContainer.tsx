@@ -88,27 +88,6 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
     }
   };
 
-  const requestAdditionalWords = async (): Promise<void> => {
-    const data = await trainingHttpClient.getGeneratedText({
-      ...trainingConfiguration,
-      languageId: ensure(
-        trainingConfiguration.languagesInfo.find((e) => e.isActive)
-      ).id
-    });
-
-    setWordStates((prevStates) => {
-      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => ({
-        letters: wordChars,
-        isActive: false,
-        isCounted: false,
-        onMoveToAnotherWord: moveOnToAnotherWordHandler,
-        onTrainingStart: trainingStartHandler,
-        onWordModeTrainingEnd: letterStatusesSubmissionHandler
-      }));
-      return [...prevStates, ...newStates];
-    });
-  };
-
   const moveOnToAnotherWordHandler = (isForward: boolean): void => {
     setWordStates((oldStates) => {
       const activeWordIndex = oldStates.findIndex((s) => s.isActive);
@@ -123,6 +102,7 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
         const shouldRequestWords =
           oldStates.filter((e) => !e.isCounted).length < 21;
         if (shouldRequestWords) {
+          // eslint-disable-next-line no-use-before-define
           void requestAdditionalWords();
         }
       }
@@ -150,6 +130,27 @@ export const GeneratedTextAreaContainer = (): JSX.Element => {
       dispatch(trainingStateActions.setWordsTyped(numberOfCompletedWords));
 
       return newStates;
+    });
+  };
+
+  const requestAdditionalWords = async (): Promise<void> => {
+    const data = await trainingHttpClient.getGeneratedText({
+      ...trainingConfiguration,
+      languageId: ensure(
+        trainingConfiguration.languagesInfo.find((e) => e.isActive)
+      ).id
+    });
+
+    setWordStates((prevStates) => {
+      const newStates = data.map<WordProps>((wordChars) => ({
+        letters: wordChars,
+        isActive: false,
+        isCounted: false,
+        onMoveToAnotherWord: moveOnToAnotherWordHandler,
+        onTrainingStart: trainingStartHandler,
+        onWordModeTrainingEnd: letterStatusesSubmissionHandler
+      }));
+      return [...prevStates, ...newStates];
     });
   };
 

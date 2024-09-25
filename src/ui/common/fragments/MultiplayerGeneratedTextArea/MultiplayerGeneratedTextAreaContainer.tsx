@@ -31,7 +31,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
   );
   const axiosPrivate = useAxiosPrivate();
   const { isRestartScheduled, setRestartScheduledStatus } = useContext(RestartContext);
-  const [channel] = useChannel(lobbyInfo.channelId, () => {});
+  const [channel] = useChannel(lobbyInfo.channelId, () => 0);
 
   const [wordStates, setWordStates] = useState<WordProps[]>([]);
 
@@ -109,13 +109,14 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
     });
 
     setWordStates((prevStates) => {
-      const newStates = data.map<WordProps>((wordChars, wordCharsIndex) => ({
+      const newStates = data.map<WordProps>((wordChars) => ({
           isDisabled: trainingState !== 'started',
           letters: wordChars,
           isActive: false,
           isCounted: false,
+          // eslint-disable-next-line no-use-before-define
           onMoveToAnotherWord: moveOnToAnotherWordHandler,
-          onTrainingStart: () => {},
+          onTrainingStart: () => 0,
           onWordModeTrainingEnd: letterStatusesSubmissionHandler
         }));
       return [...prevStates, ...newStates];
@@ -193,7 +194,7 @@ export const MultiplayerGeneratedTextAreaContainer = (): JSX.Element => {
             isActive: wordCharsIndex === 0,
             isCounted: false,
             onMoveToAnotherWord: moveOnToAnotherWordHandler,
-            onTrainingStart: () => {},
+            onTrainingStart: () => 0,
             onWordModeTrainingEnd: letterStatusesSubmissionHandler
           }))
       );

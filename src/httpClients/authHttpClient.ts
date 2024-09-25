@@ -22,7 +22,8 @@ interface SignUpRequestModel extends SignInRequestModel {
 
 export const signUp = async (
   requestModel: SignUpRequestModel
-): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => await axiosPublic.post<UniversalResponse<AuthResponse>>(
+): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => 
+  await axiosPublic.post<UniversalResponse<AuthResponse>>(
     `${relativeBasePath}sign-up`,
     requestModel,
     {
@@ -33,7 +34,8 @@ export const signUp = async (
 
 export const signIn = async (
   requestModel: SignInRequestModel
-): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => await axiosPublic.post<UniversalResponse<AuthResponse>>(
+): Promise<AxiosResponse<UniversalResponse<AuthResponse>>> => 
+  await axiosPublic.post<UniversalResponse<AuthResponse>>(
     `${relativeBasePath}sign-in`,
     requestModel,
     {
@@ -42,6 +44,7 @@ export const signIn = async (
     }
   );
 
-export const signOut = async (axios: Axios): Promise<AxiosResponse<void>> => await axios.post(`${relativeBasePath}sign-out`, {
+export const signOut = async (axios: Axios): Promise<AxiosResponse<void>> => 
+  await axios.post(`${relativeBasePath}sign-out`, {
     headers
   });

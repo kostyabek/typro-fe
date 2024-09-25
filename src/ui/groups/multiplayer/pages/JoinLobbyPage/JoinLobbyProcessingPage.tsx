@@ -19,7 +19,7 @@ export const JoinLobbyProcessingPage = (): JSX.Element => {
     isCreator: false,
     place: 1
   });
-  const [channel] = useChannel(channelId, () => {});
+  const [channel] = useChannel(channelId, () => 0);
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useAppDispatch();
 

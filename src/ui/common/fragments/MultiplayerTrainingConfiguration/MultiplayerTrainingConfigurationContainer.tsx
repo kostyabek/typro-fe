@@ -14,7 +14,7 @@ export const MultiplayerTrainingConfigurationContainer = (): JSX.Element => {
   const { areNumbersGenerated, isPunctuationGenerated, languagesInfo, timeMode, wordsMode } =
     useAppSelector((state) => state.data.trainingConfiguration);
   const { isActive, lobbyInfo, isCreator } = useAppSelector((store) => store.data.multiplayer);
-  const [channel] = useChannel(lobbyInfo.channelId, () => {});
+  const [channel] = useChannel(lobbyInfo.channelId, () => 0);
   const { setRestartScheduledStatus } = useContext(RestartContext);
 
   useChannel(lobbyInfo.channelId, 'punctuation-change', (message) => {
